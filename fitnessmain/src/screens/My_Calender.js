@@ -12,6 +12,7 @@ import {
   ScrollView,
   FlatList,
   Animated,
+  TextInput,
 } from 'react-native';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -53,17 +54,21 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
 import Head from '../components/Header_profile';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
-import {TextInput} from 'react-native-paper';
+// import {TextInput} from 'react-native-paper';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight =
   Platform.OS === 'ios'
     ? Dimensions.get('window').height
     : Dimensions.get('window').height;
-    const massage = {key:'massage', color: '#f54114', selectedDotColor: '#f54114'};
-    const workout = {key:'workout', color: '#ffc31c'};
+const massage = {key: 'massage', color: '#f54114', selectedDotColor: '#f54114'};
+const workout = {key: 'workout', color: '#ffc31c'};
 
-    const massage1 = {key:'massage', color: '#0dcc0a', selectedDotColor: '#0dcc0a'};
-    const workout1 = {key:'workout', color: '#21a1ed'};
+const massage1 = {
+  key: 'massage',
+  color: '#0dcc0a',
+  selectedDotColor: '#0dcc0a',
+};
+const workout1 = {key: 'workout', color: '#21a1ed'};
 class My_Calender extends Component {
   constructor(props) {
     super(props);
@@ -152,7 +157,7 @@ class My_Calender extends Component {
       isVisableWeight: false,
     });
   }
-   
+
   render() {
     return (
       <Container style={styles.background_general}>
@@ -229,10 +234,10 @@ class My_Calender extends Component {
                   marked: true,
                   selectedColor: '#f53716',
                 },
-                '2021-01-07': {dots:[workout], dotColor: 'red',},
-                '2021-01-18': {dots:[massage], dotColor: 'red',},
-                '2021-01-19': {dots: [massage, workout],dotColor: 'red',},
-                '2021-01-10': {dots: [massage1, workout1],dotColor: 'red',},
+                '2021-01-07': {dots: [workout], dotColor: 'red'},
+                '2021-01-18': {dots: [massage], dotColor: 'red'},
+                '2021-01-19': {dots: [massage, workout], dotColor: 'red'},
+                '2021-01-10': {dots: [massage1, workout1], dotColor: 'red'},
               }}
               markingType={'multi-dot'}
             />
@@ -411,6 +416,7 @@ class My_Calender extends Component {
                       flexDirection: 'column',
                       marginStart: 20,
                       marginTop: 10,
+                      // padding:10,
                     }}>
                     <TouchableOpacity onPress={() => this.mood()}>
                       <Text style={styles.stepsLogs}>Mood</Text>
@@ -428,7 +434,7 @@ class My_Calender extends Component {
                       <Text style={styles.stepsLogs}>Menstruation</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => this.weight()}>
-                      <Text style={styles.stepsLogs}>Weight</Text>
+                      <Text style={styles.stepsLogs_weight}>Weight</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -493,51 +499,37 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 400,
                 borderWidth: 1,
                 borderRadius: 20,
-                // width:'90%',
-                // paddingLeft:20,
-                // paddingRight:20,
-                // elevation:10,
-                // shadowColor: '#000',
-                // shadowOffset: {width: 1, height: 1},
-                // shadowOpacity: 0.4,
-                // shadowRadius: 3,
-                // elevation: 5,
-
-                // shadowColor: '#000',
-                // shadowOffset: {
-                //   width: 0,
-                //   height: 3,
-                // },
-                // shadowOpacity: 0.29,
-                // shadowRadius: 4.65,
-
-                // elevation: 7,
               }}>
               <View style={{alignSelf: 'center'}}>
                 <Text style={styles.stepsLog}>LOG MOOD</Text>
               </View>
               <TextInput
-                label="Task Title"
+                placeholder="Task Title"
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
+                  backgroundColor: '#dcdedc',
                 }}
               />
               <TextInput
-                label="optionally share something more ..."
+                placeholder="optionally share something more ..."
                 // value={text}
+                multiline={true}
                 onChangeText={() => this.setText(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
                   marginTop: 10,
                   height: 190,
+                  textAlignVertical: 'top',
+                  // alignSelf: 'flex-start',
+                  backgroundColor: '#dcdedc',
                 }}
               />
               <TouchableOpacity
@@ -576,7 +568,7 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 450,
                 borderWidth: 1,
                 borderRadius: 20,
@@ -588,16 +580,17 @@ class My_Calender extends Component {
                 <Text style={styles.stepsLog}>LOG TASK</Text>
               </View>
               <TextInput
-                label="Task Title"
+                placeholder="Task Title"
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
+                  backgroundColor: '#dcdedc',
                 }}
               />
               <TextInput
-                label="optionally share something more ..."
+                placeholder="optionally share something more ..."
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
@@ -605,6 +598,8 @@ class My_Calender extends Component {
                   marginRight: 10,
                   marginTop: 10,
                   height: 190,
+                  textAlignVertical: 'top',
+                  backgroundColor: '#dcdedc',
                 }}
               />
               <View
@@ -660,7 +655,7 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 400,
                 borderWidth: 1,
                 borderRadius: 20,
@@ -672,16 +667,17 @@ class My_Calender extends Component {
                 <Text style={styles.stepsLog}>LOG FOOD</Text>
               </View>
               <TextInput
-                label="What did you eat"
+                placeholder="What did you eat"
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
+                  backgroundColor: '#dcdedc',
                 }}
               />
               <TextInput
-                label="optionally share something more ..."
+                placeholder="optionally share something more ..."
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
@@ -689,6 +685,8 @@ class My_Calender extends Component {
                   marginRight: 10,
                   marginTop: 10,
                   height: 190,
+                  backgroundColor: '#dcdedc',
+                  textAlignVertical: 'top',
                 }}
               />
               <View
@@ -753,7 +751,7 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 380,
                 borderWidth: 1,
                 borderRadius: 20,
@@ -792,7 +790,7 @@ class My_Calender extends Component {
                 />
               </View>
               <TextInput
-                label="optionally share something more ..."
+                placeholder="optionally share something more ..."
                 // value={text}
                 onChangeText={() => this.setText(text)}
                 style={{
@@ -800,6 +798,8 @@ class My_Calender extends Component {
                   marginRight: 10,
                   marginTop: 10,
                   height: 190,
+                  backgroundColor: '#dcdedc',
+                  textAlignVertical: 'top',
                 }}
               />
 
@@ -839,7 +839,7 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 450,
                 borderWidth: 1,
                 borderRadius: 20,
@@ -1019,7 +1019,7 @@ class My_Calender extends Component {
                   </View>
                 </View>
                 <TextInput
-                  label="optionally share something more ..."
+                  placeholder="optionally share something more ..."
                   // value={text}
                   onChangeText={() => this.setText(text)}
                   style={{
@@ -1027,6 +1027,8 @@ class My_Calender extends Component {
                     marginRight: 10,
                     marginTop: 10,
                     height: 190,
+                    backgroundColor: '#dcdedc',
+                    textAlignVertical: 'top',
                   }}
                 />
 
@@ -1069,7 +1071,7 @@ class My_Calender extends Component {
             }>
             <View
               style={{
-                backgroundColor: 'transparent',
+                backgroundColor: '#ffff',
                 height: 300,
                 borderWidth: 1,
                 borderRadius: 20,
@@ -1092,6 +1094,7 @@ class My_Calender extends Component {
                       // marginRight: 10,
                       width: 90,
                       height: 60,
+                      backgroundColor: '#dcdedc',
                     }}
                   />
                   <Text style={styles.stepsLog}>KGS</Text>
@@ -1105,6 +1108,7 @@ class My_Calender extends Component {
                       marginRight: 10,
                       height: 60,
                       width: 90,
+                      backgroundColor: '#dcdedc',
                     }}
                   />
                   <Text style={styles.stepsLog}>GMS</Text>

@@ -95,7 +95,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={40}
-                        source={require('../../src/assets/images/diet.png')}
+                        source={require('../../src/assets/images/personal-information.png')}
                       />
                       <Text style={styles.cardTitle_food}>
                         Personal Details
@@ -124,7 +124,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={40}
-                        source={require('../../src/assets/images/health.png')}
+                        source={require('../../src/assets/images/height.png')}
                       />
                       <Text style={styles.cardTitle_food}>
                         Height, Weight Food Prefs
@@ -156,7 +156,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={40}
-                        source={require('../../src/assets/images/diet.png')}
+                        source={require('../../src/assets/images/medical-record.png')}
                       />
                       <Text style={styles.cardTitle_food}>Medical Details</Text>
                     </Body>
@@ -183,7 +183,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={80}
-                        source={require('../../src/assets/images/health.png')}
+                        source={require('../../src/assets/images/anger.png')}
                       />
                       <Text style={styles.cardTitle_food}>Work and Stress</Text>
                     </Body>
@@ -213,7 +213,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={40}
-                        source={require('../../src/assets/images/diet.png')}
+                        source={require('../../src/assets/images/first-aid-kit.png')}
                       />
                       <Text style={styles.cardTitle_food}>Medications</Text>
                     </Body>
@@ -240,7 +240,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={80}
-                        source={require('../../src/assets/images/health.png')}
+                        source={require('../../src/assets/images/vitamin.png')}
                       />
                       <Text style={styles.cardTitle_food}>Suppliments</Text>
                     </Body>
@@ -270,7 +270,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={40}
-                        source={require('../../src/assets/images/diet.png')}
+                        source={require('../../src/assets/images/challenge.png')}
                       />
                       <Text style={styles.cardTitle_food}>Goals</Text>
                     </Body>
@@ -297,7 +297,7 @@ class Profile_custo extends Component {
                       }}>
                       <Image
                         size={80}
-                        source={require('../../src/assets/images/health.png')}
+                        source={require('../../src/assets/images/profile.png')}
                       />
                       <Text style={styles.cardTitle_food}>Other Details</Text>
                     </Body>

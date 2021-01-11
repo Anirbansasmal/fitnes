@@ -70,7 +70,14 @@ class SideMenu extends Component {
                 <Icon name="ios-arrow-forward-outline" style={styles.icon_menu} />
               </Right>
             </ListItem> */}
-
+            <ListItem style={styles.item_menu} onPress={this.navigateToScreen('Home')}>
+              <Body>
+                <Text style={styles.text_menu}>{Strings.ST0}</Text>
+              </Body>
+              <Right>
+                <Icon name="ios-arrow-forward-outline" style={styles.icon_menu} />
+              </Right>
+            </ListItem>
           <ListItem
             style={styles.item_menu}
             onPress={this.navigateToScreen('diet')}>
@@ -81,7 +88,7 @@ class SideMenu extends Component {
               <Icon name="ios-arrow-forward-outline" style={styles.icon_menu} />
             </Right>
           </ListItem>
-          <ListItem
+          {/* <ListItem
             style={styles.item_menu}
             onPress={this.navigateToScreen('DiatesPlan')}>
             <Body>
@@ -90,7 +97,7 @@ class SideMenu extends Component {
             <Right>
               <Icon name="ios-arrow-forward-outline" style={styles.icon_menu} />
             </Right>
-          </ListItem>
+          </ListItem> */}
           {/* <ListItem style={styles.item_menu} onPress={this.navigateToScreen('PostsScreen')}>
               <Body>
                 <Text style={styles.text_menu}>{Strings.ST4}</Text>
