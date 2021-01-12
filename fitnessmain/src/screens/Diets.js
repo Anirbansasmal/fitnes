@@ -16,7 +16,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 // import { LinearGradient } from 'expo';
 import LinearGradient from 'react-native-linear-gradient';
-import {Grid, Row} from 'react-native-easy-grid';
+import {Grid, Row, Col} from 'react-native-easy-grid';
 import {
   Container,
   Text,
@@ -27,6 +27,8 @@ import {
   Thumbnail,
   ListItem,
   Left,
+  Card,
+  CardItem,
 } from 'native-base';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 // import BannerAd from '../components/BannerAd';
@@ -159,13 +161,33 @@ export default class Diets extends Component {
         )}
         {this.state.userDiet.map((student, index) => (
           <List>
-            <ListItem icon onPress={() => this.DietDetails(student)}>
-              <Body>
-                <Text>{student.week}</Text>
-              </Body>
-              <Right>
+            <ListItem icon onPress={() => this.DietDetails(student)} style={{
+              marginTop: 10,marginEnd: 20,
+            }}>
+              {/* <Body><Text>{student.week}</Text></Body> */}
+              {/* <Right>
                 <Icon active name="arrow-forward" />
-              </Right>
+              </Right> */}
+              {/* <Grid style={{flex: 1}}>
+                <Col
+                  style={{
+                    flex: 1,
+                  }}> */}
+              <Card style={styles.card_eachitem}>
+                <CardItem>
+                  <Body
+                    style={{
+                      flexDirection: 'column',
+                    }}>
+                    <Text>{student.week}</Text>
+                  </Body>
+                  <Right>
+                    <Icon active name="arrow-forward" />
+                  </Right>
+                </CardItem>
+              </Card>
+              {/* </Col>
+              </Grid> */}
             </ListItem>
           </List>
         ))}

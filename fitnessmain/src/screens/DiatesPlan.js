@@ -35,6 +35,7 @@ import {
   DatePicker,
   Card,
   CardItem,
+  ScrollableTab,
 } from 'native-base';
 // import { LinearGradient } from 'expo';
 import LinearGradient from 'react-native-linear-gradient';
@@ -60,7 +61,7 @@ class DiatesPlan extends Component {
     this.state = {
       selectColor: '#10c923',
       unselectColor: '#edf7ee',
-      dataditeSu: [],
+      dataditeSu: props.route.params.data,
       // dataditeMo: [],
       // dataditeTu: [],
       // dataditeWe: [],
@@ -78,7 +79,11 @@ class DiatesPlan extends Component {
   // like = () => {};
   // dislike = () => {};
   componentDidMount() {
-    this.ditelist();
+    // this.setState({
+    //   dataditeSu:this.props.route.params.item,
+    // })
+    // this.ditelist();
+    console.log('dite weeks', this.state.dataditeSu.data_sub);
   }
   ditelist = async () => {
     var token = await AsyncStorage.getItem('token');
@@ -557,20 +562,397 @@ class DiatesPlan extends Component {
               // height:40,
             }}>
             <Tabs
-              tabBarUnderlineStyle={{backgroundColor: '#11ba11',}}
-              tabContainerStyle={{elevation: 0,height:40,borderRadius: 10,}}
-              onChangeTab={({i}) => this.changetab(i)}>
-              <Tab
-                heading="MO"
-                tabStyle={styles.tabs_diets}
-                activeTabStyle={styles.activetabs_diets}
-                textStyle={styles.tabs_text_diets}
-                activeTextStyle={styles.activetabs_text_diets}>
-                <View style={styles.cardTitle_days1}>
-                  <this.renderCardMo />
-                </View>
-              </Tab>
-              <Tab
+              tabBarUnderlineStyle={{backgroundColor: '#11ba11'}}
+              tabContainerStyle={{elevation: 0, height: 40, borderRadius: 10,}}
+              // onChangeTab={({i}) => this.changetab(i)}
+              renderTabBar={() => <ScrollableTab />}>
+              {this.state.dataditeSu.data_sub.map((student, index) => (
+                <Tab
+                  heading={student.day}
+                  tabStyle={styles.tabs_diets}
+                  activeTabStyle={styles.activetabs_diets}
+                  textStyle={styles.tabs_text_diets}
+                  activeTextStyle={styles.activetabs_text_diets}>
+                  <View style={styles.cardTitle_days1}>
+                    {/* <this.renderCardMo /> */}
+                    <Grid style={{flex: 1}}>
+                      <Col
+                        style={{
+                          flex: 1,
+                        }}>
+                        <Card style={styles.card_each}>
+                          <CardItem header bordered>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    EARLY MORNING
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Early Mornings']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Breakfast
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Breakfast']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Mid Morning
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Mid Morning']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Lunch
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Lunch']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Afternoon Snack
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Afternoon Snack']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Evening Snack
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Evening Snack']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Dinner
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Dinner']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+
+                        <Card style={styles.card_each}>
+                          <CardItem>
+                            <Body
+                              style={{
+                                flexDirection: 'column',
+                              }}>
+                              <View style={styles.cardTitle_text}>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    width: 180,
+                                  }}>
+                                  <Text style={styles.cardTitle_days}>
+                                    Post Dinner
+                                  </Text>
+                                  <Text style={styles.cardTitle_desc}>
+                                    {student['Post Dinner']}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={{
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-around',
+                                  }}>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.like()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/like.png')}
+                                    />
+                                  </TouchableOpacity>
+                                  <TouchableOpacity
+                                    style={styles.cardTitle_like}
+                                    onPress={() => this.dislike()}>
+                                    <Image
+                                      style={styles.card_likeimg}
+                                      source={require('../../src/assets/images/dislike.png')}
+                                    />
+                                  </TouchableOpacity>
+                                </View>
+                              </View>
+                            </Body>
+                          </CardItem>
+                        </Card>
+                      </Col>
+                    </Grid>
+                  </View>
+                </Tab>
+              ))}
+              {/* <Tab
                 heading="TU"
                 tabStyle={styles.tabs_diets}
                 activeTabStyle={styles.activetabs_diets}
@@ -579,8 +961,8 @@ class DiatesPlan extends Component {
                 <View style={styles.cardTitle_days1}>
                   <this.renderCardMo />
                 </View>
-              </Tab>
-              <Tab
+              </Tab> */}
+              {/* <Tab
                 heading="WE"
                 tabStyle={styles.tabs_diets}
                 activeTabStyle={styles.activetabs_diets}
@@ -629,7 +1011,7 @@ class DiatesPlan extends Component {
                 <View style={styles.cardTitle_days1}>
                   <this.renderCardMo />
                 </View>
-              </Tab>
+              </Tab> */}
             </Tabs>
 
             <Modal
