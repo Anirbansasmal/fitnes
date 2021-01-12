@@ -341,10 +341,14 @@ module.exports = StyleSheet.create({
     backgroundColor: '#fafafa',
     borderWidth: 1,
     borderColor: '#e0dbda',
+    // flex:1,
+    width:90,
   },
 
   activetabs_diets: {
     backgroundColor: '#11ba11',
+    flex:1,
+    width:90,
   },
 
   tabs_text_diets: {
@@ -1056,5 +1060,13 @@ module.exports = StyleSheet.create({
     alignSelf: 'center',
     // marginStart: 10,
     marginTop: 10,
+  },
+  card_eachitem: {
+    borderRadius: 15,
+    overflow: 'hidden',
+    elevation: 6,
+    flex: 1,
+    // marginTop: 10,
+    backgroundColor: '#11ba11',
   },
 });
