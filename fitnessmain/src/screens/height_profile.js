@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import * as firebase from 'firebase';
+// import {View, Text} from 'react-native';
 import {NavigationActions, StackNavigator} from 'react-navigation';
 import {
   ImageBackground,
@@ -46,15 +46,9 @@ var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
-
-export default class Profile_details extends Component {
-  static navigationOptions = {
-    title: 'Profile',
-  };
-
+class height_profile extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isloading: true,
       user: [],
@@ -115,48 +109,28 @@ export default class Profile_details extends Component {
         pin: userDetails.data.details.pin,
         country: userDetails.data.details.country,
         occupation: userDetails.data.details.occupation,
+        user_age: userDetails.data.details.user_age,
       });
     }
   };
   setDate = (value) => {
     console.log(value);
   };
-
   setdetails(value, name) {
     switch (name) {
-      case 'first_name':
+      case 'Weight':
         this.setState({
-          first_name: value,
+          Weight: value,
         });
         break;
-      case 'last_name':
+      case 'Height':
         this.setState({
-          last_name: value,
+          Height: value,
         });
         break;
-      case 'dob':
+      case 'Bmi':
         this.setState({
-          dob: value,
-        });
-        break;
-      case 'weight':
-        this.setState({
-          weight: value,
-        });
-        break;
-      case 'height':
-        this.setState({
-          height: value,
-        });
-        break;
-      case 'gender':
-        this.setState({
-          gender: value,
-        });
-        break;
-      case 'bmi':
-        this.setState({
-          bmi: value,
+          Bmi: value,
         });
         break;
       case 'visceral_fat':
@@ -169,52 +143,15 @@ export default class Profile_details extends Component {
           body_fat: value,
         });
         break;
-      case 'skype_id':
+      case 'user_age':
         this.setState({
-          skype_id: value,
+          user_age: value,
         });
         break;
-      case 'phone':
-        this.setState({
-          phone: value,
-        });
-        break;
-      case 'alt_phone':
-        this.setState({
-          alt_phone: value,
-        });
-        break;
-      case 'city':
-        this.setState({
-          city: value,
-        });
-        break;
-      case 'address':
-        this.setState({
-          address: value,
-        });
-        break;
-      case 'pin':
-        this.setState({
-          pin: value,
-        });
-        break;
-      case 'country':
-        this.setState({
-          country: value,
-        });
-        break;
-      case 'occupation':
-        this.setState({
-          occupation: value,
-        });
-        break;
-
       default:
         break;
     }
   }
-
   onSubmit = async () => {
     var data = {
       email: this.state.email,
@@ -253,21 +190,10 @@ export default class Profile_details extends Component {
       });
     }
   };
-
   render() {
     if (this.state.isloading) {
       return <AppPreLoader />;
     }
-    var user = '';
-    // var email, displayName, emailVerified, creationTime;
-
-    if (user != null) {
-      // email = user.email;
-      // displayName = 'chandan';
-      // emailVerified = user.emailVerified;
-      // creationTime = user.metadata.creationTime;
-    }
-
     return (
       <Container style={styles.background_general}>
         <ImageBackground
@@ -295,23 +221,27 @@ export default class Profile_details extends Component {
               activeTextStyle={styles.activetabs_text_diets}>
               <List>
                 <ListItem>
-                  <Text>First name : {this.state.user.first_name}</Text>
+                  <Text>Weight : {this.state.user.weight}</Text>
                 </ListItem>
                 <ListItem>
-                  <Text>last name : {this.state.user.last_name}</Text>
+                  <Text>Height : {this.state.user.height}</Text>
                 </ListItem>
                 <ListItem>
-                  <Text>Date of birth: {this.state.user.dob}</Text>
+                  <Text>Bmi: {this.state.user.bmi}</Text>
                 </ListItem>
                 <ListItem>
-                  <Text>Weight: {this.state.user.weight}</Text>
+                  <Text>Visceral fat: {this.state.user.visceral_fat}</Text>
                 </ListItem>
                 <ListItem>
-                  <Text>Height: {this.state.user.height}</Text>
+                  <Text>Body fat: {this.state.user.body_fat}</Text>
                 </ListItem>
                 <ListItem>
-                  <Text>BMI: {this.state.user.bmi}</Text>
+                  <Text>User age: {this.state.user.user_age}</Text>
                 </ListItem>
+
+                {/* <ListItem>
+                  <Text>User age: {this.state.user.bmi}</Text>
+                </ListItem> */}
               </List>
             </Tab>
 
@@ -324,47 +254,28 @@ export default class Profile_details extends Component {
               <Form>
                 <Item>
                   <Input
-                    placeholder="first name"
-                    value={this.state.first_name}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'first_name')
-                    }
+                    placeholder="Weight"
+                    value={this.state.weight}
+                    onChangeText={(value) => this.setdetails(value, 'Weight')}
                   />
                 </Item>
                 <Item last>
                   <Input
-                    placeholder="last name"
-                    value={this.state.last_name}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'last_name')
-                    }
+                    placeholder="Height"
+                    value={this.state.Height}
+                    onChangeText={(value) => this.setdetails(value, 'Height')}
                   />
                 </Item>
                 <Item>
-                  <Input
-                    placeholder="weight"
-                    value={this.state.weight}
-                    onChangeText={(value) => this.setdetails(value, 'weight')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="height"
-                    value={this.state.height}
-                    onChangeText={(value) => this.setdetails(value, 'height')}
-                  />
-                </Item>
-                <Item last>
                   <Input
                     placeholder="Bmi"
                     value={this.state.bmi}
                     onChangeText={(value) => this.setdetails(value, 'bmi')}
                   />
                 </Item>
-
-                <Item>
+                <Item last>
                   <Input
-                    placeholder="visceral fat"
+                    placeholder="Visceral fat"
                     value={this.state.visceral_fat}
                     onChangeText={(value) =>
                       this.setdetails(value, 'visceral_fat')
@@ -380,66 +291,12 @@ export default class Profile_details extends Component {
                 </Item>
                 <Item>
                   <Input
-                    placeholder="skype id"
-                    value={this.state.skype_id}
-                    onChangeText={(value) => this.setdetails(value, 'skype_id')}
+                    placeholder="User age"
+                    value={this.state.user_age}
+                    onChangeText={(value) => this.setdetails(value, 'user_age')}
                   />
                 </Item>
-                <Item last>
-                  <Input
-                    placeholder="phone"
-                    value={this.state.phone}
-                    onChangeText={(value) => this.setdetails(value, 'phone')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="alt phone"
-                    value={this.state.alt_phone}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'alt_phone')
-                    }
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="city"
-                    value={this.state.city}
-                    onChangeText={(value) => this.setdetails(value, 'city')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="address"
-                    value={this.state.address}
-                    onChangeText={(value) => this.setdetails(value, 'address')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="pin"
-                    value={this.state.pin}
-                    onChangeText={(value) => this.setdetails(value, 'pin')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="country"
-                    value={this.state.country}
-                    onChangeText={(value) => this.setdetails(value, 'country')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="occupation"
-                    value={this.state.occupation}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'occupation')
-                    }
-                  />
-                </Item>
-
-                <Item>
+                {/* <Item>
                   <DatePicker
                     defaultDate={new Date(2020, 12, 12)}
                     minimumDate={new Date(1970, 1, 1)}
@@ -455,7 +312,7 @@ export default class Profile_details extends Component {
                     onDateChange={this.setDate}
                     disabled={false}
                   />
-                </Item>
+                </Item> */}
                 <Button
                   block
                   onPress={this.onSubmit}
@@ -470,3 +327,5 @@ export default class Profile_details extends Component {
     );
   }
 }
+
+export default height_profile;

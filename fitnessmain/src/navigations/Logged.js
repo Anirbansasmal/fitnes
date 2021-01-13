@@ -24,6 +24,7 @@ import PostsScreen from '../screens/Posts';
 import DiatesPlan from '../screens/DiatesPlan';
 import My_program from '../screens/My_program';
 import Diabetes from '../screens/Diabetes';
+import height_profile from '../screens/height_profile';
 // import EBodypartsScreen from '../screens/EBodyparts';
 // import EquipmentsScreen from '../screens/Equipments';
 // import WGoalsScreen from "../screens/WGoals";
@@ -409,6 +410,14 @@ const HomeStackScreen = ({navigation}) => (
         headerShown:false
       }}
     />
+    <HomeStack.Screen
+      name="height_profile"
+      component={height_profile}
+      options={{
+        headerShown:false
+      }}
+    />
+    
   </HomeStack.Navigator>
   
 );

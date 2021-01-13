@@ -909,9 +909,9 @@ module.exports = StyleSheet.create({
     // alignSelf: 'flex-end',
     // borderWidth: 1,
     borderRadius: 20,
-    elevation: 6,
+    elevation: 4,
     // height: 250,
-    width: 150,
+    // width: 150,
     marginEnd: 10,
     textAlignVertical: 'top',
     alignSelf: 'flex-start',
@@ -923,6 +923,7 @@ module.exports = StyleSheet.create({
     alignSelf: 'center',
     marginStart: 10,
     marginTop: 20,
+    marginEnd: 10,
   },
   stepsLogs: {
     color: '#035048',
@@ -931,6 +932,7 @@ module.exports = StyleSheet.create({
     marginStart: 10,
     marginTop: 10,
     // marginBottom:20,
+    marginEnd: 20,
   },
   stepsLogs_weight: {
     color: '#035048',
@@ -997,10 +999,11 @@ module.exports = StyleSheet.create({
   cardTitle_like: {
     width: 70,
     height: 66,
-    elevation: 6,
+    elevation: 3,
     borderRadius: 10,
     justifyContent: 'center',
     flexDirection: 'row',
+    marginTop: 6,
   },
   diabetesTitle: {
     color: '#035048',
