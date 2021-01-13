@@ -229,11 +229,11 @@ class My_Calender extends Component {
               // markingType={'multi-dot'}
               // renderArrow={(direction) => (<Arrow/>)}
               markedDates={{
-                '2021-01-09': {
-                  selected: true,
-                  marked: true,
-                  selectedColor: '#f53716',
-                },
+                // '2021-01-09': {
+                //   selected: true,
+                //   marked: true,
+                //   selectedColor: '#f53716',
+                // },
                 '2021-01-07': {dots: [workout], dotColor: 'red'},
                 '2021-01-18': {dots: [massage], dotColor: 'red'},
                 '2021-01-19': {dots: [massage, workout], dotColor: 'red'},

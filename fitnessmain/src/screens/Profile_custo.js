@@ -61,7 +61,7 @@ class Profile_custo extends Component {
       <Container style={styles.background_general}>
         <Head navigation={this.props.navigation} title="" />
         <ScrollView>
-        <Text style={styles.profileTitle}>ME > MY PROFILE</Text>
+          <Text style={styles.profileTitle}>ME > MY PROFILE</Text>
           <View style={{padding: 0, paddingTop: 0}}>
             {/* <Text> Profile_custo </Text> */}
             <Grid
@@ -82,7 +82,7 @@ class Profile_custo extends Component {
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
                   <CardItem
-                  button={true}
+                    button={true}
                     onPress={() => {
                       this.props.navigation.navigate('Profile_details');
                     }}>
@@ -114,7 +114,11 @@ class Profile_custo extends Component {
                 }}>
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
-                  <CardItem>
+                  <CardItem
+                    button={true}
+                    onPress={() => {
+                      this.props.navigation.navigate('height_profile');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -305,7 +309,6 @@ class Profile_custo extends Component {
                 </Card>
               </Col>
             </Grid>
-          
           </View>
         </ScrollView>
       </Container>
