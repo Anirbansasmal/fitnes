@@ -241,19 +241,20 @@ import PostDetails from '../screens/PostDetails';
 const Tabs = createBottomTabNavigator();
 const TabsScreen = () => (
   <Tabs.Navigator
+  initialRouteName="Home"
     screenOptions={({route}) => ({
       tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
-          case 'Home':
+          case 'ProfileScreen':
             iconName = focused
               ? 'account-circle'
               : 'account-circle';
             break;
-          case 'Setting':
+          case 'Home':
             iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
-          case 'Profile':
+          case 'Homeu':
             iconName = focused ? 'dots-horizontal-circle-outline' : 'dots-horizontal-circle-outline';
             break;
 
@@ -275,18 +276,18 @@ const TabsScreen = () => (
       style: {height: 50,backgroundColor:"#035048",justifyContent:"center",},
     }}>
     <Tabs.Screen
+      name="ProfileScreen"
+      component={ProfileScreen}
+      options={{tabBarLabel: ''}}
+    />
+    <Tabs.Screen
       name="Home"
       component={HomeScreen}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
-      name="Setting"
-      component={DietsScreen}
-      options={{tabBarLabel: ''}}
-    />
-    <Tabs.Screen
-      name="Profile"
-      component={WorkoutsScreen}
+      name="Homeu"
+      component={HomeScreen}
       options={{tabBarLabel: ''}}
     />
   </Tabs.Navigator>
