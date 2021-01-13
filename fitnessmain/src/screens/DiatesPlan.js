@@ -563,7 +563,7 @@ class DiatesPlan extends Component {
             }}>
             <Tabs
               tabBarUnderlineStyle={{backgroundColor: '#11ba11'}}
-              tabContainerStyle={{elevation: 0, height: 40, borderRadius: 10,}}
+              tabContainerStyle={{elevation: 0, height: 40, borderRadius: 10}}
               // onChangeTab={({i}) => this.changetab(i)}
               renderTabBar={() => <ScrollableTab />}>
               {this.state.dataditeSu.data_sub.map((student, index) => (
