@@ -13,7 +13,7 @@ import WorkoutsScreen from '../screens/Workouts';
 import Head from '../components/Header';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Icon } from 'react-native-elements';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 // const HeaderComp = (navigation, titleTxt) => (
 //   <Head navigation={navigation} titleTxt={titleTxt} />
 // );
@@ -53,7 +53,7 @@ import Profile_custo from "../screens/Profile_custo";
 import Profile_details from "../screens/Profile_details";
 import Profile_health from '../screens/Profile_health';
 import My_Calender from '../screens/My_Calender';
-
+import My_task from '../screens/My_task'
 // import WorkoutSearchScreen from "../screens/WorkoutSearch";
 // import WorkoutResultsScreen from "../screens/WorkoutResults";
 // import CalculatorScreen from "../screens/Calculator";
@@ -251,10 +251,10 @@ const TabsScreen = () => (
               : 'account-circle';
             break;
           case 'Setting':
-            iconName = focused ? 'add-comment' : 'add-comment';
+            iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
           case 'Profile':
-            iconName = focused ? 'add-task' : 'add-task';
+            iconName = focused ? 'dots-horizontal-circle-outline' : 'dots-horizontal-circle-outline';
             break;
 
           default:
@@ -265,14 +265,14 @@ const TabsScreen = () => (
         if (route.name === 'Home') {
           
         }
-        return <Icon  name={iconName} style={{color:'#000'}}/>
+        return <MaterialCommunityIcons  name={iconName} style={{color:'#ffff',alignSelf: 'center',marginTop: 10,}} size={30}/>
       },
     })}
     tabBarOptions={{
       activeTintColor: '#ff1a1a',
       inactiveTintColor: 'gray',
-      labelStyle: {paddingBottom: 5},
-      style: {height: 50},
+      labelStyle: {paddingBottom: 0},
+      style: {height: 50,backgroundColor:"#035048",justifyContent:"center",},
     }}>
     <Tabs.Screen
       name="Home"
@@ -417,13 +417,18 @@ const HomeStackScreen = ({navigation}) => (
         headerShown:false
       }}
     />
+    <HomeStack.Screen
+      name="My_task"
+      component={My_task}
+      options={{
+        headerShown:false
+      }}
+    />
     
-  </HomeStack.Navigator>
+    </HomeStack.Navigator>
   
-);
-
-
-/**
+  );
+    /**
  * Drawer Navigator
  */
 const Drawer = createDrawerNavigator();

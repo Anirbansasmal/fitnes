@@ -96,8 +96,8 @@ export default class SplashScreen1 extends Component {
           height:500,
           borderTopLeftRadius:20,
           borderTopRightRadius:20,
-          borderColor:"#3309d9",
-          borderWidth:2,
+          // borderColor:"#3309d9",
+          // borderWidth:2,
         }}>
         <View style={{
           marginTop:80

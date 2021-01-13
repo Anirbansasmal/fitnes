@@ -7,6 +7,8 @@ import {
   View,
   ScrollView,
   SafeAreaView,
+  Alert,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
@@ -64,12 +66,19 @@ export default class Home extends Component {
       blogLoading: true,
       Latestrecipe: [],
       recipeLoading: true,
+      task: [],
+      taskLoading: true,
+      profile_name:'',
+      weight:'',
+      bmi:'',
+      taskdet:'',
     };
   }
   componentDidMount() {
     //this.LoginCheck();
     this.getBlog();
     this.getRecipe();
+    this.getMytask();
   }
   getBlog = async () => {
     var blog = await Api.getBlog('wp-json/wp/v2/posts?_embed&per_page=1');
@@ -103,7 +112,34 @@ export default class Home extends Component {
       });
     }
   };
+  getMytask = async () => {
+    var user = await AsyncStorage.getItem('userId');
+    var apiResponse = await Api.get('userById/' + user);
+    // console.log(apiResponse);
+    if (apiResponse.status === 'success') {
+      // Alert.alert('Success', 'Profile Updated');
 
+      this.setState({
+        isloading: false,
+        task: apiResponse.data.tasks,
+        taskLoading: false,
+        profile_name:apiResponse.data.details.first_name,
+        weight:apiResponse.data.details.weight,
+        bmi:apiResponse.data.details.bmi,
+        taskdet:apiResponse.data.tasks[0].task,
+      });
+    } else {
+      const error = apiResponse.errors;
+      this.setState({isLoading: false}, () => {
+        var errors = '';
+        Object.keys(error).forEach(function (key) {
+          errors += error[key] + ' ';
+        });
+        Alert.alert('Error', errors);
+      });
+    }
+    console.log("user",this.state.task[0].task)
+  };
   navigateToScreen = (route) => () => {
     this.props.navigation.navigate(route);
   };
@@ -122,7 +158,9 @@ export default class Home extends Component {
       });
     }
   };
-
+  task() {
+    this.props.navigation.navigate('My_task');
+  }
   render() {
     var loaded = this.state.isloading;
     if (loaded) {
@@ -138,21 +176,23 @@ export default class Home extends Component {
               <Left>
                 <Body>
                   <Text style={styles.textTitle}>
-                    Hi , {this.state.username}
+                    Hi , {this.state.profile_name}
                   </Text>
                 </Body>
               </Left>
               <Right>
-                <View style={styles.MainContainer}>
+                <TouchableOpacity
+                  style={styles.MainContainer}
+                  onPress={() => this.task()}>
                   <View style={styles.childView}>
                     <Text style={styles.More_text}> My task </Text>
                   </View>
-                </View>
+                </TouchableOpacity>
               </Right>
             </CardItem>
           </View>
           <View style={styles.taskHolder}>
-            <Text style={styles.task}>Next: Lunch followed by Walk</Text>
+            <Text style={styles.task}>Next: {this.state.taskdet}</Text>
           </View>
           <List>
             <View style={styles.stepView}>
@@ -199,7 +239,11 @@ export default class Home extends Component {
                     width={120}
                     source={require('../../src/assets/images/weight-scale.png')}
                   />
-                  <Text style={styles.counterText}>82 kgs</Text>
+                  {this.state.weight ==" " ?(
+                    <Text style={styles.counterText}>_</Text>
+                  ):(
+                  <Text style={styles.counterText}>{this.state.weight} kgs</Text>
+                  )}
                 </View>
                 <View
                   style={{
@@ -213,7 +257,11 @@ export default class Home extends Component {
                     width={120}
                     source={require('../../src/assets/images/bmi.png')}
                   />
-                  <Text style={styles.counterText}>28</Text>
+                  {this.state.weight ==" " ?(
+                    <Text style={styles.counterText}>_</Text>  
+                  ):(
+                  <Text style={styles.counterText}>{this.state.bmi}</Text>
+                  )}
                 </View>
               </View>
             </ListItem>
@@ -266,7 +314,11 @@ export default class Home extends Component {
                   paddingLeft: 15,
                 }}>
                 <Card style={{borderRadius: 15, overflow: 'hidden'}}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                    onPress={() => {
+                      this.props.navigation.navigate('diet');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -296,7 +348,8 @@ export default class Home extends Component {
                     button={true}
                     onPress={() => {
                       this.props.navigation.navigate('My_program');
-                    }}>
+                    }}
+                    >
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -354,7 +407,11 @@ export default class Home extends Component {
                   paddingRight: 15,
                 }}>
                 <Card style={{borderRadius: 15, overflow: 'hidden'}}>
-                  <CardItem>
+                  <CardItem
+                    button={true}
+                    onPress={() => {
+                      this.props.navigation.navigate('diet');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',

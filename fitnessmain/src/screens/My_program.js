@@ -56,6 +56,7 @@ class My_program extends Component {
     super(props);
     this.state = {
       progressStatus: 0,
+      program:[],
     };
   }
 
@@ -63,6 +64,7 @@ class My_program extends Component {
 
   componentDidMount() {
     this.onAnimate();
+    this.dietprogram();
   }
 
   onAnimate = () => {
@@ -74,7 +76,19 @@ class My_program extends Component {
       duration: 50000,
     }).start();
   };
-
+dietprogram=async()=>{
+  var user = await AsyncStorage.getItem('userId');
+    // console.log(user);
+    var userDetails = await Api.get('userById/' + user);
+    // console.log(userDetails);
+    if (userDetails.status === 'success') {
+      // console.log(userDetails.data.details.first_name);
+      this.setState({
+        program: userDetails.data,
+        isloading: false,
+      });
+    }
+}
   render() {
     return (
       <Container style={styles.background_general}>
@@ -82,7 +96,7 @@ class My_program extends Component {
         <ScrollView>
           <Text style={styles.profileTitle}>MY PROGRAMS</Text>
           <View style={{padding: 0, paddingTop: 0}}>
-            <View></View>
+            {/* <View></View> */}
             <Grid
               style={{
                 flex: 2,
@@ -93,7 +107,7 @@ class My_program extends Component {
               }}>
               <Row
                 style={{
-                  height: 270,
+                  // height: 270,
                   // width: 180,
                   //   flex: 1,
                   paddingRight: 20,
@@ -128,18 +142,10 @@ class My_program extends Component {
                           <Text style={styles.cardTitle_health}>
                             Start Date :
                           </Text>
-                          <Text style={styles.cardTitle_date}>24-Dec-2020</Text>
+                          <Text style={styles.cardTitle_date}>{this.state.program.created_at}</Text>
                         </View>
 
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                          }}>
-                          <Text style={styles.cardTitle_health}>
-                            Start Date :
-                          </Text>
-                          <Text style={styles.cardTitle_date}>24-Dec-2020</Text>
-                        </View>
+                        
 
                         <View
                           style={{
@@ -148,7 +154,7 @@ class My_program extends Component {
                           <Text style={styles.cardTitle_health}>
                             End Date :
                           </Text>
-                          <Text style={styles.cardTitle_date}>23-Mar-2021</Text>
+                          <Text style={styles.cardTitle_date}>{this.state.program.updated_at}</Text>
                         </View>
 
                         <View
@@ -159,7 +165,7 @@ class My_program extends Component {
                             Assigned Dietician :
                           </Text>
                           <Text style={styles.cardTitle_date}>
-                            Shampa Banerjee
+                            {this.state.program.dietitian_name}
                           </Text>
                         </View>
                       </View>
