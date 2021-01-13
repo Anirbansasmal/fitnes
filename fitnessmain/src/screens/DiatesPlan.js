@@ -88,7 +88,7 @@ class DiatesPlan extends Component {
   ditelist = async () => {
     var token = await AsyncStorage.getItem('token');
     var user = await AsyncStorage.getItem('userId');
-    var userDetails = await Api.get('userById/' + 74);
+    var userDetails = await Api.get('userById/' + user);
     // console.log(userDetails);
     if (userDetails.status === 'success') {
       console.log(userDetails.data.dietchart[1].data_sub[0]);

@@ -999,7 +999,7 @@ module.exports = StyleSheet.create({
   cardTitle_like: {
     width: 70,
     height: 66,
-    elevation: 3,
+    elevation: 1,
     borderRadius: 10,
     justifyContent: 'center',
     flexDirection: 'row',

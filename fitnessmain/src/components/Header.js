@@ -20,7 +20,7 @@ export default class Head extends Component {
     };
     render() {
       return (
-        <Header noShadow style={{backgroundColor:'#fff'}}>
+        <Header noShadow style={{backgroundColor:'#fff',elevation:6,}}>
           <Left>
             
             <View>
