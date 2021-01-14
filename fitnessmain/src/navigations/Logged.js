@@ -246,7 +246,7 @@ const TabsScreen = () => (
       tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
-          case 'ProfileScreen':
+          case 'Profile_custo':
             iconName = focused
               ? 'account-circle'
               : 'account-circle';
@@ -276,8 +276,8 @@ const TabsScreen = () => (
       style: {height: 50,backgroundColor:"#035048",justifyContent:"center",},
     }}>
     <Tabs.Screen
-      name="ProfileScreen"
-      component={ProfileScreen}
+      name="Profile_custo"
+      component={Profile_custo}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
