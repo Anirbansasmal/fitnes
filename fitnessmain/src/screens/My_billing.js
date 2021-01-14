@@ -162,7 +162,7 @@ dietprogram=async()=>{
                           // size={40}
                           style={{
                             height: 100,
-                            width: 1000,
+                            width: 100,
                             marginEnd: 20,
                           }}
                           source={{
