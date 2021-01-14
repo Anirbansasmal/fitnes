@@ -28,7 +28,7 @@ export default class Head extends Component {
     return (
       <Header style={{backgroundColor: '#fff', elevation: 10}}>
         <Left>
-          <View>
+          {/* <View>
             <Button transparent>
               <Icon
                 onPress={this.openMenu}
@@ -36,10 +36,10 @@ export default class Head extends Component {
                 style={{color: '#000'}}
               />
             </Button>
-          </View>
+          </View> */}
         </Left>
         <Body>
-          <View style={{marginTop: 20}}>
+          <View style={{marginTop: 20,alignSelf:"flex-start"}}>
             <Image
               width={100}
               source={require('../../src/assets/images/header-logo.png')}

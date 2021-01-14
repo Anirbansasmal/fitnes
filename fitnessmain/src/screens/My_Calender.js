@@ -131,31 +131,37 @@ class My_Calender extends Component {
     this.setState({
       isVisableMood: false,
     });
+    Alert.alert('Successfully', 'Your mood Add');
   }
   submitTask() {
     this.setState({
       isVisableTask: false,
     });
+    Alert.alert('Successfully', 'Add your Task');
   }
   submitFood() {
     this.setState({
       isVisableFood: false,
     });
+    Alert.alert('Successfully', 'Add your food');
   }
   submitActivity() {
     this.setState({
       isVisableActivity: false,
     });
+    Alert.alert('Successfully', 'Add your Activity');
   }
   submitMenstruation() {
     this.setState({
       isVisableMenstruation: false,
     });
+    Alert.alert('Successfully', 'Add your Menstruation');
   }
   submitWeight() {
     this.setState({
       isVisableWeight: false,
     });
+    Alert.alert('Successfully', 'Add your Weight');
   }
 
   render() {
@@ -761,6 +767,7 @@ class My_Calender extends Component {
               </View>
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
+                <TouchableOpacity>
                 <Image
                   size={40}
                   source={require('../../src/assets/images/e87be674516ed204f304cf0bff8a577c.png')}
@@ -770,6 +777,8 @@ class My_Calender extends Component {
                     margin: 10,
                   }}
                 />
+                </TouchableOpacity>
+                <TouchableOpacity>
                 <Image
                   size={40}
                   source={require('../../src/assets/images/5f0a282cee6bcd654d14f9349fb8db20.png')}
@@ -779,6 +788,8 @@ class My_Calender extends Component {
                     margin: 10,
                   }}
                 />
+                </TouchableOpacity>
+                <TouchableOpacity>
                 <Image
                   size={40}
                   source={require('../../src/assets/images/628c748a20f0f8d8306ebbdd04d1662d.png')}
@@ -788,6 +799,7 @@ class My_Calender extends Component {
                     margin: 10,
                   }}
                 />
+                </TouchableOpacity>
               </View>
               <TextInput
                 placeholder="optionally share something more ..."
@@ -859,6 +871,8 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
+                    <TouchableOpacity>
+                      
                       <Image
                         size={40}
                         source={require('../../src/assets/images/spotting.png')}
@@ -868,9 +882,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>spotting</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+                      
                       <Image
                         size={40}
                         source={require('../../src/assets/images/light.png')}
@@ -880,9 +897,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>light</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/medium.png')}
@@ -892,9 +912,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>medium</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/heavy.png')}
@@ -904,6 +927,7 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>heavy</Text>
                     </View>
                   </View>
@@ -914,6 +938,9 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
+                    <TouchableOpacity>
+                      
+                    </TouchableOpacity>
                       <Image
                         size={40}
                         source={require('../../src/assets/images/egg_white.png')}
@@ -926,6 +953,8 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>egg white</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/creamy.png')}
@@ -935,9 +964,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>creamy</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/sticky.png')}
@@ -947,9 +979,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>sticky</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/unusual.png')}
@@ -959,6 +994,7 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>unusual</Text>
                     </View>
                   </View>
@@ -969,6 +1005,8 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/cramps.png')}
@@ -978,9 +1016,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>cramps</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/headache.png')}
@@ -990,9 +1031,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>headache</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/acne.png')}
@@ -1002,9 +1046,12 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>acne</Text>
                     </View>
                     <View>
+                    <TouchableOpacity>
+
                       <Image
                         size={40}
                         source={require('../../src/assets/images/sick.png')}
@@ -1014,6 +1061,7 @@ class My_Calender extends Component {
                           margin: 10,
                         }}
                       />
+                    </TouchableOpacity>
                       <Text style={styles.title_subCate}>sick</Text>
                     </View>
                   </View>

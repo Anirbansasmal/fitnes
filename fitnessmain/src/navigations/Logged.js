@@ -254,8 +254,8 @@ const TabsScreen = () => (
             break;
           case 'Homeu':
             iconName = focused
-              ? 'dots-horizontal-circle-outline'
-              : 'dots-horizontal-circle-outline';
+              ? 'home-circle-outline'
+              : 'home-circle-outline';
             break;
 
           default:
@@ -590,36 +590,36 @@ const HomeStackScreen = ({navigation}) => (
 /**
  * Drawer Navigator
  */
-const Drawer = createDrawerNavigator();
-const DrawerScreen = () => (
-  <Drawer.Navigator
-    // initialRouteName="Home"
-    drawerPosition="left"
-    drawerContent={(props) => <SideMenu {...props} />}
-    drawerStyle={{width: '90%'}}
-    drawerContentOptions={{
-      labelStyle: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginTop: -5,
-        color: '#000000',
-      },
-      activeTintColor: '#4d4d4d',
-      itemStyle: {
-        borderBottomColor: '#cccccc',
-        borderBottomWidth: 0.5,
-        height: 40,
-      },
-    }}>
-    <Drawer.Screen name="Home" component={TabsScreen} />
-    {/* <Drawer.Screen name="Home_nav" component={HomeStackScreenNav} /> */}
-  </Drawer.Navigator>
-);
+// const Drawer = createDrawerNavigator();
+// const DrawerScreen = () => (
+//   <Drawer.Navigator
+//     // initialRouteName="Home"
+//     drawerPosition="left"
+//     drawerContent={(props) => <SideMenu {...props} />}
+//     drawerStyle={{width: '90%'}}
+//     drawerContentOptions={{
+//       labelStyle: {
+//         fontSize: 14,
+//         fontWeight: 'bold',
+//         marginTop: -5,
+//         color: '#000000',
+//       },
+//       activeTintColor: '#4d4d4d',
+//       itemStyle: {
+//         borderBottomColor: '#cccccc',
+//         borderBottomWidth: 0.5,
+//         height: 40,
+//       },
+//     }}>
+//     <Drawer.Screen name="Home" component={TabsScreen} />
+//     {/* <Drawer.Screen name="Home_nav" component={HomeStackScreenNav} /> */}
+//   </Drawer.Navigator>
+// );
 
 const RootStack = createStackNavigator();
 const RootStackScreen = ({userToken}) => (
   <RootStack.Navigator headerMode="none">
-    <RootStack.Screen name="Auth" component={DrawerScreen} />
+    <RootStack.Screen name="Auth" component={TabsScreen} />
   </RootStack.Navigator>
 );
 
