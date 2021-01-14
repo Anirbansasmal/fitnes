@@ -23,15 +23,15 @@ export default class Head extends Component {
         <Header noShadow style={{backgroundColor:'#fff',elevation:6,}}>
           <Left>
             
-            <View>
+            {/* <View>
               <Button transparent>
                 <Icon onPress={this.openMenu} name="menu" style={{color:'#000'}}/>
               </Button>
-            </View>
+            </View> */}
             
           </Left>
           <Body>
-          <View style={{marginTop:20}}>
+          <View style={{marginTop:20,alignItems:"flex-start"}}>
               <Image width={100} source={require('../../src/assets/images/header-logo.png')} />
             </View>
             <Title>{this.props.title}</Title>
