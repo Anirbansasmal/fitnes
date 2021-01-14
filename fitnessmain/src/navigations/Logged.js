@@ -1,6 +1,6 @@
 import React from 'react';
 import SideMenu from './SideMenu';
-import {Dimensions, Text} from "react-native";
+import {Dimensions, Text} from 'react-native';
 
 var {height, width} = Dimensions.get('window');
 
@@ -12,8 +12,8 @@ import HomeScreen from '../screens/Home';
 import WorkoutsScreen from '../screens/Workouts';
 import Head from '../components/Header';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Icon } from 'react-native-elements';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import {Icon} from 'react-native-elements';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 // const HeaderComp = (navigation, titleTxt) => (
 //   <Head navigation={navigation} titleTxt={titleTxt} />
 // );
@@ -34,11 +34,12 @@ import height_profile from '../screens/height_profile';
 // import WorkoutsByGoalScreen from "../screens/WorkoutsByGoal";
 // import WorkoutsByLevelScreen from "../screens/WorkoutsByLevel";
 // import PostsByTagScreen from "../screens/PostsByTag";
-import DietsByCategoryScreen from "../screens/DietsByCategory";
+import DietsByCategoryScreen from '../screens/DietsByCategory';
 // import WorkoutDetailsScreen from "../screens/WorkoutDetails";
 // import ExerciseDetailsScreen from "../screens/ExerciseDetails";
-import DietDetailsScreen from "../screens/DietDetails";
-import PostDetailsScreen from "../screens/PostDetails";
+import DietDetailsScreen from '../screens/DietDetails';
+import PostDetailsScreen from '../screens/PostDetails';
+import My_billing from '../screens/My_billing'
 // import VideoExerciseScreen from "../screens/VideoExercise";
 // import Day1Screen from "../screens/Day1";
 // import Day2Screen from "../screens/Day2";
@@ -47,13 +48,13 @@ import PostDetailsScreen from "../screens/PostDetails";
 // import Day5Screen from "../screens/Day5";
 // import Day6Screen from "../screens/Day6";
 // import Day7Screen from "../screens/Day7";
-import ProfileScreen from "../screens/Profile";
-import LogoutScreen from "../screens/Logout";
-import Profile_custo from "../screens/Profile_custo";
-import Profile_details from "../screens/Profile_details";
+import ProfileScreen from '../screens/Profile';
+import LogoutScreen from '../screens/Logout';
+import Profile_custo from '../screens/Profile_custo';
+import Profile_details from '../screens/Profile_details';
 import Profile_health from '../screens/Profile_health';
 import My_Calender from '../screens/My_Calender';
-import My_task from '../screens/My_task'
+import My_task from '../screens/My_task';
 // import WorkoutSearchScreen from "../screens/WorkoutSearch";
 // import WorkoutResultsScreen from "../screens/WorkoutResults";
 // import CalculatorScreen from "../screens/Calculator";
@@ -64,9 +65,8 @@ import My_task from '../screens/My_task'
 // import TagsScreen from "../screens/Tags";
 // import CategoriesScreen from "../screens/Categories";
 // import ContactUsScreen from "../screens/ContactUs";
-import OfflineBar from "../components/OfflineBar";
+import OfflineBar from '../components/OfflineBar';
 import PostDetails from '../screens/PostDetails';
-
 
 // const leftIcon = (navigation, icon) => <Icon
 // 	name={icon}
@@ -241,21 +241,21 @@ import PostDetails from '../screens/PostDetails';
 const Tabs = createBottomTabNavigator();
 const TabsScreen = () => (
   <Tabs.Navigator
-  initialRouteName="Home"
+    initialRouteName="Home"
     screenOptions={({route}) => ({
       tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
           case 'Profile_custo':
-            iconName = focused
-              ? 'account-circle'
-              : 'account-circle';
+            iconName = focused ? 'account-circle' : 'account-circle';
             break;
           case 'Home':
             iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
           case 'Homeu':
-            iconName = focused ? 'dots-horizontal-circle-outline' : 'dots-horizontal-circle-outline';
+            iconName = focused
+              ? 'dots-horizontal-circle-outline'
+              : 'dots-horizontal-circle-outline';
             break;
 
           default:
@@ -264,30 +264,35 @@ const TabsScreen = () => (
 
         // You can return any component that you like here!
         if (route.name === 'Home') {
-          
         }
-        return <MaterialCommunityIcons  name={iconName} style={{color:'#ffff',alignSelf: 'center',marginTop: 10,}} size={30}/>
+        return (
+          <MaterialCommunityIcons
+            name={iconName}
+            style={{color: '#ffff', alignSelf: 'center', marginTop: 10}}
+            size={30}
+          />
+        );
       },
     })}
     tabBarOptions={{
       activeTintColor: '#ff1a1a',
       inactiveTintColor: 'gray',
       labelStyle: {paddingBottom: 0},
-      style: {height: 50,backgroundColor:"#035048",justifyContent:"center",},
+      style: {height: 50, backgroundColor: '#035048', justifyContent: 'center'},
     }}>
     <Tabs.Screen
       name="Profile_custo"
-      component={Profile_custo}
+      component={HomeStackScreenNav}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
       name="Home"
-      component={HomeScreen}
+      component={HomeStackScreen}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
       name="Homeu"
-      component={HomeScreen}
+      component={HomeStackScreen}
       options={{tabBarLabel: ''}}
     />
   </Tabs.Navigator>
@@ -297,145 +302,298 @@ const TabsScreen = () => (
  * All Stack navigators
  */
 const HomeStack = createStackNavigator();
+
+const HomeStack_nav = createStackNavigator();
+const HomeStackScreenNav=({navigation})=>(
+  <HomeStack_nav.Navigator initialRouteName="Profile_custo">
+    {/* <HomeStack.Screen
+      name="Home_nav"
+      component={TabsScreen}
+      options={{
+        headerShown: false,
+      }}
+    /> */}
+    <HomeStack_nav.Screen
+      name="Profile_custo"
+      component={Profile_custo}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="diet"
+      component={DietsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="LogoutScreen"
+      component={LogoutScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="offline"
+      component={OfflineBar}
+      options={{
+        headerShown: true,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="PostsScreen"
+      component={PostsScreen}
+      options={{
+        headerShown: true,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="PostDetailsScreen"
+      component={PostDetails}
+      options={{
+        headerShown: true,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="ProfileScreen"
+      component={ProfileScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    
+    <HomeStack_nav.Screen
+      name="Profile_details"
+      component={Profile_details}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Profile_health"
+      component={Profile_health}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="DietDetails"
+      component={DietDetailsScreen}
+      options={{
+        headerShown: true,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="DiatesPlan"
+      component={DiatesPlan}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="My_program"
+      component={My_program}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="My_Calender"
+      component={My_Calender}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Diabetes"
+      component={Diabetes}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="height_profile"
+      component={height_profile}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="My_task"
+      component={My_task}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="My_billing"
+      component={My_billing}
+      options={{
+        headerShown: false,
+      }}
+    />
+    </HomeStack_nav.Navigator>
+)
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator initialRouteName="Home">
     <HomeStack.Screen
       name="Home"
-      component={TabsScreen}
+      component={HomeScreen}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
+    
     <HomeStack.Screen
       name="workout"
       component={WorkoutsScreen}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="diet"
       component={DietsScreen}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="LogoutScreen"
       component={LogoutScreen}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="offline"
       component={OfflineBar}
       options={{
-        headerShown:true
+        headerShown: true,
       }}
     />
     <HomeStack.Screen
       name="PostsScreen"
       component={PostsScreen}
       options={{
-        headerShown:true
+        headerShown: true,
       }}
     />
     <HomeStack.Screen
       name="PostDetailsScreen"
       component={PostDetails}
       options={{
-        headerShown:true
+        headerShown: true,
       }}
     />
     <HomeStack.Screen
       name="ProfileScreen"
       component={ProfileScreen}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="Profile_custo"
       component={Profile_custo}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="Profile_details"
       component={Profile_details}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="Profile_health"
       component={Profile_health}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="DietDetails"
       component={DietDetailsScreen}
       options={{
-        headerShown:true
+        headerShown: true,
       }}
     />
     <HomeStack.Screen
       name="DiatesPlan"
       component={DiatesPlan}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="My_program"
       component={My_program}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="My_Calender"
       component={My_Calender}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="Diabetes"
       component={Diabetes}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="height_profile"
       component={height_profile}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
       name="My_task"
       component={My_task}
       options={{
-        headerShown:false
+        headerShown: false,
       }}
     />
-    
-    </HomeStack.Navigator>
-  
-  );
-    /**
+    <HomeStack_nav.Screen
+      name="My_billing"
+      component={My_billing}
+      options={{
+        headerShown: false,
+      }}
+    />
+    {/* <HomeStack.Screen
+      name="Home_nav"
+      component={HomeStackScreenNav}
+      options={{
+        headerShown: false,
+      }}
+    /> */}
+  </HomeStack.Navigator>
+);
+/**
  * Drawer Navigator
  */
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
   <Drawer.Navigator
-    initialRouteName="Home"
+    // initialRouteName="Home"
     drawerPosition="left"
     drawerContent={(props) => <SideMenu {...props} />}
     drawerStyle={{width: '90%'}}
@@ -453,26 +611,20 @@ const DrawerScreen = () => (
         height: 40,
       },
     }}>
-    <Drawer.Screen
-      name="Home"
-      component={HomeStackScreen}
-    />
+    <Drawer.Screen name="Home" component={TabsScreen} />
+    {/* <Drawer.Screen name="Home_nav" component={HomeStackScreenNav} /> */}
   </Drawer.Navigator>
 );
 
-
 const RootStack = createStackNavigator();
 const RootStackScreen = ({userToken}) => (
-  
   <RootStack.Navigator headerMode="none">
     <RootStack.Screen name="Auth" component={DrawerScreen} />
   </RootStack.Navigator>
 );
 
-
-
 export default ({userToken}) => (
-  <NavigationContainer >
-    <RootStackScreen  />
+  <NavigationContainer>
+    <RootStackScreen />
   </NavigationContainer>
 );

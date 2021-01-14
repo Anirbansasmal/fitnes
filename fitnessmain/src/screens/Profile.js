@@ -359,7 +359,11 @@ export default class Profile extends Component {
                 }}>
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
-                  <CardItem>
+                  <CardItem
+                    button={true}
+                    onPress={() => {
+                      this.props.navigation.navigate('My_billing');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -481,7 +485,7 @@ export default class Profile extends Component {
               <View style={styles.needs_titlecolor}>
                 <Image
                   // size={80}
-                  style={{height:40,width:40,}}
+                  style={{height: 40, width: 40}}
                   source={require('../../src/assets/images/menstrual-cycle.png')}
                 />
                 <Text style={styles.cardTitle_food}>Menstrual Report</Text>
@@ -489,7 +493,7 @@ export default class Profile extends Component {
               <View style={styles.needs_titlecolor}>
                 <Image
                   // size={80}
-                  style={{height:40,width:40,}}
+                  style={{height: 40, width: 40}}
                   source={require('../../src/assets/images/settings.png')}
                 />
                 <Text style={styles.cardTitle_food}>App Settings</Text>
