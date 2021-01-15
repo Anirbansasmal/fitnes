@@ -246,7 +246,7 @@ const TabsScreen = () => (
       tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
-          case 'Profile_custo':
+          case 'ProfileScreen':
             iconName = focused ? 'account-circle' : 'account-circle';
             break;
           case 'Home':
@@ -256,6 +256,11 @@ const TabsScreen = () => (
             iconName = focused
               ? 'home-circle-outline'
               : 'home-circle-outline';
+            break;
+            case 'Homenav':
+            iconName = focused
+              ? 'dots-horizontal-circle-outline'
+              : 'dots-horizontal-circle-outline';
             break;
 
           default:
@@ -281,7 +286,7 @@ const TabsScreen = () => (
       style: {height: 50, backgroundColor: '#035048', justifyContent: 'center'},
     }}>
     <Tabs.Screen
-      name="Profile_custo"
+      name="ProfileScreen"
       component={HomeStackScreenNav}
       options={{tabBarLabel: ''}}
     />
@@ -295,6 +300,11 @@ const TabsScreen = () => (
       component={HomeStackScreen}
       options={{tabBarLabel: ''}}
     />
+    <Tabs.Screen
+      name="Homenav"
+      component={HomeStackScreen}
+      options={{tabBarLabel: ''}}
+    />
   </Tabs.Navigator>
 );
 
@@ -305,7 +315,7 @@ const HomeStack = createStackNavigator();
 
 const HomeStack_nav = createStackNavigator();
 const HomeStackScreenNav=({navigation})=>(
-  <HomeStack_nav.Navigator initialRouteName="Profile_custo">
+  <HomeStack_nav.Navigator initialRouteName="ProfileScreen">
     {/* <HomeStack.Screen
       name="Home_nav"
       component={TabsScreen}
@@ -314,8 +324,8 @@ const HomeStackScreenNav=({navigation})=>(
       }}
     /> */}
     <HomeStack_nav.Screen
-      name="Profile_custo"
-      component={Profile_custo}
+      name="ProfileScreen"
+      component={ProfileScreen}
       options={{
         headerShown: false,
       }}
@@ -362,14 +372,14 @@ const HomeStackScreenNav=({navigation})=>(
         headerShown: true,
       }}
     />
+    
     <HomeStack_nav.Screen
-      name="ProfileScreen"
-      component={ProfileScreen}
+      name="Profile_custo"
+      component={Profile_custo}
       options={{
         headerShown: false,
       }}
     />
-    
     <HomeStack_nav.Screen
       name="Profile_details"
       component={Profile_details}
