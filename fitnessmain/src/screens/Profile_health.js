@@ -65,6 +65,17 @@ class Profile_health extends Component {
           <View style={{padding: 0, paddingTop: 0}}>
             <View>
               <Text style={styles.revenueTitle}>New Revenue</Text>
+              <View style={{ margin:10,justifyContent:"center",flex:1}}>
+              <Image
+                style={{
+                  height: 140,
+                  width: 360,
+                  margin:10,
+                  // alignSelf:"center",
+                }}
+                resizeMode="cover"
+                source={require('../../src/assets/images/chart.png')}></Image>
+                </View>
             </View>
 
             <Text style={styles.profileTitle_sugg}>

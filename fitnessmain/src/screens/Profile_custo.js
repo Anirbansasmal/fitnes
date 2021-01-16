@@ -127,7 +127,11 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          height: 45,
+                          width: 45,
+                        }}
                         source={require('../../src/assets/images/height.png')}
                       />
                       <Text style={styles.cardTitle_food}>

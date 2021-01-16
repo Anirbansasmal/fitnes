@@ -46,7 +46,8 @@ var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
-
+import Head from '../components/Header_profile';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export default class Profile_details extends Component {
   static navigationOptions = {
     title: 'Profile',
@@ -270,201 +271,313 @@ export default class Profile_details extends Component {
 
     return (
       <Container style={styles.background_general}>
-        <ImageBackground
-          source={require('../../src/assets/images/profilebg.jpg')}
-          style={{
-            width: width,
-            height: height * 0.2,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text style={{color: '#f39c12', fontSize: 22, marginTop: 6}}>
-            {this.state.username}
-          </Text>
-          {/* <Text style={{color: '#FFF', fontSize: 16, marginTop: 6, textTransform: 'uppercase'}}> {Strings.ST65} </Text> */}
-        </ImageBackground>
+        <Head navigation={this.props.navigation} title="" />
         <ScrollView>
-          <Tabs
-            tabBarUnderlineStyle={{backgroundColor: '#f39c12'}}
-            tabContainerStyle={{elevation: 0}}>
-            <Tab
-              heading="View"
-              tabStyle={styles.tabs_diets}
-              activeTabStyle={styles.activetabs_diets}
-              textStyle={styles.tabs_text_diets}
-              activeTextStyle={styles.activetabs_text_diets}>
-              <List>
-                <ListItem>
-                  <Text>First name : {this.state.user.first_name}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>last name : {this.state.user.last_name}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Date of birth: {this.state.user.dob}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Weight: {this.state.user.weight}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Height: {this.state.user.height}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>BMI: {this.state.user.bmi}</Text>
-                </ListItem>
-              </List>
-            </Tab>
+        <Text style={styles.profileTitle}>MY PROFILE > PERSONAL DETAILS</Text>
+          <List>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Name</Text>
+                    <Text style={styles.stepsView}>
+                      {this.state.user.first_name} {this.state.user.last_name}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      // justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Phone</Text>
+                    <Text style={styles.stepsView}>{this.state.phone}</Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Email IDs</Text>
+                    <Text style={styles.stepsView}>
+                      {this.state.email}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>City,Country,Pincode</Text>
+                    <Text style={styles.stepsView}>
+                      {this.state.city},{this.state.address},{this.state.pin}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Occupation</Text>
+                    <Text style={styles.stepsView}>
+                      {this.state.occupation}
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>City</Text>
+                    <Text style={styles.stepsView}>{this.state.city}</Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Date of Birth</Text>
+                    <Text style={styles.stepsView}>{this.state.dob}</Text>
+                  </View>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+          </List>
+{/* 
+          <Item>
+            <Input
+              placeholder="weight"
+              value={this.state.weight}
+              onChangeText={(value) => this.setdetails(value, 'weight')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="height"
+              value={this.state.height}
+              onChangeText={(value) => this.setdetails(value, 'height')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="Bmi"
+              value={this.state.bmi}
+              onChangeText={(value) => this.setdetails(value, 'bmi')}
+            />
+          </Item>
 
-            <Tab
-              heading="Edit"
-              tabStyle={styles.tabs_diets}
-              activeTabStyle={styles.activetabs_diets}
-              textStyle={styles.tabs_text_diets}
-              activeTextStyle={styles.activetabs_text_diets}>
-              <Form>
-                <Item>
-                  <Input
-                    placeholder="first name"
-                    value={this.state.first_name}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'first_name')
-                    }
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="last name"
-                    value={this.state.last_name}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'last_name')
-                    }
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    placeholder="weight"
-                    value={this.state.weight}
-                    onChangeText={(value) => this.setdetails(value, 'weight')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="height"
-                    value={this.state.height}
-                    onChangeText={(value) => this.setdetails(value, 'height')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="Bmi"
-                    value={this.state.bmi}
-                    onChangeText={(value) => this.setdetails(value, 'bmi')}
-                  />
-                </Item>
+          <Item>
+            <Input
+              placeholder="visceral fat"
+              value={this.state.visceral_fat}
+              onChangeText={(value) => this.setdetails(value, 'visceral_fat')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="body fat"
+              value={this.state.body_fat}
+              onChangeText={(value) => this.setdetails(value, 'body_fat')}
+            />
+          </Item>
+          <Item>
+            <Input
+              placeholder="skype id"
+              value={this.state.skype_id}
+              onChangeText={(value) => this.setdetails(value, 'skype_id')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="phone"
+              value={this.state.phone}
+              onChangeText={(value) => this.setdetails(value, 'phone')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="alt phone"
+              value={this.state.alt_phone}
+              onChangeText={(value) => this.setdetails(value, 'alt_phone')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="city"
+              value={this.state.city}
+              onChangeText={(value) => this.setdetails(value, 'city')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="address"
+              value={this.state.address}
+              onChangeText={(value) => this.setdetails(value, 'address')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="pin"
+              value={this.state.pin}
+              onChangeText={(value) => this.setdetails(value, 'pin')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="country"
+              value={this.state.country}
+              onChangeText={(value) => this.setdetails(value, 'country')}
+            />
+          </Item>
+          <Item last>
+            <Input
+              placeholder="occupation"
+              value={this.state.occupation}
+              onChangeText={(value) => this.setdetails(value, 'occupation')}
+            />
+          </Item>
 
-                <Item>
-                  <Input
-                    placeholder="visceral fat"
-                    value={this.state.visceral_fat}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'visceral_fat')
-                    }
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="body fat"
-                    value={this.state.body_fat}
-                    onChangeText={(value) => this.setdetails(value, 'body_fat')}
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    placeholder="skype id"
-                    value={this.state.skype_id}
-                    onChangeText={(value) => this.setdetails(value, 'skype_id')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="phone"
-                    value={this.state.phone}
-                    onChangeText={(value) => this.setdetails(value, 'phone')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="alt phone"
-                    value={this.state.alt_phone}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'alt_phone')
-                    }
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="city"
-                    value={this.state.city}
-                    onChangeText={(value) => this.setdetails(value, 'city')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="address"
-                    value={this.state.address}
-                    onChangeText={(value) => this.setdetails(value, 'address')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="pin"
-                    value={this.state.pin}
-                    onChangeText={(value) => this.setdetails(value, 'pin')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="country"
-                    value={this.state.country}
-                    onChangeText={(value) => this.setdetails(value, 'country')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="occupation"
-                    value={this.state.occupation}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'occupation')
-                    }
-                  />
-                </Item>
-
-                <Item>
-                  <DatePicker
-                    defaultDate={new Date(2020, 12, 12)}
-                    minimumDate={new Date(1970, 1, 1)}
-                    maximumDate={new Date(2040, 12, 31)}
-                    locale={'en'}
-                    timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={'fade'}
-                    androidMode={'default'}
-                    placeHolderText="Date of birth"
-                    textStyle={{color: 'green'}}
-                    placeHolderTextStyle={{color: '#d3d3d3'}}
-                    onDateChange={this.setDate}
-                    disabled={false}
-                  />
-                </Item>
-                <Button
-                  block
-                  onPress={this.onSubmit}
-                  style={styles.button_auth}>
-                  <Text>Update</Text>
-                </Button>
-              </Form>
-            </Tab>
-          </Tabs>
+          <Item>
+            <DatePicker
+              defaultDate={new Date(2020, 12, 12)}
+              minimumDate={new Date(1970, 1, 1)}
+              maximumDate={new Date(2040, 12, 31)}
+              locale={'en'}
+              timeZoneOffsetInMinutes={undefined}
+              modalTransparent={false}
+              animationType={'fade'}
+              androidMode={'default'}
+              placeHolderText="Date of birth"
+              textStyle={{color: 'green'}}
+              placeHolderTextStyle={{color: '#d3d3d3'}}
+              onDateChange={this.setDate}
+              disabled={false}
+            />
+          </Item> */}
+        
         </ScrollView>
       </Container>
     );

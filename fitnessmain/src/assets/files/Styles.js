@@ -144,8 +144,8 @@ module.exports = StyleSheet.create({
   //////////////////////// POSTS
 
   title_posts_categories: {
-    color: '#FFF',
-    fontSize: 13,
+    // color: '#FFF',
+    fontSize: 18,
     padding: 10,
     fontWeight: 'bold',
     paddingTop: 2,
@@ -170,10 +170,11 @@ module.exports = StyleSheet.create({
   },
 
   background_posts_2columns: {
-    width: width * 0.46,
-    height: height * 0.15,
+    width: width * 0.40,
+    height: height * 0.24,
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
+    borderRadius:10,
   },
 
   postDetail_background: {
@@ -770,9 +771,11 @@ module.exports = StyleSheet.create({
     fontSize: 16,
     alignSelf: 'center',
     // alignContent: 'center',
-    // textAlign: 'center',
+    textAlign: 'center',
     justifyContent: 'center',
     marginLeft: 10,
+    // backgroundColor: '#d8cecd',
+    width:'100%'
   },
   profileTitle: {
     color: '#035048',
@@ -857,7 +860,7 @@ module.exports = StyleSheet.create({
   },
   inner_bar: {
     width: '100%',
-    height: 12,
+    height: 10,
     borderRadius: 15,
     backgroundColor: '#11ba11',
     // marginTop:20,
@@ -867,7 +870,7 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     // marginStart:10,
     borderColor: '#2c2e2c',
-    borderWidth: 3,
+    borderWidth: 1,
     flexDirection: 'row',
     borderRadius: 30,
     width: '100%',
@@ -902,19 +905,21 @@ module.exports = StyleSheet.create({
   },
   flatButton: {
     alignSelf: 'flex-end',
-    marginTop: 30,
+    // marginTop: 30,
     marginBottom: 20,
   },
   flatPopup: {
     // alignSelf: 'flex-end',
     // borderWidth: 1,
     borderRadius: 20,
-    elevation: 4,
+    elevation: 1,
     // height: 250,
     // width: 150,
     marginEnd: 10,
     textAlignVertical: 'top',
     alignSelf: 'flex-start',
+    marginTop:-145,
+    backgroundColor: '#ffff',
   },
   stepsLog: {
     color: '#035048',
@@ -933,6 +938,26 @@ module.exports = StyleSheet.create({
     marginTop: 10,
     // marginBottom:20,
     marginEnd: 20,
+  },
+  stepsEdit: {
+    color: '#035048',
+    fontWeight: '500',
+    fontSize: 18,
+    marginStart: 10,
+    marginTop: 10,
+    // marginBottom:20,
+    marginEnd: 20,
+    alignSelf:"flex-start",
+  },
+  stepsView: {
+    color: '#035048',
+    fontWeight: '700',
+    fontSize: 18,
+    marginStart: 10,
+    marginTop: 10,
+    // marginBottom:20,
+    marginEnd: 20,
+    alignSelf:"flex-start",
   },
   stepsLogs_weight: {
     color: '#035048',
@@ -997,7 +1022,16 @@ module.exports = StyleSheet.create({
     // textAlign:"center"
   },
   cardTitle_like: {
-    width: 70,
+    width: 66,
+    height: 66,
+    elevation: 1,
+    borderRadius: 10,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    // marginTop: 6,
+  },
+  cardTitle_dislike: {
+    width: 66,
     height: 66,
     elevation: 1,
     borderRadius: 10,
@@ -1053,8 +1087,17 @@ module.exports = StyleSheet.create({
     marginEnd: 20,
     alignSelf: 'center',
     marginStart: 18,
-    padding:6,
-    marginTop: 10,
+    // padding:6,
+    // marginTop: 10,
+  },
+  card_dislikeimg:{
+    height: 40,
+    width: 40,
+    marginEnd: 20,
+    alignSelf: 'center',
+    marginStart: 18,
+    // padding:6,
+    // marginTop: 10,
   },
   stepsdeviation: {
     color: '#035048',

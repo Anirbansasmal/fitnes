@@ -120,7 +120,7 @@ dietprogram=async()=>{
                     elevation: 6,
                     flex: 1,
                   }}>
-                  <CardItem button={true}>
+                  <CardItem button={false}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -186,6 +186,7 @@ dietprogram=async()=>{
                           // backgroundColor:"#11ba11",
                           width: '100%',
                         }}>
+                        <TouchableOpacity>
                         <Image
                           // size={40}
                           style={{
@@ -195,6 +196,8 @@ dietprogram=async()=>{
                           }}
                           source={require('../../src/assets/images/message.png')}
                         />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
                         <Image
                           // size={40}
                           style={{
@@ -203,6 +206,7 @@ dietprogram=async()=>{
                           }}
                           source={require('../../src/assets/images/icon_war.png')}
                         />
+                        </TouchableOpacity>
                       </View>
 
                       {/* </View> */}
@@ -226,7 +230,8 @@ dietprogram=async()=>{
                     elevation: 6,
                     flex: 1,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}>
                     <Body
                       style={{
                         // justifyContent: 'center',
