@@ -72,6 +72,8 @@ export default class Home extends Component {
       weight:'',
       bmi:'',
       taskdet:'',
+      userDiet:'',
+      
     };
   }
   componentDidMount() {
@@ -126,8 +128,18 @@ export default class Home extends Component {
         profile_name:apiResponse.data.details.first_name,
         weight:apiResponse.data.details.weight,
         bmi:apiResponse.data.details.bmi,
-        taskdet:apiResponse.data.tasks[0].task,
+        userDiet: apiResponse.data.dietchart,
       });
+      if(apiResponse.data.tasks==""){
+        this.setState({
+          taskdet:"No task available",
+        })
+      }else{
+        this.setState({
+          taskdet:apiResponse.data.tasks[0].task,
+        })
+      }
+      console.log("userDiet",apiResponse)
     } else {
       const error = apiResponse.errors;
       this.setState({isLoading: false}, () => {
@@ -160,6 +172,13 @@ export default class Home extends Component {
   };
   task() {
     this.props.navigation.navigate('My_task');
+  }
+  dietplan(){
+    if(this.state.userDiet==""){
+      Alert.alert('Diet plan', "No diet exist");
+    }else{
+      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[0]});
+    }
   }
   render() {
     var loaded = this.state.isloading;
@@ -316,9 +335,9 @@ export default class Home extends Component {
                 <Card style={{borderRadius: 15, overflow: 'hidden'}}>
                   <CardItem
                   button={true}
-                    onPress={() => {
-                      this.props.navigation.navigate('diet');
-                    }}>
+                    onPress={() => 
+                    this.dietplan()
+                    }>
                     <Body
                       style={{
                         justifyContent: 'center',

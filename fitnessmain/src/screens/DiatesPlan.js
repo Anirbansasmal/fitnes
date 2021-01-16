@@ -83,7 +83,7 @@ class DiatesPlan extends Component {
     //   dataditeSu:this.props.route.params.item,
     // })
     // this.ditelist();
-    console.log('dite weeks', this.state.dataditeSu.data_sub);
+    console.log('dite weeks', this.state.dataditeSu);
   }
   ditelist = async () => {
     var token = await AsyncStorage.getItem('token');
@@ -533,6 +533,11 @@ class DiatesPlan extends Component {
     return (
       <Container>
         <Head navigation={this.props.navigation} title="" />
+        {this.state.dataditeSu =="" ?(
+          null
+        ):(
+
+        
         <ScrollView>
           <View
             style={{
@@ -613,10 +618,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -659,10 +664,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -705,10 +710,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -751,10 +756,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -797,10 +802,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -843,10 +848,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -889,10 +894,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -935,10 +940,10 @@ class DiatesPlan extends Component {
                                     />
                                   </TouchableOpacity>
                                   <TouchableOpacity
-                                    style={styles.cardTitle_like}
+                                    style={styles.cardTitle_dislike}
                                     onPress={() => this.dislike()}>
                                     <Image
-                                      style={styles.card_likeimg}
+                                      style={styles.card_dislikeimg}
                                       source={require('../../src/assets/images/dislike.png')}
                                     />
                                   </TouchableOpacity>
@@ -1188,8 +1193,10 @@ class DiatesPlan extends Component {
                 </TouchableOpacity>
               </View>
             </Modal>
+
           </View>
         </ScrollView>
+        )}
       </Container>
     );
   }

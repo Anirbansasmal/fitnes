@@ -392,7 +392,8 @@ export default class Profile extends Component {
                 }}>
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
-                  <CardItem>
+                  <CardItem
+                  button={true}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -424,7 +425,8 @@ export default class Profile extends Component {
                 }}>
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
-                  <CardItem>
+                  <CardItem
+                  button={true}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -451,7 +453,8 @@ export default class Profile extends Component {
                 }}>
                 <Card
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
-                  <CardItem>
+                  <CardItem
+                  button={true}>
                     <Body
                       style={{
                         justifyContent: 'center',

@@ -111,7 +111,7 @@ const Strings = {
 
     ST53: "Saved",
 
-    ST54: "Recent Posts",
+    ST54: "Lifestyle | Health | Diabetes | Some Category",//Recent Posts
 
     ST55: "Tags",
 

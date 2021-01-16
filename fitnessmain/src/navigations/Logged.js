@@ -246,16 +246,17 @@ const TabsScreen = () => (
       tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
-          case 'ProfileScreen':
-            iconName = focused ? 'account-circle' : 'account-circle';
-            break;
-          case 'Home':
-            iconName = focused ? 'message-reply-text' : 'message-reply-text';
-            break;
           case 'Homeu':
             iconName = focused
               ? 'home-circle-outline'
               : 'home-circle-outline';
+            break;
+          
+            case 'ProfileScreen':
+            iconName = focused ? 'account-circle' : 'account-circle';
+            break;
+            case 'Home':
+            iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
             case 'Homenav':
             iconName = focused
@@ -285,6 +286,12 @@ const TabsScreen = () => (
       labelStyle: {paddingBottom: 0},
       style: {height: 50, backgroundColor: '#035048', justifyContent: 'center'},
     }}>
+    
+    <Tabs.Screen
+      name="Homeu"
+      component={HomeStackScreen}
+      options={{tabBarLabel: ''}}
+    />
     <Tabs.Screen
       name="ProfileScreen"
       component={HomeStackScreenNav}
@@ -292,11 +299,6 @@ const TabsScreen = () => (
     />
     <Tabs.Screen
       name="Home"
-      component={HomeStackScreen}
-      options={{tabBarLabel: ''}}
-    />
-    <Tabs.Screen
-      name="Homeu"
       component={HomeStackScreen}
       options={{tabBarLabel: ''}}
     />
