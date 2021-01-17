@@ -28,25 +28,17 @@ export default class Head extends Component {
     return (
       <Header style={{backgroundColor: '#fff', elevation: 10}}>
         <Left>
-          {/* <View>
-            <Button transparent>
-              <Icon
-                onPress={this.openMenu}
-                name="menu"
-                style={{color: '#000'}}
-              />
-            </Button>
-          </View> */}
-        </Left>
-        <Body>
-          <View style={{marginTop: 20,alignSelf:"flex-start"}}>
+        {/* <Body>
+          <View style={{marginTop: 20,alignSelf:"flex-start"}}> */}
             <Image
               width={100}
               source={require('../../src/assets/images/header-logo.png')}
             />
-          </View>
+          {/* </View>
           <Title>{this.props.title}</Title>
-        </Body>
+        </Body> */}
+        </Left>
+        
         <Right>
           {/* <Button transparent>
               <Icon name="cart" />

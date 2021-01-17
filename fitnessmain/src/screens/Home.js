@@ -73,7 +73,7 @@ export default class Home extends Component {
       bmi:'',
       taskdet:'',
       userDiet:'',
-      
+      isVisable: true,
     };
   }
   componentDidMount() {
@@ -324,15 +324,12 @@ export default class Home extends Component {
 
           <View style={{padding: 10, paddingTop: 10, backgroundColor: '#FFF'}}>
             <Grid style={{flex: 2}}>
-              <Col
-                style={{
-                  height: 160,
-                  width: 150,
-                  flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+              <Row
+                style={{justifyContent:"space-around",
+                  padding: 10,
                 }}>
-                <Card style={{borderRadius: 15, overflow: 'hidden'}}>
+                <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
+                  width: 170,elevation: 6,}}>
                   <CardItem
                   button={true}
                     onPress={() => 
@@ -346,23 +343,18 @@ export default class Home extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/diet.png')}
                       />
-                      <Text style={styles.cardTitle}>My Diet Plan</Text>
+                      <Text style={styles.cardTitle_food}>My Diet Plan</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 160,
-                  width: 150,
-                  flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
-                <Card style={{borderRadius: 15, overflow: 'hidden'}}>
+                <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
+                  width: 170,elevation: 6,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -377,25 +369,26 @@ export default class Home extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/health.png')}
                       />
-                      <Text style={styles.cardTitle}>My Program</Text>
+                      <Text style={styles.cardTitle_food}>My Program</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
             <Grid style={{flex: 2}}>
-              <Col
+              <Row
                 style={{
-                  height: 200,
-                  width: 150,
-                  flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent:"space-around",
+                  padding: 10,
                 }}>
-                <Card style={{borderRadius: 15, overflow: 'hidden'}}>
+                <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
+                  width: 170,elevation: 6,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -409,23 +402,19 @@ export default class Home extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/2019.png')}
                       />
-                      <Text style={styles.cardTitle}>My Calendar</Text>
+                      <Text style={styles.cardTitle_food}>My Calendar</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 200,
-                  width: 150,
-                  flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
-                <Card style={{borderRadius: 15, overflow: 'hidden'}}>
+
+                <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
+                  width: 170,elevation: 6,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -439,13 +428,16 @@ export default class Home extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
+                      style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/basket.png')}
                       />
-                      <Text style={styles.cardTitle}>Health Stores</Text>
+                      <Text style={styles.cardTitle_food}>Health Stores</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
             <View style={{backgroundColor: '#f6ffee', paddingBottom: 20}}>

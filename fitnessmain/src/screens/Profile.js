@@ -281,19 +281,19 @@ export default class Profile extends Component {
               style={{
                 flex: 2,
                 marginTop: 20,
-                justifyContent: 'center',
+                justifyContent: 'space-between',
                 elevation: 6,
+                // backgroundColor:"#ff99"
               }}>
-              <Col
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
-                }}>
+                  // backgroundColor:"#ff9933",
+                  justifyContent:"space-around",
+                  padding: 10,
+                }}
+                >
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,width: 170,height: 140,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -307,24 +307,20 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/man.png')}
                       />
                       <Text style={styles.cardTitle_food}>My Profile</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
+                  width: 170,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -338,27 +334,29 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/goal.png')}
                       />
                       <Text style={styles.cardTitle_food}>Health Progress</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
+              
             </Grid>
 
-            <Grid style={{flex: 2, justifyContent: 'center', marginTop: -20}}>
-              <Col
+            <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent:"space-around",
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
+                  width: 170,}}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -372,7 +370,10 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/bill.png')}
                       />
                       <Text style={styles.cardTitle_food}>
@@ -381,17 +382,10 @@ export default class Profile extends Component {
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
+                  width: 170,}}>
                   <CardItem
                   button={true}>
                     <Body
@@ -402,7 +396,10 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/fitness.png')}
                       />
                       <Text style={styles.cardTitle_food}>
@@ -411,20 +408,18 @@ export default class Profile extends Component {
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
-            <Grid style={{flex: 2, justifyContent: 'center', marginTop: -20}}>
-              <Col
+            <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent:"space-around",
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
+                  width: 170,}}>
                   <CardItem
                   button={true}>
                     <Body
@@ -435,24 +430,20 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/email.png')}
                       />
                       <Text style={styles.cardTitle_food}>Events</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
+                  width: 170,}}>
                   <CardItem
                   button={true}>
                     <Body
@@ -463,14 +454,17 @@ export default class Profile extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width:70,height:70,
+                        }}
                         source={require('../../src/assets/images/survey.png')}
                       />
                       <Text style={styles.cardTitle_food}>Survey / Quiz</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
             <View style={styles.needs_title}>
@@ -488,18 +482,18 @@ export default class Profile extends Component {
               <View style={styles.needs_titlecolor}>
                 <Image
                   // size={80}
-                  style={{height: 40, width: 40}}
+                  style={{height: 40, width: 40,}}
                   source={require('../../src/assets/images/menstrual-cycle.png')}
                 />
-                <Text style={styles.cardTitle_food}>Menstrual Report</Text>
+                <Text style={styles.cardTitle_report}>Menstrual Report</Text>
               </View>
-              <View style={styles.needs_titlecolor}>
+              <View style={styles.needs_setting}>
                 <Image
                   // size={80}
                   style={{height: 40, width: 40}}
                   source={require('../../src/assets/images/settings.png')}
                 />
-                <Text style={styles.cardTitle_food}>App Settings</Text>
+                <Text style={styles.cardTitle_report}>App Settings</Text>
               </View>
             </View>
           </View>
