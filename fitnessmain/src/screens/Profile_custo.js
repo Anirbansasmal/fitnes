@@ -71,16 +71,19 @@ class Profile_custo extends Component {
                 justifyContent: 'center',
                 elevation: 6,
               }}>
-              <Col
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent: 'space-around',
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -94,7 +97,11 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/personal-information.png')}
                       />
                       <Text style={styles.cardTitle_food}>
@@ -103,17 +110,15 @@ class Profile_custo extends Component {
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem
                     button={true}
                     onPress={() => {
@@ -129,8 +134,8 @@ class Profile_custo extends Component {
                       <Image
                         // size={40}
                         style={{
-                          height: 45,
-                          width: 45,
+                          height: 60,
+                          width: 60,
                         }}
                         source={require('../../src/assets/images/height.png')}
                       />
@@ -140,20 +145,23 @@ class Profile_custo extends Component {
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
-            <Grid style={{flex: 2, justifyContent: 'center', marginTop: -20}}>
-              <Col
+            <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent: 'space-around',
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -163,24 +171,26 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/medical-record.png')}
                       />
                       <Text style={styles.cardTitle_food}>Medical Details</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -190,27 +200,34 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/anger.png')}
                       />
                       <Text style={styles.cardTitle_food}>Work and Stress</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
-            <Grid style={{flex: 2, justifyContent: 'center', marginTop: -20}}>
-              <Col
+            <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent: 'space-around',
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -220,24 +237,26 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/first-aid-kit.png')}
                       />
                       <Text style={styles.cardTitle_food}>Medications</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -247,27 +266,34 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/vitamin.png')}
                       />
                       <Text style={styles.cardTitle_food}>Suppliments</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
 
-            <Grid style={{flex: 2, justifyContent: 'center', marginTop: -30}}>
-              <Col
+            <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
+              <Row
                 style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingRight: 15,
-                  paddingLeft: 15,
+                  justifyContent: 'space-around',
+                  padding: 10,
                 }}>
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -277,24 +303,26 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={40}
+                        // size={40}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/challenge.png')}
                       />
                       <Text style={styles.cardTitle_food}>Goals</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
-              <Col
-                style={{
-                  height: 180,
-                  width: 180,
-                  //   flex: 1,
-                  paddingLeft: 10,
-                  paddingRight: 15,
-                }}>
+
                 <Card
-                  style={{borderRadius: 15, overflow: 'hidden', elevation: 6}}>
+                  style={{
+                    borderRadius: 15,
+                    overflow: 'hidden',
+                    elevation: 6,
+                    height: 140,
+                    width: 170,
+                  }}>
                   <CardItem>
                     <Body
                       style={{
@@ -304,14 +332,18 @@ class Profile_custo extends Component {
                         alignItems: 'center',
                       }}>
                       <Image
-                        size={80}
+                        // size={80}
+                        style={{
+                          width: 70,
+                          height: 70,
+                        }}
                         source={require('../../src/assets/images/profile.png')}
                       />
                       <Text style={styles.cardTitle_food}>Other Details</Text>
                     </Body>
                   </CardItem>
                 </Card>
-              </Col>
+              </Row>
             </Grid>
           </View>
         </ScrollView>
