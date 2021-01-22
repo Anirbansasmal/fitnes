@@ -38,7 +38,7 @@ import {Image} from 'react-native';
 // import * as Progress from 'react-native-progress';
 import ProgressBar from 'react-native-progress/Bar';
 import HTMLView from 'react-native-htmlview';
-
+import Modal from 'react-native-modal';
 import {
   Placeholder,
   PlaceholderMedia,
@@ -74,6 +74,8 @@ export default class Home extends Component {
       taskdet:'',
       userDiet:'',
       isVisable: true,
+      count: 0,
+      // isVisableMore: true,
     };
   }
   componentDidMount() {
@@ -116,7 +118,7 @@ export default class Home extends Component {
   };
   getMytask = async () => {
     var user = await AsyncStorage.getItem('userId');
-    var apiResponse = await Api.get('userById/' + user);
+    var apiResponse = await Api.get('userById/' + 74);
     // console.log(apiResponse);
     if (apiResponse.status === 'success') {
       // Alert.alert('Success', 'Profile Updated');
@@ -139,7 +141,7 @@ export default class Home extends Component {
           taskdet:apiResponse.data.tasks[0].task,
         })
       }
-      console.log("userDiet",apiResponse)
+      console.log("userDiet",apiResponse.data.created_at)
     } else {
       const error = apiResponse.errors;
       this.setState({isLoading: false}, () => {
@@ -177,7 +179,7 @@ export default class Home extends Component {
     if(this.state.userDiet==""){
       Alert.alert('Diet plan', "No diet exist");
     }else{
-      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[0]});
+      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[1]});
     }
   }
   render() {
@@ -418,7 +420,7 @@ export default class Home extends Component {
                   <CardItem
                     button={true}
                     onPress={() => {
-                      this.props.navigation.navigate('diet');
+                      Alert.alert('Health Store', "Coming Soon");
                     }}>
                     <Body
                       style={{
@@ -630,6 +632,59 @@ export default class Home extends Component {
               </CardItem>
             </Card>
           </View>
+
+          <Modal
+            isVisible={this.state.isVisableMore}
+            style={{
+              // height: 100,
+              // backdropOpacity: 10.7,
+              alignSelf: 'flex-end',
+              width: '50%',
+              paddingLeft: 30,
+              // paddingRight: 30,
+              // alignItems:"flex-end"
+              // position:"relative",
+            }}
+            // marginTop={width}
+            marginTop={height-390}
+            backdropColor="transparent"
+            coverScreen={true}
+            hasBackdrop={true}
+            onBackdropPress={() =>
+              this.setState({
+                isVisableMore: false,
+              })
+            }>
+            <View
+              style={{
+                backgroundColor: '#ffff',
+                // height: 300,
+                // borderWidth: 1,
+                borderRadius: 20,
+              }}>
+              <View style={{alignSelf: 'center'}}>
+                <Text style={styles.stepsLog}>More Options</Text>
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                  marginTop: 18,
+                }}>
+                <View>
+                  
+                  <Text style={styles.stepsSetting}>About F&W</Text>
+                  <Text style={styles.stepsSetting}>Contact</Text>
+                  <Text style={styles.stepsSetting}>FAQ</Text>
+                  <Text style={styles.stepsSetting}>Disclaimer</Text>
+                  <Text style={styles.stepsSetting}>Policies</Text>
+                  <Text style={styles.stepsSetting_bottom}>Refer</Text>
+                </View>
+                
+              </View>
+              
+            </View>
+          </Modal>
         </ScrollView>
       </Container>
     );
