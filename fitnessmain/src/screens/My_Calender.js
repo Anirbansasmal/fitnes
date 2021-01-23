@@ -81,6 +81,7 @@ class My_Calender extends Component {
       isVisableActivity: false,
       isVisableMenstruation: false,
       isVisableWeight: false,
+      taskdet: [],
     };
   }
   show() {
@@ -163,7 +164,47 @@ class My_Calender extends Component {
     });
     Alert.alert('Successfully', 'Add your Weight');
   }
+  componentDidMount() {
+    this.task();
+  }
+  async task() {
+    var user = await AsyncStorage.getItem('userId');
+    var apiResponse = await Api.get('userById/' + user);
+    // console.log(apiResponse);
+    if (apiResponse.status === 'success') {
+      // Alert.alert('Success', 'Profile Updated');
 
+      // this.setState({
+      //   isloading: false,
+      //   task: apiResponse.data.tasks,
+      //   taskLoading: false,
+      //   profile_name:apiResponse.data.details.first_name,
+      //   weight:apiResponse.data.details.weight,
+      //   bmi:apiResponse.data.details.bmi,
+      //   userDiet: apiResponse.data.dietchart,
+      // });
+      if (apiResponse.data.tasks == '') {
+        this.setState({
+          taskdet: 'No task available',
+        });
+      } else {
+        this.setState({
+          taskdet: apiResponse.data.tasks[0].task,
+        });
+      }
+      console.log('userDiet', apiResponse.data.created_at);
+    } else {
+      const error = apiResponse.errors;
+      this.setState({isLoading: false}, () => {
+        var errors = '';
+        Object.keys(error).forEach(function (key) {
+          errors += error[key] + ' ';
+        });
+        Alert.alert('Error', errors);
+      });
+    }
+    console.log('user', this.state.task[0].task);
+  }
   render() {
     return (
       <Container style={styles.background_general}>
@@ -338,82 +379,85 @@ class My_Calender extends Component {
 
           <View style={{flexDirection: 'column'}}>
             <Text style={styles.Titletoday}>TODAY'S TASKS</Text>
+
             <View
               style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View
-                style={{
-                  // backgroundColor: '#ffff44',
-                  flexDirection: 'column',
-                  width: 200,
-                  alignSelf: 'flex-start',
-                  justifyContent: 'flex-start',
-                  // position:"absolute"
-                }}>
+              {this.state.taskdet != 'No task available' ? (
                 <View
                   style={{
-                    flexDirection: 'row',
-                    marginStart: 20,
-                    marginTop: 10,
+                    // backgroundColor: '#ffff44',
+                    flexDirection: 'column',
+                    width: 200,
+                    alignSelf: 'flex-start',
+                    justifyContent: 'flex-start',
+                    // position:"absolute"
                   }}>
                   <View
                     style={{
-                      height: 20,
-                      width: 20,
-                      borderWidth: 1,
-                      borderColor: '#035048',
-                      backgroundColor: '#d7dbd7',
-                    }}></View>
-                  <Text style={styles.stepsTitle}>Walk 10000 Steps</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginStart: 20,
-                    marginTop: 10,
-                  }}>
+                      flexDirection: 'row',
+                      marginStart: 20,
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderWidth: 1,
+                        borderColor: '#035048',
+                        backgroundColor: '#d7dbd7',
+                      }}></View>
+                    <Text style={styles.stepsTitle}>Walk 10000 Steps</Text>
+                  </View>
                   <View
                     style={{
-                      height: 20,
-                      width: 20,
-                      borderWidth: 1,
-                      borderColor: '#035048',
-                      backgroundColor: '#d7dbd7',
-                    }}></View>
-                  <Text style={styles.stepsTitle}>Drink 1ltr Water</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginStart: 20,
-                    marginTop: 10,
-                  }}>
+                      flexDirection: 'row',
+                      marginStart: 20,
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderWidth: 1,
+                        borderColor: '#035048',
+                        backgroundColor: '#d7dbd7',
+                      }}></View>
+                    <Text style={styles.stepsTitle}>Drink 1ltr Water</Text>
+                  </View>
                   <View
                     style={{
-                      height: 20,
-                      width: 20,
-                      borderWidth: 1,
-                      borderColor: '#035048',
-                      backgroundColor: '#d7dbd7',
-                    }}></View>
-                  <Text style={styles.stepsTitle}>Heart Medicine</Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    marginStart: 20,
-                    marginTop: 10,
-                  }}>
+                      flexDirection: 'row',
+                      marginStart: 20,
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderWidth: 1,
+                        borderColor: '#035048',
+                        backgroundColor: '#d7dbd7',
+                      }}></View>
+                    <Text style={styles.stepsTitle}>Heart Medicine</Text>
+                  </View>
                   <View
                     style={{
-                      height: 20,
-                      width: 20,
-                      borderWidth: 1,
-                      borderColor: '#035048',
-                      backgroundColor: '#d7dbd7',
-                    }}></View>
-                  <Text style={styles.stepsTitle}>Evening Walk</Text>
+                      flexDirection: 'row',
+                      marginStart: 20,
+                      marginTop: 10,
+                    }}>
+                    <View
+                      style={{
+                        height: 20,
+                        width: 20,
+                        borderWidth: 1,
+                        borderColor: '#035048',
+                        backgroundColor: '#d7dbd7',
+                      }}></View>
+                    <Text style={styles.stepsTitle}>Evening Walk</Text>
+                  </View>
                 </View>
-              </View>
+              ) : null}
               {this.state.isVisable === true ? (
                 <View style={styles.flatPopup}>
                   <Text style={styles.stepsLog}>SELF LOG</Text>
@@ -768,37 +812,37 @@ class My_Calender extends Component {
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
                 <TouchableOpacity>
-                <Image
-                  size={40}
-                  source={require('../../src/assets/images/e87be674516ed204f304cf0bff8a577c.png')}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    margin: 10,
-                  }}
-                />
+                  <Image
+                    size={40}
+                    source={require('../../src/assets/images/e87be674516ed204f304cf0bff8a577c.png')}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      margin: 10,
+                    }}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                <Image
-                  size={40}
-                  source={require('../../src/assets/images/5f0a282cee6bcd654d14f9349fb8db20.png')}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    margin: 10,
-                  }}
-                />
+                  <Image
+                    size={40}
+                    source={require('../../src/assets/images/5f0a282cee6bcd654d14f9349fb8db20.png')}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      margin: 10,
+                    }}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity>
-                <Image
-                  size={40}
-                  source={require('../../src/assets/images/628c748a20f0f8d8306ebbdd04d1662d.png')}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    margin: 10,
-                  }}
-                />
+                  <Image
+                    size={40}
+                    source={require('../../src/assets/images/628c748a20f0f8d8306ebbdd04d1662d.png')}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      margin: 10,
+                    }}
+                  />
                 </TouchableOpacity>
               </View>
               <TextInput
@@ -871,63 +915,59 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                    <TouchableOpacity>
-                      
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/spotting.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/spotting.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>spotting</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-                      
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/light.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/light.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>light</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/medium.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/medium.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>medium</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/heavy.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/heavy.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>heavy</Text>
                     </View>
                   </View>
@@ -938,9 +978,7 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                    <TouchableOpacity>
-                      
-                    </TouchableOpacity>
+                      <TouchableOpacity></TouchableOpacity>
                       <Image
                         size={40}
                         source={require('../../src/assets/images/egg_white.png')}
@@ -953,48 +991,45 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>egg white</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/creamy.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/creamy.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>creamy</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/sticky.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/sticky.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>sticky</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/unusual.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/unusual.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>unusual</Text>
                     </View>
                   </View>
@@ -1005,63 +1040,59 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/cramps.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/cramps.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>cramps</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/headache.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/headache.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>headache</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/acne.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/acne.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>acne</Text>
                     </View>
                     <View>
-                    <TouchableOpacity>
-
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/sick.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                    </TouchableOpacity>
+                      <TouchableOpacity>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/sick.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.title_subCate}>sick</Text>
                     </View>
                   </View>

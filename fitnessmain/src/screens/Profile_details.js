@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
@@ -30,7 +31,6 @@ import {
   Item,
   Input,
   Label,
-  DatePicker,
 } from 'native-base';
 // import { LinearGradient } from 'expo';
 import LinearGradient from 'react-native-linear-gradient';
@@ -41,13 +41,14 @@ import ConfigApp from '../utils/ConfigApp';
 // import WorkoutFav from '../components/WorkoutFav';
 import Strings from '../utils/Strings';
 import AppPreLoader from '../components/AppPreLoader';
-
+import Modal from 'react-native-modal';
 var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
 import Head from '../components/Header_profile';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import DatePicker from 'react-native-datepicker'
 export default class Profile_details extends Component {
   static navigationOptions = {
     title: 'Profile',
@@ -79,6 +80,9 @@ export default class Profile_details extends Component {
       pin: '',
       country: '',
       occupation: '',
+      isVisableMood: false,
+      detail: '',
+      title: '',
     };
   }
   componentDidMount() {
@@ -120,7 +124,12 @@ export default class Profile_details extends Component {
     }
   };
   setDate = (value) => {
-    console.log(value);
+    // console.log(value);
+    this.setState({
+      isVisableMood: true,
+      title: 'User Date of Birth',
+      dob: value,
+    });
   };
 
   setdetails(value, name) {
@@ -210,7 +219,11 @@ export default class Profile_details extends Component {
           occupation: value,
         });
         break;
-
+      case 'email':
+        this.setState({
+          email: value,
+        });
+        break;
       default:
         break;
     }
@@ -236,6 +249,7 @@ export default class Profile_details extends Component {
       pin: this.state.pin,
       country: this.state.country,
       occupation: this.state.occupation,
+      email: this.state.email,
     };
     console.log(data);
     var user = await AsyncStorage.getItem('userId');
@@ -254,26 +268,77 @@ export default class Profile_details extends Component {
       });
     }
   };
-
+  reminder() {
+    this.setState({
+      isVisableMood: false,
+    });
+    this.onSubmit();
+  }
+  editaccfirst_Name = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Name',
+      weight: 'first_name',
+    });
+  };
+  editacclast_Name = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Name',
+      weight: 'last_name',
+    });
+  };
+  editaccOccu = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Occupation',
+      weight: 'occupation',
+    });
+  };
+  editaccPhone = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Phone',
+      weight: 'phone',
+    });
+  };
+  editaccemail = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Email IDs',
+      weight: 'email',
+    });
+  };
+  editaccpinc = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Pincode',
+      weight: 'pin',
+    });
+  };
+  editaccCity = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User City',
+      weight: 'city',
+    });
+  };
+  editaccDate = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Date of Birth',
+      weight: 'dob',
+    });
+  };
   render() {
     if (this.state.isloading) {
       return <AppPreLoader />;
     }
-    var user = '';
-    // var email, displayName, emailVerified, creationTime;
-
-    if (user != null) {
-      // email = user.email;
-      // displayName = 'chandan';
-      // emailVerified = user.emailVerified;
-      // creationTime = user.metadata.creationTime;
-    }
-
     return (
       <Container style={styles.background_general}>
         <Head navigation={this.props.navigation} title="" />
         <ScrollView>
-        <Text style={styles.profileTitle}>MY PROFILE > PERSONAL DETAILS</Text>
+          <Text style={styles.profileTitle}>MY PROFILE > PERSONAL DETAILS</Text>
           <List>
             <ListItem>
               <View style={{justifyContent: 'space-between', width: '100%'}}>
@@ -282,11 +347,73 @@ export default class Profile_details extends Component {
                     justifyContent: 'space-between',
                     flexDirection: 'row',
                   }}>
-                  <View>
-                    <Text style={styles.stepsEdit}>Name</Text>
-                    <Text style={styles.stepsView}>
-                      {this.state.user.first_name} {this.state.user.last_name}
-                    </Text>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                    }}>
+                    <Text style={styles.stepsEdit}>First Name</Text>
+                    {this.state.user.last_name == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccfirst_Name()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.user.first_name}
+                      </Text>
+                    )}
+                  </View>
+                  <View
+                    style={{
+                      // justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </View>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                    }}>
+                    <Text style={styles.stepsEdit}>Last Name</Text>
+                    {this.state.user.last_name == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editacclast_Name()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.user.last_name}
+                      </Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -312,7 +439,21 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>Phone</Text>
-                    <Text style={styles.stepsView}>{this.state.phone}</Text>
+                    {this.state.phone == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccPhone()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.phone}</Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -338,9 +479,21 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>Email IDs</Text>
-                    <Text style={styles.stepsView}>
-                      {this.state.email}
-                    </Text>
+                    {this.state.email == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccemail()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.email}</Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -366,9 +519,23 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>City,Country,Pincode</Text>
-                    <Text style={styles.stepsView}>
-                      {this.state.city},{this.state.address},{this.state.pin}
-                    </Text>
+                    {this.state.address == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccpinc()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.city},{this.state.address},{this.state.pin}
+                      </Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -394,9 +561,23 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>Occupation</Text>
-                    <Text style={styles.stepsView}>
-                      {this.state.occupation}
-                    </Text>
+                    {this.state.occupation == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccOccu()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.occupation}
+                      </Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -422,7 +603,21 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>City</Text>
-                    <Text style={styles.stepsView}>{this.state.city}</Text>
+                    {this.state.city == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.editaccCity()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.city}</Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -448,7 +643,36 @@ export default class Profile_details extends Component {
                   }}>
                   <View>
                     <Text style={styles.stepsEdit}>Date of Birth</Text>
-                    <Text style={styles.stepsView}>{this.state.dob}</Text>
+                    {this.state.dob == null ? (
+                      <DatePicker
+                        style={{width: 200}}
+                        date={this.state.date}
+                        mode="date"
+                        placeholder="select date"
+                        format="YYYY-MM-DD"
+                        minDate="1940-01-01"
+                        maxDate="2040-01-01"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                          dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0,
+                          },
+                          dateInput: {
+                            marginLeft: 36,
+                          },
+                          // ... You can check the source to find the other keys.
+                        }}
+                        onDateChange={(date) => {
+                          this.setState({dob: date},this.onSubmit);
+                        }}
+                      />
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.dob}</Text>
+                    )}
                   </View>
                   <View
                     style={{
@@ -466,7 +690,68 @@ export default class Profile_details extends Component {
               </View>
             </ListItem>
           </List>
-{/* 
+
+          <Modal
+            isVisible={this.state.isVisableMood}
+            style={{
+              // height: 100,
+              backdropOpacity: 10.7,
+              alignSelf: 'center',
+              width: '90%',
+              paddingLeft: 30,
+              paddingRight: 30,
+              // elevation: 10,
+              // overflow: 'hidden',
+              // borderWidth: 1,
+            }}
+            backdropColor="#ffff"
+            coverScreen={true}
+            hasBackdrop={true}
+            onBackdropPress={() =>
+              this.setState({
+                isVisableMood: false,
+              })
+            }>
+            <View
+              style={{
+                backgroundColor: '#ffff',
+                // height: 400,
+                borderWidth: 1,
+                borderRadius: 20,
+              }}>
+              <View style={{alignSelf: 'center'}}>
+                <Text style={styles.stepsLog}>LOG MOOD</Text>
+              </View>
+              <TextInput
+                placeholder={this.state.title}
+                // value={this.state.weight}
+                onChangeText={(value) =>
+                  this.setdetails(value, this.state.weight)
+                }
+                style={{
+                  marginLeft: 10,
+                  marginRight: 10,
+                  backgroundColor: '#dcdedc',
+                }}
+              />
+
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#069906',
+                  width: 120,
+                  alignSelf: 'center',
+                  borderRadius: 10,
+                  marginTop: 10,
+                  marginBottom: 20,
+                }}
+                onPress={() => this.reminder()}>
+                <Text style={{margin: 10, alignSelf: 'center', color: '#ffff'}}>
+                  Submit
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+          {/* 
           <Item>
             <Input
               placeholder="weight"
@@ -577,7 +862,6 @@ export default class Profile_details extends Component {
               disabled={false}
             />
           </Item> */}
-        
         </ScrollView>
       </Container>
     );

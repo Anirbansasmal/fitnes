@@ -824,6 +824,13 @@ module.exports = StyleSheet.create({
     // marginTop: 10,
     padding:6,
   },
+  suggestedTitleweek:{
+    color: '#ffff',
+    fontWeight: '700',
+    fontSize: 20,
+    alignSelf: 'center',
+    // marginEnd: 20,
+  },
   needs_title: {
     flexDirection: 'row',
     justifyContent: 'space-around',
@@ -1135,4 +1142,20 @@ module.exports = StyleSheet.create({
     // marginTop: 10,
     backgroundColor: '#11ba11',
   },
+  stepsEdit:{
+    color: '#035048',
+    fontWeight: '500',
+    fontSize: 18,
+    alignSelf: 'flex-start',
+    // marginStart: 10,
+    marginTop: 10,
+  },
+  stepsView:{
+    color: '#035048',
+    fontWeight: '700',
+    fontSize: 18,
+    alignSelf: 'flex-start',
+    // marginStart: 10,
+    marginTop: 10,
+  }
 });

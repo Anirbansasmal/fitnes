@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   Alert,
   TouchableOpacity,
+  // WebView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
@@ -50,7 +51,7 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 import Head from '../components/Header';
-
+import { WebView } from 'react-native-webview';
 export default class Home extends Component {
   // static navigationOptions = {
   //   title: `${Strings.ST0}`,
@@ -118,7 +119,7 @@ export default class Home extends Component {
   };
   getMytask = async () => {
     var user = await AsyncStorage.getItem('userId');
-    var apiResponse = await Api.get('userById/' + 74);
+    var apiResponse = await Api.get('userById/' + user);
     // console.log(apiResponse);
     if (apiResponse.status === 'success') {
       // Alert.alert('Success', 'Profile Updated');
@@ -179,8 +180,11 @@ export default class Home extends Component {
     if(this.state.userDiet==""){
       Alert.alert('Diet plan', "No diet exist");
     }else{
-      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[1]});
+      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[0]});
     }
+  }
+  event(){
+    this.props.navigation.navigate('webview_event');
   }
   render() {
     var loaded = this.state.isloading;
@@ -292,7 +296,10 @@ export default class Home extends Component {
               <CardItem style={{backgroundColor: '#d8cecd'}}>
                 <Left>
                   <Body>
+                  <TouchableOpacity
+                  onPress={()=>this.event()}>
                     <Text style={styles.homeText}>Upcoming Event</Text>
+                  </TouchableOpacity>
                   </Body>
                 </Left>
                 <Right>

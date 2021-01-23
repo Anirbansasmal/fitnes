@@ -56,6 +56,8 @@ import Profile_health from '../screens/Profile_health';
 import My_Calender from '../screens/My_Calender';
 import My_task from '../screens/My_task';
 import More_option from '../screens/More_option';
+import webview_event from '../screens/webview_event'
+import webview_survey from '../screens/webview_survey'
 // import WorkoutSearchScreen from "../screens/WorkoutSearch";
 // import WorkoutResultsScreen from "../screens/WorkoutResults";
 // import CalculatorScreen from "../screens/Calculator";
@@ -257,7 +259,7 @@ const TabsScreen = () => (
           case 'Chat':
             iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
-          case 'Moreoption':
+          case 'Homeu':
             iconName = focused
               ? 'dots-horizontal-circle-outline'
               : 'dots-horizontal-circle-outline';
@@ -301,8 +303,8 @@ const TabsScreen = () => (
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
-      name="Moreoption"
-      component={HomeStackOption}
+      name="Homeu"
+      component={HomeStackScreen}
       options={{tabBarLabel: ''}}
     />
   </Tabs.Navigator>
@@ -329,6 +331,21 @@ const HomeStackScreenNav = ({navigation}) => (
     <HomeStack_nav.Screen
       name="ProfileScreen"
       component={ProfileScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    
+    <HomeStack_nav.Screen
+      name="webview_event"
+      component={webview_event}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="webview_survey"
+      component={webview_survey}
       options={{
         headerShown: false,
       }}
@@ -482,6 +499,20 @@ const HomeStackScreen = ({navigation}) => (
     <HomeStack.Screen
       name="diet"
       component={DietsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="webview_event"
+      component={webview_event}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="webview_survey"
+      component={webview_survey}
       options={{
         headerShown: false,
       }}
