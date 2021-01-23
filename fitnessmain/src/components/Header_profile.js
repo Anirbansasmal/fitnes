@@ -32,7 +32,7 @@ export default class Head extends Component {
           <View style={{marginTop: 20,alignSelf:"flex-start"}}> */}
             <Image
               width={100}
-              source={require('../../src/assets/images/header-logo.png')}
+              source={require('../../src/assets/images/logoupdate.jpeg')}
             />
           {/* </View>
           <Title>{this.props.title}</Title>

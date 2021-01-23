@@ -50,6 +50,7 @@ var {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
 import Head from '../components/Header_profile';
+import { WebView } from 'react-native-webview';
 export default class Profile extends Component {
   static navigationOptions = {
     title: 'Profile',
@@ -255,7 +256,12 @@ export default class Profile extends Component {
       });
     }
   };
-
+  survey(){
+    this.props.navigation.navigate('webview_survey');
+  }
+  event(){
+    this.props.navigation.navigate('webview_event');
+  }
   render() {
     if (this.state.isloading) {
       return <AppPreLoader />;
@@ -421,7 +427,8 @@ export default class Profile extends Component {
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
                   width: 170,}}>
                   <CardItem
-                  button={true}>
+                  button={true}
+                  onPress={()=>this.event()}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -445,7 +452,8 @@ export default class Profile extends Component {
                   style={{borderRadius: 15, overflow: 'hidden', elevation: 6,height: 140,
                   width: 170,}}>
                   <CardItem
-                  button={true}>
+                  button={true}
+                  onPress={()=>this.survey()}>
                     <Body
                       style={{
                         justifyContent: 'center',

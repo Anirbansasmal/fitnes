@@ -55,6 +55,8 @@ import Api from '../services/api';
 import Head from '../components/Header_profile';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import {TextInput} from 'react-native-paper';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 class DiatesPlan extends Component {
   constructor(props) {
     super(props);
@@ -640,6 +642,11 @@ class DiatesPlan extends Component {
         i++
       ) {
         console.log(this.state.dataditeSu.data_sub[i]);
+        if (this.state.dataditeSu.data_sub[i] == '') {
+          // break
+        } else {
+          this.state.pagi.push(this.state.dataditeSu.data_sub[i]);
+        }
       }
       //   this.setState({
       //     weeksprevVisable: true,
@@ -647,6 +654,9 @@ class DiatesPlan extends Component {
       //     pagi: [this.state.dataditeSu.data_sub],
       //   });
       // }
+      this.state.user_days_uniq_id = Array.from(
+        new Set(this.state.pagi),
+      ).filter((x) => x !== undefined);
     }
   };
   change = () => {
@@ -728,27 +738,38 @@ class DiatesPlan extends Component {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
+                    height: 37,
                   }}>
                   <TouchableOpacity
                     style={{
                       backgroundColor: '#035048',
+                      flexDirection: 'row',
                     }}
                     onPress={() => this.previous()}
                     disabled={this.state.prev}>
-                    <Text style={styles.suggestedTitle}>
-                      {this.state.resPerPage} Week
+                    <MaterialIcons
+                      name="keyboard-arrow-left"
+                      size={40}
+                      color="#ffff"></MaterialIcons>
+                    <Text style={styles.suggestedTitleweek}>
+                      {this.state.resPerPage} Week {''}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
                       backgroundColor: '#035048',
                       marginStart: 10,
+                      flexDirection: 'row',
                     }}
                     onPress={() => this.next()}
                     disabled={this.state.nextVisble}>
-                    <Text style={styles.suggestedTitle}>
-                      Week {this.state.resPerPage + 1}
+                    <Text style={styles.suggestedTitleweek}>
+                      {''} Week {this.state.resPerPage + 1}
                     </Text>
+                    <MaterialIcons
+                      name="keyboard-arrow-right"
+                      size={40}
+                      color="#ffff"></MaterialIcons>
                   </TouchableOpacity>
                 </View>
               </View>
