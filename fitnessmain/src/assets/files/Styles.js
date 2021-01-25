@@ -144,13 +144,19 @@ module.exports = StyleSheet.create({
   //////////////////////// POSTS
 
   title_posts_categories: {
-    color: '#FFF',
-    fontSize: 13,
+    color: '#000',
+    fontSize: 23,
     padding: 10,
     fontWeight: 'bold',
     paddingTop: 2,
   },
-
+  desc_posts_categories:{
+    color: '#000',
+    fontSize: 13,
+    padding: 10,
+    fontWeight: 'bold',
+    // paddingTop: 2,
+  },
   date_posts: {
     color: 'rgba(255,255,255,0.50)',
     fontSize: 11,
@@ -171,9 +177,13 @@ module.exports = StyleSheet.create({
 
   background_posts_2columns: {
     width: width * 0.46,
-    height: height * 0.15,
+    height: height * 0.30,
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
+    borderRadius:7,
+    marginStart: 7,
+    marginTop: 7,
+    marginBottom: 7,
   },
 
   postDetail_background: {
@@ -342,13 +352,13 @@ module.exports = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e0dbda',
     // flex:1,
-    width:90,
+    width: 90,
   },
 
   activetabs_diets: {
     backgroundColor: '#11ba11',
-    flex:1,
-    width:90,
+    flex: 1,
+    width: 90,
   },
 
   tabs_text_diets: {
@@ -792,15 +802,20 @@ module.exports = StyleSheet.create({
     // marginTop: 20,
   },
   cardTitle_dislike: {
-    width: 66,
-    height: 66,
+    width: 60,
+    height: 60,
     elevation: 1,
     borderRadius: 10,
     justifyContent: 'center',
     flexDirection: 'row',
     marginTop: 6,
+    shadowOpacity: 0.26,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 10,
+    elevation: 3,
+    backgroundColor: 'white',
   },
-  card_dislikeimg:{
+  card_dislikeimg: {
     height: 40,
     width: 40,
     marginEnd: 20,
@@ -819,17 +834,18 @@ module.exports = StyleSheet.create({
   suggestedTitle: {
     color: '#ffff',
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 18,
     // marginStart: 30,
     // marginTop: 10,
-    padding:6,
+    padding: 6,
   },
-  suggestedTitleweek:{
+  suggestedTitleweek: {
     color: '#ffff',
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 18,
     alignSelf: 'center',
     // marginEnd: 20,
+    textAlign: 'center',
   },
   needs_title: {
     flexDirection: 'row',
@@ -975,6 +991,15 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     marginEnd: 10,
   },
+  stepsLogdislike:{
+    color: '#035048',
+    fontWeight: '700',
+    fontSize: 18,
+    alignSelf: 'center',
+    marginStart: 10,
+    // marginTop: 20,
+    marginEnd: 10,
+  },
   stepsSetting: {
     color: '#035048',
     // fontWeight: '700',
@@ -993,7 +1018,7 @@ module.exports = StyleSheet.create({
     marginStart: 10,
     marginTop: 10,
     marginEnd: 10,
-    marginBottom:18,
+    marginBottom: 18,
   },
   stepsLogs: {
     color: '#035048',
@@ -1010,7 +1035,7 @@ module.exports = StyleSheet.create({
     fontSize: 18,
     marginStart: 10,
     marginTop: 10,
-    marginBottom:20,
+    marginBottom: 20,
   },
   title_MENSTRUATION: {
     margin: 10,
@@ -1033,7 +1058,7 @@ module.exports = StyleSheet.create({
     fontSize: 18,
     // alignSelf:"center",
     marginStart: 30,
-    marginTop: 10,
+    // marginTop: 10,
   },
   tabdays: {
     width: 40,
@@ -1067,13 +1092,18 @@ module.exports = StyleSheet.create({
     // textAlign:"center"
   },
   cardTitle_like: {
-    width: 70,
-    height: 66,
-    elevation: 1,
+    width: 60,
+    height: 60,
+    // elevation: 1,
     borderRadius: 10,
     justifyContent: 'center',
     flexDirection: 'row',
     marginTop: 6,
+    shadowOpacity: 0.26,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 10,
+    elevation: 3,
+    backgroundColor: 'white',
   },
   diabetesTitle: {
     color: '#035048',
@@ -1123,7 +1153,16 @@ module.exports = StyleSheet.create({
     marginEnd: 20,
     alignSelf: 'center',
     marginStart: 18,
-    padding:6,
+    padding: 6,
+    // marginTop: 10,
+  },
+  card_likeimgad:{
+    height: 40,
+    width: 40,
+    marginEnd: 20,
+    alignSelf: 'center',
+    marginStart: 18,
+    padding: 6,
     marginTop: 10,
   },
   stepsdeviation: {
@@ -1142,7 +1181,7 @@ module.exports = StyleSheet.create({
     // marginTop: 10,
     backgroundColor: '#11ba11',
   },
-  stepsEdit:{
+  stepsEdit: {
     color: '#035048',
     fontWeight: '500',
     fontSize: 18,
@@ -1150,12 +1189,12 @@ module.exports = StyleSheet.create({
     // marginStart: 10,
     marginTop: 10,
   },
-  stepsView:{
+  stepsView: {
     color: '#035048',
     fontWeight: '700',
     fontSize: 18,
     alignSelf: 'flex-start',
     // marginStart: 10,
     marginTop: 10,
-  }
+  },
 });

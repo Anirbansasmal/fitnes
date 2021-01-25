@@ -87,7 +87,7 @@ dietprogram=async()=>{
         <Head navigation={this.props.navigation} title="" />
         <ScrollView>
           <Text style={styles.profileTitle}>Billing Invoice</Text>
-          <View style={{padding: 0, paddingTop: 0}}>
+          <View style={{padding: 0, paddingTop: 0,}}>
             {/* <View></View> */}
             <Grid
               style={{
@@ -95,6 +95,7 @@ dietprogram=async()=>{
                 marginTop: 20,
                 justifyContent: 'center',
                 elevation: 6,
+                // backgroundColor:"#dba858"
               }}>
               <Col
                 style={{
@@ -108,8 +109,11 @@ dietprogram=async()=>{
                     overflow: 'hidden',
                     elevation: 6,
                     flex: 1,
+                    // backgroundColor:"#dba858"
                   }}>
-                  <CardItem button={true}>
+                  <CardItem button={true} style={{
+                    backgroundColor:"#bf9656"
+                  }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -153,24 +157,29 @@ dietprogram=async()=>{
                       <View
                         style={{
                           flexDirection: 'row',
-                          // justifyContent: 'flex-end',
+                          alignSelf: 'flex-end',
                           marginTop: 10,
                           // backgroundColor:"#11ba11",
-                          width: '100%',
+                          // width: '100%',
                         }}>
                         <Image
                           // size={40}
                           style={{
-                            height: 100,
-                            width: 100,
+                            height: 50,
+                            width: 50,
                             marginEnd: 20,
                           }}
-                          source={{
-                            uri:student.doc
-                          
-                          }}
+                          source={require('../../src/assets/images/PDF_file_icon.png')}
                         />
-                        
+                        <Image
+                          // size={40}
+                          style={{
+                            height: 50,
+                            width: 50,
+                            marginEnd: 20,
+                          }}
+                          source={require('../../src/assets/images/card.png')}
+                        />
                       </View>
 
                       {/* </View> */}

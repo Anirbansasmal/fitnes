@@ -28,6 +28,8 @@ import {
   Left,
   Thumbnail,
   ListItem,
+  Card,
+  CardItem,
 } from 'native-base';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import ConfigApp from '../utils/ConfigApp';
@@ -198,7 +200,7 @@ export default class Posts extends Component {
                   activeOpacity={1}
                   style={{flex: 1}}>
                   {/* // <TouchableOpacity activeOpacity={1} style={{flex: 1}}> */}
-                  <View
+                  <Card
                     style={{
                       margin: 5,
                       marginLeft: 4,
@@ -207,24 +209,28 @@ export default class Posts extends Component {
                       flexDirection: 'row',
                       borderColor: '#d3e3d4',
                       justifyContent: 'space-between',
+                      
                     }}>
-                    <View style={{margin: 7}}>
+                    {/* <View style={{margin: 7,backgroundColor:"#ffff"}}> */}
                       <Image
                         source={{uri: item.images}}
                         style={styles.background_posts_2columns}></Image>
-                    </View>
+                    {/* </View> */}
 
-                    <View style={{margin: 5, marginEnd: 10,width:190,}}>
+                    <Body style={{margin: 4, marginEnd: 10,}}>
                       <Text
                         style={styles.title_posts_categories}>
                         {item.title}
                       </Text>
-                      <View>
-                        <HTMLView value={item.except} />
-                      </View>
-                    </View>
+                      <Body style={{
+                        justifyContent:"center",
+                        padding:2,
+                      }}>
+                        <HTMLView value={item.except} stylesheet={styles.desc_posts_categories}/>
+                      </Body>
+                    </Body>
 
-                  </View>
+                  </Card>
                 </TouchableOpacity>
               )}
               keyExtractor={(item, index) => index.toString()}
