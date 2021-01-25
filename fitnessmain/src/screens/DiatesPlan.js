@@ -56,7 +56,7 @@ import Head from '../components/Header_profile';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import {TextInput} from 'react-native-paper';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import CheckBox from '@react-native-community/checkbox';
 class DiatesPlan extends Component {
   constructor(props) {
     super(props);
@@ -86,6 +86,11 @@ class DiatesPlan extends Component {
       nextVisble: false,
       user_days_uniq_id: [],
       activeColor: '#fff999',
+      toggleCheckBox1:false,
+      toggleCheckBox2:false,
+      toggleCheckBox3:false,
+      toggleCheckBox4:false,
+      days:1,
     };
     this.diet();
     // console.log('dite weeks', this.state.dataditeSu.data_sub);
@@ -680,6 +685,27 @@ class DiatesPlan extends Component {
       </View>
     );
   };
+  setToggleCheckBox1=(newValue)=>{
+    this.setState({
+      toggleCheckBox1:newValue,
+    })
+    console.log(newValue)
+  }
+  setToggleCheckBox2=(newValue)=>{
+    this.setState({
+      toggleCheckBox2:newValue,
+    })
+  }
+  setToggleCheckBox3=(newValue)=>{
+    this.setState({
+      toggleCheckBox3:newValue,
+    })
+  }
+  setToggleCheckBox4=(newValue)=>{
+    this.setState({
+      toggleCheckBox4:newValue,
+    })
+  }
   render() {
     return (
       <Container>
@@ -703,9 +729,29 @@ class DiatesPlan extends Component {
             </View>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.dietTitle}>day</Text>
-              <Text style={styles.dietTitle}>4</Text>
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  backgroundColor: '#09eb46',
+                  alignSelf: 'center',
+                  // marginTop: 10,
+                  marginStart: 12,
+                }}>
+                <Text style={{color: '#ffff', alignSelf: 'center'}}>{this.state.days}</Text>
+              </View>
               <Text style={styles.dietTitle}>week</Text>
-              <Text style={styles.dietTitle}>3</Text>
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  backgroundColor: '#09eb46',
+                  alignSelf: 'center',
+                  // marginTop: 10,
+                  marginStart: 12,
+                }}>
+                <Text style={{color: '#ffff', alignSelf: 'center'}}>{this.state.dataditeSu.week}</Text>
+              </View>
             </View>
             <View
               style={{
@@ -720,6 +766,7 @@ class DiatesPlan extends Component {
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   marginBottom: 20,
+                  // padding:10,
                 }}>
                 <View
                   style={{
@@ -738,21 +785,26 @@ class DiatesPlan extends Component {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                    height: 37,
+                    // height: 34,
                   }}>
                   <TouchableOpacity
                     style={{
                       backgroundColor: '#035048',
                       flexDirection: 'row',
+                      height: 34,
+                      // width:88,
                     }}
                     onPress={() => this.previous()}
                     disabled={this.state.prev}>
                     <MaterialIcons
                       name="keyboard-arrow-left"
-                      size={40}
-                      color="#ffff"></MaterialIcons>
+                      size={20}
+                      color="#ffff"
+                      style={{
+                        alignSelf: 'center',
+                      }}></MaterialIcons>
                     <Text style={styles.suggestedTitleweek}>
-                      {this.state.resPerPage} Week {''}
+                      week {this.state.resPerPage}{' '}
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -760,15 +812,21 @@ class DiatesPlan extends Component {
                       backgroundColor: '#035048',
                       marginStart: 10,
                       flexDirection: 'row',
+                      height: 34,
+                      // width:88,
                     }}
                     onPress={() => this.next()}
                     disabled={this.state.nextVisble}>
                     <Text style={styles.suggestedTitleweek}>
-                      {''} Week {this.state.resPerPage + 1}
+                      {' '}
+                      week {this.state.resPerPage + 1}
                     </Text>
                     <MaterialIcons
                       name="keyboard-arrow-right"
-                      size={40}
+                      size={20}
+                      style={{
+                        alignSelf: 'center',
+                      }}
                       color="#ffff"></MaterialIcons>
                   </TouchableOpacity>
                 </View>
@@ -788,9 +846,9 @@ class DiatesPlan extends Component {
                     height: 40,
                     borderRadius: 10,
                   }}
-                  // onChangeTab={({i}) => this.changetab(i)}
-                  // renderTabBar={() => <ScrollableTab />}
-                >
+                  onChangeTab={({ i })=>this.setState({
+                    days:i+1
+                  })}>
                   {this.state.user_days_uniq_id.map((student, index) => (
                     <Tab
                       heading={student.day}
@@ -1279,7 +1337,7 @@ class DiatesPlan extends Component {
                         flexDirection: 'row',
                       }}>
                       <Image
-                        style={styles.card_likeimg}
+                        style={styles.card_likeimgad}
                         source={require('../../src/assets/images/like.png')}
                       />
                       <Text style={styles.stepsLog}>Diet Followed</Text>
@@ -1288,30 +1346,42 @@ class DiatesPlan extends Component {
                   </View>
                   <View
                     style={{
-                      justifyContent: 'space-around',
+                      justifyContent: 'center',
                       flexDirection: 'row',
                       marginTop: 10,
                     }}>
+                    <CheckBox
+                      disabled={false}
+                      value={this.state.toggleCheckBox1}
+                      onValueChange={(newValue) => this.setToggleCheckBox1(newValue)}
+                    />
                     <Text
                       // onChangeText={() => this.setText(text)}
                       style={{
                         marginLeft: 10,
                         marginRight: 10,
+                        alignSelf: 'center',
                       }}>
                       Skipped the Meal{' '}
                     </Text>
                   </View>
                   <View
                     style={{
-                      justifyContent: 'space-around',
+                      justifyContent: 'center',
                       flexDirection: 'row',
                     }}>
+                    <CheckBox
+                      disabled={false}
+                      value={this.state.toggleCheckBox2}
+                      onValueChange={(newValue) => this.setToggleCheckBox2(newValue)}
+                    />
                     <Text
                       style={{
-                        marginLeft: 10,
+                        // marginLeft: 10,
                         marginRight: 10,
                         // marginTop: 10,
                         // height: 190,
+                        alignSelf: 'center',
                       }}>
                       Ate Something Else{' '}
                     </Text>
@@ -1364,38 +1434,50 @@ class DiatesPlan extends Component {
                     <View
                       style={{alignSelf: 'space-around', flexDirection: 'row'}}>
                       <Image
-                        style={styles.card_likeimg}
+                        style={styles.card_likeimgad}
                         source={require('../../src/assets/images/dislike.png')}
                       />
-                      <Text style={styles.stepsLog}>Diet Missed</Text>
+                      <Text style={styles.stepsLogdislike}>Diet Missed</Text>
                     </View>
                     <Text style={styles.stepsdeviation}>What Went Wrong ?</Text>
                   </View>
                   <View
                     style={{
-                      justifyContent: 'space-around',
+                      justifyContent: 'center',
                       flexDirection: 'row',
                       marginTop: 10,
                     }}>
+                    <CheckBox
+                      disabled={false}
+                      value={this.state.toggleCheckBox3}
+                      onValueChange={(newValue) => this.setToggleCheckBox3(newValue)}
+                    />
                     <Text
                       style={{
                         marginLeft: 10,
                         marginRight: 10,
+                        alignSelf: 'center',
                       }}>
                       Skipped the Meal
                     </Text>
                   </View>
                   <View
                     style={{
-                      justifyContent: 'space-around',
+                      justifyContent: 'center',
                       flexDirection: 'row',
                     }}>
+                    <CheckBox
+                      disabled={false}
+                      value={this.state.toggleCheckBox4}
+                      onValueChange={(newValue) => this.setToggleCheckBox4(newValue)}
+                    />
                     <Text
                       style={{
-                        marginLeft: 10,
+                        // marginLeft: 10,
                         marginRight: 10,
                         // marginTop: 10,
                         // height: 190,
+                        alignSelf: 'center',
                       }}>
                       Ate Something Else
                     </Text>

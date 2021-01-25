@@ -370,18 +370,19 @@ export default class Profile_details extends Component {
                       </Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       // justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccfirst_Name()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -415,18 +416,19 @@ export default class Profile_details extends Component {
                       </Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       // justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editacclast_Name()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -455,18 +457,19 @@ export default class Profile_details extends Component {
                       <Text style={styles.stepsView}>{this.state.phone}</Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccPhone()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -495,18 +498,19 @@ export default class Profile_details extends Component {
                       <Text style={styles.stepsView}>{this.state.email}</Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccemail()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -537,18 +541,19 @@ export default class Profile_details extends Component {
                       </Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccpinc()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -579,18 +584,19 @@ export default class Profile_details extends Component {
                       </Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccOccu()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -619,18 +625,19 @@ export default class Profile_details extends Component {
                       <Text style={styles.stepsView}>{this.state.city}</Text>
                     )}
                   </View>
-                  <View
+                  <TouchableOpacity
                     style={{
                       justifyContent: 'center',
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
-                    }}>
+                    }}
+                    onPress={() => this.editaccCity()}>
                     <AntDesign
                       size={50}
                       name="right"
                       // color="#ffff"
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
             </ListItem>
@@ -680,11 +687,32 @@ export default class Profile_details extends Component {
                       alignSelf: 'flex-end',
                       // backgroundColor: '#11ba11',
                     }}>
-                    <AntDesign
-                      size={50}
-                      name="right"
-                      // color="#ffff"
-                    />
+                    <DatePicker
+                        style={{width: 200}}
+                        date={this.state.date}
+                        mode="date"
+                        placeholder="select date"
+                        format="YYYY-MM-DD"
+                        minDate="1940-01-01"
+                        maxDate="2040-01-01"
+                        confirmBtnText="Confirm"
+                        cancelBtnText="Cancel"
+                        customStyles={{
+                          dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0,
+                          },
+                          dateInput: {
+                            marginLeft: 36,
+                          },
+                          // ... You can check the source to find the other keys.
+                        }}
+                        onDateChange={(date) => {
+                          this.setState({dob: date},this.onSubmit);
+                        }}
+                      />
                   </View>
                 </View>
               </View>
@@ -720,7 +748,7 @@ export default class Profile_details extends Component {
                 borderRadius: 20,
               }}>
               <View style={{alignSelf: 'center'}}>
-                <Text style={styles.stepsLog}>LOG MOOD</Text>
+                <Text style={styles.stepsLog}>Edit {this.state.title}</Text>
               </View>
               <TextInput
                 placeholder={this.state.title}

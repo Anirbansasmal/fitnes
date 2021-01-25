@@ -294,7 +294,7 @@ export default class Profile extends Component {
               <Row
                 style={{
                   // backgroundColor:"#ff9933",
-                  justifyContent:"space-around",
+                  justifyContent:"space-between",
                   padding: 10,
                 }}
                 >
@@ -357,7 +357,7 @@ export default class Profile extends Component {
             <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
               <Row
                 style={{
-                  justifyContent:"space-around",
+                  justifyContent:"space-between",
                   padding: 10,
                 }}>
                 <Card
@@ -420,7 +420,7 @@ export default class Profile extends Component {
             <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
               <Row
                 style={{
-                  justifyContent:"space-around",
+                  justifyContent:"space-between",
                   padding: 10,
                 }}>
                 <Card

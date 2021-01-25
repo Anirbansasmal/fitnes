@@ -119,7 +119,7 @@ export default class Home extends Component {
   };
   getMytask = async () => {
     var user = await AsyncStorage.getItem('userId');
-    var apiResponse = await Api.get('userById/' + user);
+    var apiResponse = await Api.get('userById/' + 74);
     // console.log(apiResponse);
     if (apiResponse.status === 'success') {
       // Alert.alert('Success', 'Profile Updated');
@@ -180,7 +180,7 @@ export default class Home extends Component {
     if(this.state.userDiet==""){
       Alert.alert('Diet plan', "No diet exist");
     }else{
-      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[0]});
+      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[1]});
     }
   }
   event(){
@@ -334,8 +334,8 @@ export default class Home extends Component {
           <View style={{padding: 10, paddingTop: 10, backgroundColor: '#FFF'}}>
             <Grid style={{flex: 2}}>
               <Row
-                style={{justifyContent:"space-around",
-                  padding: 10,
+                style={{justifyContent:"space-between",
+                  // padding: 10,
                 }}>
                 <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
                   width: 170,elevation: 6,}}>
@@ -393,8 +393,8 @@ export default class Home extends Component {
             <Grid style={{flex: 2}}>
               <Row
                 style={{
-                  justifyContent:"space-around",
-                  padding: 10,
+                  justifyContent:"space-between",
+                  // padding: 10,
                 }}>
                 <Card style={{borderRadius: 15, overflow: 'hidden',height: 140,
                   width: 170,elevation: 6,}}>
@@ -449,7 +449,7 @@ export default class Home extends Component {
               </Row>
             </Grid>
 
-            <View style={{backgroundColor: '#f6ffee', paddingBottom: 20}}>
+            <View style={{backgroundColor: '#f6ffee', paddingBottom: 20,marginTop:20,}}>
               {this.state.blogLoading == false ? (
                 <View>
                   <CardItem style={{backgroundColor: '#f6ffee'}}>
