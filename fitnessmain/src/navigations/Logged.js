@@ -56,18 +56,22 @@ import Profile_health from '../screens/Profile_health';
 import My_Calender from '../screens/My_Calender';
 import My_task from '../screens/My_task';
 import More_option from '../screens/More_option';
-import webview_event from '../screens/webview_event'
-import webview_survey from '../screens/webview_survey'
+import webview_event from '../screens/webview_event';
+import webview_survey from '../screens/webview_survey';
+import Disclaimer from '../screens/Disclaimer';
+import Faq from '../screens/Faq';
+import Polices from '../screens/Polices';
+import Refer from '../screens/Refer';
 // import WorkoutSearchScreen from "../screens/WorkoutSearch";
 // import WorkoutResultsScreen from "../screens/WorkoutResults";
 // import CalculatorScreen from "../screens/Calculator";
 // import QuotesScreen from "../screens/Quotes";
 // import SettingsScreen from "../screens/Settings";
 // import TermsScreen from "../screens/Terms";
-// import AboutUsScreen from "../screens/AboutUs";
+import AboutUsScreen from "../screens/AboutUs";
 // import TagsScreen from "../screens/Tags";
 // import CategoriesScreen from "../screens/Categories";
-// import ContactUsScreen from "../screens/ContactUs";
+import ContactUsScreen from "../screens/ContactUs";
 import OfflineBar from '../components/OfflineBar';
 import PostDetails from '../screens/PostDetails';
 
@@ -241,6 +245,14 @@ import PostDetails from '../screens/PostDetails';
 /**
  * Tab Navigator
  */
+// const customTabBarStyle = {
+//     activeTintColor: Colors.tabIconSelected,
+//     inactiveTintColor: Colors.tabIconDefault,
+//     allowFontScaling: true,
+//     labelStyle: { fontSize: 16, paddingTop: 5 },
+//     tabStyle: { paddingTop: 5 },
+//     style: { height: 60, borderTopColor: Colors.tabBarBorderDefault },
+//   }
 const Tabs = createBottomTabNavigator();
 const TabsScreen = () => (
   <Tabs.Navigator
@@ -259,7 +271,7 @@ const TabsScreen = () => (
           case 'Chat':
             iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
-          case 'Homeu':
+          case 'Moreoption':
             iconName = focused
               ? 'dots-horizontal-circle-outline'
               : 'dots-horizontal-circle-outline';
@@ -285,7 +297,9 @@ const TabsScreen = () => (
       activeTintColor: '#ff1a1a',
       inactiveTintColor: 'gray',
       labelStyle: {paddingBottom: 0},
-      style: {height: 50, backgroundColor: '#035048', justifyContent: 'center'},
+      allowFontScaling: true,
+      style: {height: 50, backgroundColor: '#035048', justifyContent: 'center',},
+      tabStyle: { paddingTop: 5 },
     }}>
     <Tabs.Screen
       name="Home"
@@ -303,9 +317,10 @@ const TabsScreen = () => (
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
-      name="Homeu"
-      component={HomeStackScreen}
-      options={{tabBarLabel: ''}}
+      name="Moreoption"
+      component={HomeStackOption}
+      options={{tabBarButton: () => (<More_option />)}}
+      
     />
   </Tabs.Navigator>
 );
@@ -622,7 +637,7 @@ const HomeStackScreen = ({navigation}) => (
         headerShown: false,
       }}
     />
-    <HomeStack_nav.Screen
+    <HomeStack.Screen
       name="My_billing"
       component={My_billing}
       options={{
@@ -631,7 +646,49 @@ const HomeStackScreen = ({navigation}) => (
     />
     <HomeStack.Screen
       name="Moreoption"
-      component={HomeScreen}
+      component={More_option}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="AboutUsScreen"
+      component={AboutUsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="ContactUsScreen"
+      component={ContactUsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="Disclaimer"
+      component={Disclaimer}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="Faq"
+      component={Faq}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="Polices"
+      component={Polices}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack.Screen
+      name="Refer"
+      component={Refer}
       options={{
         headerShown: false,
       }}
@@ -652,8 +709,8 @@ const HomeStackScreen = ({navigation}) => (
     /> */}
   </HomeStack.Navigator>
 );
-const HomeStackOption = ({navigation}) => {
-  <HomeStack_option.Navigator initialRouteName="Moreoption">
+const HomeStackOption = ({navigation}) => (
+  <HomeStack_option.Navigator initialRouteName="Moreoption" mode="modal">
     
     {/* <HomeStack_option.Screen
       name="Home"
@@ -667,9 +724,52 @@ const HomeStackOption = ({navigation}) => {
       component={More_option}
       options={{
         headerShown: false,
+        animationEnabled: true,
       }}
     />
     <HomeStack_option.Screen
+      name="AboutUsScreen"
+      component={AboutUsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_option.Screen
+      name="ContactUsScreen"
+      component={ContactUsScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_option.Screen
+      name="Disclaimer"
+      component={Disclaimer}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_option.Screen
+      name="Faq"
+      component={Faq}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_option.Screen
+      name="Polices"
+      component={Polices}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_option.Screen
+      name="Refer"
+      component={Refer}
+      options={{
+        headerShown: false,
+      }}
+    />
+    {/* <HomeStack_option.Screen
       name="Home"
       component={HomeScreen}
       options={{
@@ -683,7 +783,14 @@ const HomeStackOption = ({navigation}) => {
         headerShown: false,
       }}
     />
-    <HomeStack_nav.Screen
+    <HomeStack_option.Screen
+      name="My_billing"
+      component={My_billing}
+      options={{
+        headerShown: false,
+      }}
+    /> */}
+    {/* <HomeStack_nav.Screen
       name="LogoutScreen"
       component={LogoutScreen}
       options={{
@@ -795,9 +902,9 @@ const HomeStackOption = ({navigation}) => {
       options={{
         headerShown: false,
       }}
-    />
-  </HomeStack_option.Navigator>;
-};
+    /> */}
+  </HomeStack_option.Navigator>
+);
 
 /**
  * Drawer Navigator

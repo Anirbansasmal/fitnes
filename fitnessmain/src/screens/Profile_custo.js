@@ -73,7 +73,7 @@ class Profile_custo extends Component {
               }}>
               <Row
                 style={{
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-around',
                   padding: 10,
                 }}>
                 <Card
@@ -151,7 +151,7 @@ class Profile_custo extends Component {
             <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
               <Row
                 style={{
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-around',
                   padding: 10,
                 }}>
                 <Card
@@ -217,7 +217,7 @@ class Profile_custo extends Component {
             <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
               <Row
                 style={{
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-around',
                   padding: 10,
                 }}>
                 <Card
@@ -283,7 +283,7 @@ class Profile_custo extends Component {
             <Grid style={{flex: 2, justifyContent: 'center', marginTop: 0}}>
               <Row
                 style={{
-                  justifyContent: 'space-between',
+                  justifyContent: 'space-around',
                   padding: 10,
                 }}>
                 <Card
