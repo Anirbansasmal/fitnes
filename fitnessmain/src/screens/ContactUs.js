@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 import { NavigationActions, StackNavigator } from 'react-navigation';
 import { AppRegistry, StyleSheet, TextInput, View, Alert, Dimensions, Image } from 'react-native';
 import {Grid, Row, Col } from 'react-native-easy-grid';
@@ -7,10 +7,9 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { Container, Form, Item, Input, Label, Textarea, Button, Text } from 'native-base';
 import ConfigApp from '../utils/ConfigApp';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {Toast} from 'antd-mobile';
 import Strings from '../utils/Strings';
 
-var styles = require('../../assets/files/Styles');
+var styles = require('../assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 
 export default class ContactUs extends Component {
@@ -58,9 +57,9 @@ fetch(ConfigApp.URL+'controller/contactform.php', {
       .then((responseJson) => {
 
         if (responseJson == 'false') {
-          Toast.info(Strings.ST32, 1)
+          Toast.show(Strings.ST32, 1);
         }else{
-          Toast.info(Strings.ST74, 1)
+          Toast.show(Strings.ST74, 1);
           this.props.navigation.goBack()
         }
 
@@ -82,7 +81,7 @@ fetch(ConfigApp.URL+'controller/contactform.php', {
 <View style={{flex: 1, margin: 15}}>
 
 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Image source={require('../../assets/images/contact.png')} style={{width: 100, height: 100, marginTop: 10}} />
+      <Image source={require('../assets/images/contact.png')} style={{width: 100, height: 100, marginTop: 10}} />
 </View>
 
 <Text style={{paddingLeft: 0, paddingBottom: 10, marginBottom: 5, marginTop: 15, fontSize: 22, fontWeight:'bold', textAlign: 'center' }}>

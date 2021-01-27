@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as firebase from 'firebase';
+// import * as firebase from 'firebase';
 import AppPreLoader from '../components/AppPreLoader';
 import { NavigationActions, StackNavigator } from 'react-navigation';
 import{TouchableOpacity, Dimensions, View, Image, FlatList, ScrollView} from 'react-native';
@@ -12,7 +12,7 @@ import HTML from 'react-native-render-html';
 import Strings from '../utils/Strings';
 
 
-var styles = require('../../assets/files/Styles');
+var styles = require('../assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 
 export default class AboutUs extends Component {

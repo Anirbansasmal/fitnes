@@ -503,41 +503,14 @@ class My_Calender extends Component {
               source={require('../../src/assets/images/flat_add.png')}></Image>
           </TouchableOpacity>
 
-          {/* <Modal
-            isVisible={this.state.isVisableMood}
-            backdropColor="#ffff"
-            // coverScreen={true}
-            // hasBackdrop={true}
-            // deviceHeight={100}
-            style={{
-              width: deviceWidth,
-              margin: 0,
-              backdropOpacity: 10.7,
-              backgroundColor: '#f2f1ed',
-              marginTop: deviceHeight - 600,
-              // marginBottom:deviceHeight - 600,
-              alignSelf: 'center',
-            }}
-            animationIn={'slideInUp'}
-            propagateSwipe={true}>
-            <View style={{flex: 1, alignSelf: 'center'}}>
-              <Text>Hello!</Text>
-            </View>
-          </Modal> */}
-
-          {/* <View> */}
           <Modal
             isVisible={this.state.isVisableMood}
             style={{
-              // height: 100,
               backdropOpacity: 10.7,
               alignSelf: 'center',
               width: '90%',
               paddingLeft: 30,
               paddingRight: 30,
-              // elevation: 10,
-              // overflow: 'hidden',
-              // borderWidth: 1,
             }}
             backdropColor="#ffff"
             coverScreen={true}
