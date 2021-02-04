@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
 export default class API {
   // static contextType = AuthContext;
   constructor(options) {
@@ -16,7 +17,10 @@ export default class API {
   post(endpoint, params) {
     return this.httpRequest('POST', this.baseUrl + endpoint, params);
   }
-
+  postlog(endpoint, params) {
+    return this.httpRequestlog('POST', this.baseUrl + endpoint, params);
+  }
+  
   delete(endpoint, params) {
     return this.httpRequest('DELETE', this.baseUrl + endpoint, params);
   }
@@ -50,7 +54,7 @@ export default class API {
   httpRequest(method, url, params) {
     return new Promise(async (resolve, reject) => {
       var token = await AsyncStorage.getItem('token');
-      console.log(url);
+      console.log(JSON.stringify(params));
       let options = {
         headers: {
           Accept: 'application/json',
@@ -61,7 +65,7 @@ export default class API {
         body: JSON.stringify(params),
       };
       // console.log(url);
-      console.log(options);
+      // console.log(options);
       fetch(url, options)
         .then((response) => response.json())
         .then((responseJson) => {
@@ -73,7 +77,28 @@ export default class API {
         }); //to catch the errors if any
     });
   }
-
+  httpRequestlog(method, url, params) {
+    return new Promise(async (resolve, reject) => {
+      var token = await AsyncStorage.getItem('token');
+      console.log(url);
+      console.log(JSON.stringify(params));
+      let options = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        method: method,
+        body: JSON.stringify(params),
+      };
+      fetch(url, options)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          resolve(responseJson);
+        })
+        .catch((error) => reject(error)); //to catch the errors if any
+    });
+  }
   getBlog(endpoint, params) {
     return this.httpBlogRequest('GET', this.blogUrl + endpoint, params);
   }

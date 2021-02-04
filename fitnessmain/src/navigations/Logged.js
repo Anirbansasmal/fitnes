@@ -25,6 +25,7 @@ import DiatesPlan from '../screens/DiatesPlan';
 import My_program from '../screens/My_program';
 import Diabetes from '../screens/Diabetes';
 import height_profile from '../screens/height_profile';
+import Chat from '../screens/Chat'
 // import EBodypartsScreen from '../screens/EBodyparts';
 // import EquipmentsScreen from '../screens/Equipments';
 // import WGoalsScreen from "../screens/WGoals";
@@ -313,7 +314,7 @@ const TabsScreen = () => (
     />
     <Tabs.Screen
       name="Chat"
-      component={HomeStackScreen}
+      component={Chat}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
@@ -488,6 +489,14 @@ const HomeStackScreenNav = ({navigation}) => (
     <HomeStack_nav.Screen
       name="Moreoption"
       component={HomeScreen}
+      options={{
+        headerShown: false,
+      }}
+    />
+    
+    <HomeStack_nav.Screen
+      name="Chat"
+      component={Chat}
       options={{
         headerShown: false,
       }}
@@ -689,6 +698,13 @@ const HomeStackScreen = ({navigation}) => (
     <HomeStack.Screen
       name="Refer"
       component={Refer}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Chat"
+      component={Chat}
       options={{
         headerShown: false,
       }}

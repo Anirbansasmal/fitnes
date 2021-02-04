@@ -21,7 +21,8 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 // import {NavigationActions} from 'react-navigation';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
-
+import {AuthContext} from '../context';
+import AsyncStorage from '@react-native-community/async-storage';
 import Strings from '../utils/Strings';
 import Api from '../services/api';
 
@@ -64,6 +65,7 @@ export default class Register extends Component {
   static navigationOptions = {
     header: null,
   };
+  static contextType = AuthContext;
   constructor() {
     super();
 
@@ -156,14 +158,15 @@ export default class Register extends Component {
           dietitian_id: 0,
         };
         var apiResponse = await Api.post(request_1_url, postData);
-        console.log(apiResponse);
+        console.log("success",apiResponse);
         if (apiResponse.status === 'success') {
           var token = apiResponse.data.token;
-          var userId = apiResponse.data.id;
+          var userId = apiResponse.data.user.id;
           await AsyncStorage.setItem('userId', String(userId));
           await AsyncStorage.setItem('token', token);
           await this.context.signIn(token);
-          this.props.navigation.navigate('Home');
+          // this.props.navigation.navigate('Home');
+          Alert.alert('Success', "Register user successfully");
         } else {
           console.log(apiResponse.errors);
           const error = apiResponse.errors;
