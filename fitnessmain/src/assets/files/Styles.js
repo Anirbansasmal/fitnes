@@ -150,12 +150,12 @@ module.exports = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 2,
   },
-  desc_posts_categories:{
+  desc_posts_categories: {
     color: '#000',
     fontSize: 13,
     padding: 10,
     fontWeight: 'bold',
-    marginEnd:20,
+    marginEnd: 20,
     // paddingTop: 2,
   },
   date_posts: {
@@ -181,7 +181,7 @@ module.exports = StyleSheet.create({
     height: height * 0.24,
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    borderRadius:7,
+    borderRadius: 7,
     marginStart: 7,
     marginTop: 7,
     marginBottom: 7,
@@ -998,7 +998,7 @@ module.exports = StyleSheet.create({
     marginTop: 20,
     marginEnd: 10,
   },
-  stepsLogdislike:{
+  stepsLogdislike: {
     color: '#035048',
     fontWeight: '700',
     fontSize: 18,
@@ -1163,7 +1163,7 @@ module.exports = StyleSheet.create({
     padding: 6,
     // marginTop: 10,
   },
-  card_likeimgad:{
+  card_likeimgad: {
     height: 40,
     width: 40,
     marginEnd: 20,
@@ -1203,5 +1203,21 @@ module.exports = StyleSheet.create({
     alignSelf: 'flex-start',
     // marginStart: 10,
     marginTop: 10,
+  },
+  chatmessage: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingTop: 12,
+  },
+  messages:{
+    alignSelf: 'stretch',
+  },
+  input: {
+    alignSelf: 'stretch'
+  },
+  joinPart: {
+    fontStyle: 'italic'
   },
 });
