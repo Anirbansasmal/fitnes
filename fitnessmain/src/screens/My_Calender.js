@@ -55,6 +55,7 @@ import Api from '../services/api';
 import Head from '../components/Header_profile';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 // import {TextInput} from 'react-native-paper';
+import moment from 'moment';
 const deviceWidth = Dimensions.get('window').width;
 const deviceHeight =
   Platform.OS === 'ios'
@@ -81,93 +82,218 @@ class My_Calender extends Component {
       isVisableActivity: false,
       isVisableMenstruation: false,
       isVisableWeight: false,
+      showsMood: false,
       taskdet: [],
+      taskAddlog: '',
+      taskmoodtitle: '',
+      taskmooddesc: '',
+      taskweight1: '',
+      taskweight2: '',
+      taskmood: '',
+      month: '',
+      year: '',
+      logData: [],
+      titlefetch: '',
+      descfetch: '',
+      logmood: '',
     };
+    this.year = new Date().getFullYear();
+    this.month = new Date().getMonth() + 1;
+    this.day = new Date().getDay();
+    this.logdate = moment().format('YYYY-MM-DD');
   }
   show() {
     if (this.state.count == 0) {
       this.setState({
         isVisable: true,
         count: 1,
+        // taskAdd:'Mood'
       });
     } else {
       this.setState({
         isVisable: false,
         count: 0,
+        // taskAdd:'',
       });
     }
   }
   mood() {
     this.setState({
       isVisableMood: true,
+      taskAddlog: 'mood',
     });
   }
   task() {
     this.setState({
       isVisableTask: true,
+      taskAddlog: 'task',
     });
   }
   food() {
     this.setState({
       isVisableFood: true,
+      taskAddlog: 'food',
     });
   }
   activity() {
     this.setState({
       isVisableActivity: true,
+      taskAddlog: 'activity',
     });
   }
   menstruation() {
     this.setState({
       isVisableMenstruation: true,
+      taskAddlog: 'menstruation',
     });
   }
   weight() {
     this.setState({
       isVisableWeight: true,
+      taskAddlog: 'weight',
     });
   }
 
-  reminder() {
-    this.setState({
-      isVisableMood: false,
-    });
-    Alert.alert('Successfully', 'Your mood Add');
+  async reminder() {
+    //  calendar/store
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    console.log('logdate', this.logdate);
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    var logs = {
+      title: this.state.taskmoodtitle,
+      title_desc: this.state.taskmooddesc,
+    };
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(logs),
+    };
+
+    var apiResponse = await Api.postlog('calendar/store', data);
+    console.log('apiResponse', apiResponse);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableMood: false,
+      });
+      Alert.alert('Successfully', 'Your mood Add');
+    } else {
+    }
   }
-  submitTask() {
-    this.setState({
-      isVisableTask: false,
-    });
-    Alert.alert('Successfully', 'Add your Task');
+  async submitTask() {
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    formdata.append('type_log', this.state.taskmood);
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(formdata),
+    };
+
+    var apiResponse = await Api.postlog('calendar/store', data);
+    console.log('apiResponse', apiResponse);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableMood: false,
+      });
+      Alert.alert('Successfully', 'Your mood Add');
+    } else {
+    }
   }
-  submitFood() {
-    this.setState({
-      isVisableFood: false,
-    });
-    Alert.alert('Successfully', 'Add your food');
+  async submitFood() {
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    formdata.append('type', this.state.taskmood);
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(formdata),
+    };
+    var apiResponse = await Api.post('calendar/store', data);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableFood: false,
+      });
+      Alert.alert('Successfully', 'Add your food');
+    } else {
+    }
   }
-  submitActivity() {
-    this.setState({
-      isVisableActivity: false,
-    });
-    Alert.alert('Successfully', 'Add your Activity');
+  async submitActivity() {
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    formdata.append('type', this.state.taskmood);
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(formdata),
+    };
+    var apiResponse = await Api.post('calendar/store', data);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableActivity: false,
+      });
+      Alert.alert('Successfully', 'Add your Activity');
+    } else {
+    }
   }
-  submitMenstruation() {
-    this.setState({
-      isVisableMenstruation: false,
-    });
-    Alert.alert('Successfully', 'Add your Menstruation');
+  async submitMenstruation() {
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    formdata.append('type', this.state.taskmood);
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(formdata),
+    };
+    var apiResponse = await Api.post('calendar/store', data);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableMenstruation: false,
+      });
+      Alert.alert('Successfully', 'Add your Menstruation');
+    } else {
+    }
   }
-  submitWeight() {
-    this.setState({
-      isVisableWeight: false,
-    });
-    Alert.alert('Successfully', 'Add your Weight');
+  async submitWeight() {
+    var user = await AsyncStorage.getItem('userId');
+    var formdata = new FormData();
+    formdata.append('title', this.state.taskmoodtitle);
+    formdata.append('title_desc', this.state.taskmooddesc);
+    formdata.append('type', this.state.taskmood);
+    var data = {
+      user_id: user,
+      date: this.logdate,
+      type: this.state.taskAddlog,
+      log: JSON.stringify(formdata),
+    };
+    var apiResponse = await Api.post('calendar/store', data);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        isVisableWeight: false,
+      });
+      Alert.alert('Successfully', 'Add your Weight');
+    } else {
+    }
   }
+  taskaddLog() {}
   componentDidMount() {
-    this.task();
+    this.taskadd();
   }
-  async task() {
+  async taskadd() {
     var user = await AsyncStorage.getItem('userId');
     var apiResponse = await Api.get('userById/' + user);
     // console.log(apiResponse);
@@ -204,6 +330,85 @@ class My_Calender extends Component {
       });
     }
     console.log('user', this.state.task[0].task);
+  }
+  async taskfecth() {
+    var user = await AsyncStorage.getItem('userId');
+    var data = {
+      user_id: user,
+      month: this.state.month,
+      year: this.state.year,
+    };
+    var apiResponse = await Api.post('calendar/fetch', data);
+    if (apiResponse.status === 'success') {
+      this.setState({
+        logData: apiResponse.data,
+        titlefetch: apiResponse,
+        descfetch: apiResponse,
+        logmood: apiResponse,
+      });
+    } else {
+    }
+  }
+  setTaskti = (task) => {
+    this.setState({
+      taskmoodtitle: task,
+    });
+  };
+  setTaskdesc = (task) => {
+    this.setState({
+      taskmooddesc: task,
+    });
+  };
+  setTaskweight1 = (task) => {
+    this.setState({
+      taskweight1: task,
+    });
+  };
+  setTaskweight2 = (task) => {
+    this.setState({
+      taskweight2: task,
+    });
+  };
+  taskmood = () => {
+    this.setState({
+      taskmood: 'Reminder',
+    });
+  };
+  close() {
+    this.setState({
+      showsMood: false,
+    });
+  }
+  renderlog({index, item}) {
+    console.log(item.log[index].title);
+    return (
+      <View>
+        <View style={{alignSelf: 'center'}}>
+          <Text style={styles.stepsLog}>LOG {item.log_type}</Text>
+        </View>
+        {/* {this.state.titlefetch == '' ? null : ( */}
+        <Text
+          style={{
+            marginLeft: 10,
+            marginRight: 40,
+            alignSelf: 'center',
+            marginTop: 10,
+          }}>
+          created at: {item.log_date}
+        </Text>
+        {/* )} */}
+        {/* {this.state.titlefetch == '' ? null : ( */}
+        <Text
+          style={{
+            marginLeft: 10,
+            marginRight: 10,
+            marginTop: 10,
+          }}>
+          {/* {this.state.titlefetch} */}
+        </Text>
+        {/* )} */}
+      </View>
+    );
   }
   render() {
     return (
@@ -268,6 +473,14 @@ class My_Calender extends Component {
               }}
               onDayPress={(day) => {
                 console.log('selected day', day);
+                this.setState(
+                  {
+                    month: day.month,
+                    year: day.year,
+                    showsMood: true,
+                  },
+                  this.taskfecth,
+                );
               }}
               hideExtraDays={true}
               firstDay={1}
@@ -518,6 +731,7 @@ class My_Calender extends Component {
             onBackdropPress={() =>
               this.setState({
                 isVisableMood: false,
+                taskAddlog: '',
               })
             }>
             <View
@@ -533,7 +747,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="Task Title"
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskti(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -544,7 +758,7 @@ class My_Calender extends Component {
                 placeholder="optionally share something more ..."
                 // value={text}
                 multiline={true}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskdesc(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -605,7 +819,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="Task Title"
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskti(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -615,7 +829,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="optionally share something more ..."
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskdesc(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -625,11 +839,12 @@ class My_Calender extends Component {
                   backgroundColor: '#dcdedc',
                 }}
               />
-              <View
+              <TouchableOpacity
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'flex-start',
-                }}>
+                }}
+                onPress={() => this.taskmood()}>
                 <Image
                   size={40}
                   source={require('../../src/assets/images/reminder.png')}
@@ -642,7 +857,7 @@ class My_Calender extends Component {
                 <Text style={{margin: 10, alignSelf: 'center'}}>
                   SET REMINDER
                 </Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity
                 style={{
                   backgroundColor: '#069906',
@@ -692,7 +907,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="What did you eat"
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskti(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -702,7 +917,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="optionally share something more ..."
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskdesc(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -784,7 +999,12 @@ class My_Calender extends Component {
               </View>
               <View
                 style={{justifyContent: 'space-around', flexDirection: 'row'}}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      taskmood: 'weight',
+                    })
+                  }>
                   <Image
                     size={40}
                     source={require('../../src/assets/images/e87be674516ed204f304cf0bff8a577c.png')}
@@ -795,7 +1015,12 @@ class My_Calender extends Component {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      taskmood: 'walk',
+                    })
+                  }>
                   <Image
                     size={40}
                     source={require('../../src/assets/images/5f0a282cee6bcd654d14f9349fb8db20.png')}
@@ -806,7 +1031,12 @@ class My_Calender extends Component {
                     }}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.setState({
+                      taskmood: 'sleep',
+                    })
+                  }>
                   <Image
                     size={40}
                     source={require('../../src/assets/images/628c748a20f0f8d8306ebbdd04d1662d.png')}
@@ -821,7 +1051,7 @@ class My_Calender extends Component {
               <TextInput
                 placeholder="optionally share something more ..."
                 // value={text}
-                onChangeText={() => this.setText(text)}
+                onChangeText={(text) => this.setTaskti(text)}
                 style={{
                   marginLeft: 10,
                   marginRight: 10,
@@ -888,7 +1118,12 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'spotting',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/spotting.png')}
@@ -902,7 +1137,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>spotting</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'light',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/light.png')}
@@ -916,7 +1156,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>light</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'medium',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/medium.png')}
@@ -930,7 +1175,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>medium</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: '',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/heavy.png')}
@@ -951,20 +1201,31 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                      <TouchableOpacity></TouchableOpacity>
-                      <Image
-                        size={40}
-                        source={require('../../src/assets/images/egg_white.png')}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          margin: 10,
-                        }}
-                      />
-                      <Text style={styles.title_subCate}>egg white</Text>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'egg white',
+                          })
+                        }>
+                        <Image
+                          size={40}
+                          source={require('../../src/assets/images/egg_white.png')}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            margin: 10,
+                          }}
+                        />
+                        <Text style={styles.title_subCate}>egg white</Text>
+                      </TouchableOpacity>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'creamy',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/creamy.png')}
@@ -978,7 +1239,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>creamy</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'sticky',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/sticky.png')}
@@ -992,7 +1258,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>sticky</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'unusual',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/unusual.png')}
@@ -1013,7 +1284,12 @@ class My_Calender extends Component {
                       flexDirection: 'row',
                     }}>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'cramps',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/cramps.png')}
@@ -1027,7 +1303,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>cramps</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'headache',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/headache.png')}
@@ -1041,7 +1322,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>headache</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'acne',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/acne.png')}
@@ -1055,7 +1341,12 @@ class My_Calender extends Component {
                       <Text style={styles.title_subCate}>acne</Text>
                     </View>
                     <View>
-                      <TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            taskmood: 'sick',
+                          })
+                        }>
                         <Image
                           size={40}
                           source={require('../../src/assets/images/sick.png')}
@@ -1073,7 +1364,7 @@ class My_Calender extends Component {
                 <TextInput
                   placeholder="optionally share something more ..."
                   // value={text}
-                  onChangeText={() => this.setText(text)}
+                  onChangeText={(text) => this.setText(text)}
                   style={{
                     marginLeft: 10,
                     marginRight: 10,
@@ -1140,7 +1431,7 @@ class My_Calender extends Component {
                 <View>
                   <TextInput
                     // value={text}
-                    onChangeText={() => this.setText(text)}
+                    onChangeText={(text) => this.setTaskweight1(text)}
                     style={{
                       marginLeft: 10,
                       // marginRight: 10,
@@ -1154,7 +1445,7 @@ class My_Calender extends Component {
                 <View>
                   <TextInput
                     // value={text}
-                    onChangeText={() => this.setText(text)}
+                    onChangeText={(text) => this.setTaskweight2(text)}
                     style={{
                       marginLeft: 10,
                       marginRight: 10,
@@ -1166,13 +1457,18 @@ class My_Calender extends Component {
                   <Text style={styles.stepsLog}>GMS</Text>
                 </View>
               </View>
-              <View
+              <TouchableOpacity
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'center',
                   marginLeft: 40,
                   marginRight: 20,
-                }}>
+                }}
+                onPress={() =>
+                  this.setState({
+                    taskmood: 'Smart Scale',
+                  })
+                }>
                 <Image
                   size={40}
                   source={require('../../src/assets/images/WEIGHT.png')}
@@ -1193,7 +1489,7 @@ class My_Calender extends Component {
                   }}>
                   Click to get weight from a Smart Scale
                 </Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity
                 style={{
                   backgroundColor: '#069906',
@@ -1204,6 +1500,53 @@ class My_Calender extends Component {
                 onPress={() => this.submitWeight()}>
                 <Text style={{margin: 10, alignSelf: 'center', color: '#ffff'}}>
                   Submit
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+
+          <Modal
+            isVisible={this.state.showsMood}
+            style={{
+              backdropOpacity: 10.7,
+              alignSelf: 'center',
+              width: '90%',
+              paddingLeft: 30,
+              paddingRight: 30,
+            }}
+            backdropColor="#ffff"
+            coverScreen={true}
+            hasBackdrop={true}
+            onBackdropPress={() =>
+              this.setState({
+                showsMood: false,
+                taskAddlog: '',
+              })
+            }>
+            <View
+              style={{
+                backgroundColor: '#ffff',
+                height: 400,
+                borderWidth: 1,
+                borderRadius: 20,
+              }}>
+              <FlatList
+                data={this.state.logData}
+                renderItem={this.renderlog}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#069906',
+                  width: 120,
+                  alignSelf: 'center',
+                  borderRadius: 10,
+                  marginTop: 10,
+                  marginBottom: 20,
+                }}
+                onPress={() => this.close()}>
+                <Text style={{margin: 10, alignSelf: 'center', color: '#ffff'}}>
+                  OK
                 </Text>
               </TouchableOpacity>
             </View>

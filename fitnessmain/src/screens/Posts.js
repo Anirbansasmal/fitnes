@@ -12,6 +12,7 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import { LinearGradient } from 'expo';
@@ -195,12 +196,12 @@ export default class Posts extends Component {
               data={this.state.recentposts}
               // numColumns={2}
               renderItem={({item, index}) => (
-                <TouchableOpacity
+                <TouchableWithoutFeedback
                   onPress={() => this.PostDetails(item)}
                   activeOpacity={1}
                   style={{flex: 1}}>
                   {/* // <TouchableOpacity activeOpacity={1} style={{flex: 1}}> */}
-                  <Card
+                  <View
                     style={{
                       margin: 5,
                       marginLeft: 4,
@@ -209,29 +210,42 @@ export default class Posts extends Component {
                       flexDirection: 'row',
                       borderColor: '#d3e3d4',
                       justifyContent: 'space-between',
-                      
                     }}>
                     {/* <View style={{margin: 7,backgroundColor:"#ffff"}}> */}
-                      <Image
-                        source={{uri: item.images}}
-                        style={styles.background_posts_2columns}></Image>
+                    {/* <View></View> */}
+                    <Image
+                      source={{uri: item.images}}
+                      style={styles.background_posts_2columns}></Image>
                     {/* </View> */}
 
-                    <Body style={{margin: 4, marginEnd: 10,}}>
-                      <Text
-                        style={styles.title_posts_categories}>
-                        {item.title}
-                      </Text>
-                      <Body style={{
-                        justifyContent:"center",
-                        padding:2,
+                    <View
+                      style={{
+                        margin: 4,
+                        marginEnd: 10,
+                        height: 170,
+                        width: width * 0.45,
                       }}>
-                        <HTMLView value={item.except} stylesheet={styles.desc_posts_categories}/>
-                      </Body>
-                    </Body>
-
-                  </Card>
-                </TouchableOpacity>
+                      <ScrollView
+                        // showsHorizontalScrollIndicator={false}
+                        // showsVerticalScrollIndicator={false}
+                        >
+                        <Text style={styles.title_posts_categories}>
+                          {item.title}
+                        </Text>
+                        <View
+                          style={{
+                            justifyContent: 'center',
+                            padding: 2,
+                          }}>
+                          <HTMLView
+                            value={item.except}
+                            stylesheet={styles.desc_posts_categories}
+                          />
+                        </View>
+                      </ScrollView>
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
               )}
               keyExtractor={(item, index) => index.toString()}
             />

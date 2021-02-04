@@ -155,6 +155,7 @@ module.exports = StyleSheet.create({
     fontSize: 13,
     padding: 10,
     fontWeight: 'bold',
+    marginEnd:20,
     // paddingTop: 2,
   },
   date_posts: {
@@ -177,7 +178,7 @@ module.exports = StyleSheet.create({
 
   background_posts_2columns: {
     width: width * 0.46,
-    height: height * 0.30,
+    height: height * 0.24,
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
     borderRadius:7,

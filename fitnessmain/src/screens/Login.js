@@ -45,7 +45,7 @@ var _ = require('lodash');
 const stylesheet = _.cloneDeep(t.form.Form.stylesheet);
 import {AuthContext} from '../context';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import AppPreLoader from '../components/AppPreLoader';
 var width = Dimensions.get('window').width;
 
 stylesheet.textbox.normal.color = '#808080';
@@ -77,6 +77,9 @@ export default class Login extends Component {
 
   constructor() {
     super();
+    this.state={
+      loaded:false,
+    }
     this.user = t.struct({
       email: FormValidation.email,
       password: FormValidation.password,
@@ -121,11 +124,15 @@ export default class Login extends Component {
         console.log(userId);
         await AsyncStorage.setItem('userId', String(userId));
         await AsyncStorage.setItem('token', token);
+        this.setState({
+          loaded:true,
+        })
         await this.context.signIn(token);
         // await this.context.setDetails(userData);
-        this.props.navigation.navigate('Home');
+        // this.props.navigation.navigate('Home');
+        
       } else {
-        this.setState({isLoading: false}, () => {
+        this.setState({loaded: false}, () => {
           var errors = '';
           apiResponse.errors.forEach((element) => {
             errors += element + ' ';
@@ -144,6 +151,9 @@ export default class Login extends Component {
   }
 
   render() {
+    if (this.state.loaded) {
+      return <AppPreLoader />;
+    }
     return (
       <Container style={{backgroundColor: '#E7FDFF'}}>
         <Header

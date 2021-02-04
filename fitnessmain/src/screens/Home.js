@@ -119,7 +119,7 @@ export default class Home extends Component {
   };
   getMytask = async () => {
     var user = await AsyncStorage.getItem('userId');
-    var apiResponse = await Api.get('userById/' + 74);
+    var apiResponse = await Api.get('userById/' + user);
     // console.log(apiResponse);
     if (apiResponse.status === 'success') {
       // Alert.alert('Success', 'Profile Updated');
@@ -180,7 +180,7 @@ export default class Home extends Component {
     if(this.state.userDiet==""){
       Alert.alert('Diet plan', "No diet exist");
     }else{
-      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[1]});
+      this.props.navigation.navigate('DiatesPlan',{data: this.state.userDiet[0]});
     }
   }
   event(){
