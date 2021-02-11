@@ -96,6 +96,8 @@ class My_Calender extends Component {
       titlefetch: '',
       descfetch: '',
       logmood: '',
+      selectDate:'',
+      logDate:[],
     };
     this.year = new Date().getFullYear();
     this.month = new Date().getMonth() + 1;
@@ -292,6 +294,7 @@ class My_Calender extends Component {
   taskaddLog() {}
   componentDidMount() {
     this.taskadd();
+    this.taskfecthLog();
   }
   async taskadd() {
     var user = await AsyncStorage.getItem('userId');
@@ -317,6 +320,7 @@ class My_Calender extends Component {
         this.setState({
           taskdet: apiResponse.data.tasks[0].task,
         });
+        
       }
       console.log('userDiet', apiResponse.data.created_at);
     } else {
@@ -340,14 +344,45 @@ class My_Calender extends Component {
     };
     var apiResponse = await Api.post('calendar/fetch', data);
     if (apiResponse.status === 'success') {
+      if(apiResponse.data==""){
+        this.setState({
+          showsMood:false,
+        })
+      }else{
       this.setState({
         logData: apiResponse.data,
         titlefetch: apiResponse,
         descfetch: apiResponse,
         logmood: apiResponse,
+        showsMood:true,
       });
+    }
     } else {
     }
+  }
+ async taskfecthLog(){
+  var user = await AsyncStorage.getItem('userId');
+  var data = {
+    user_id: user,
+    month: this.month,
+    year: this.year,
+  };
+  var apiResponse = await Api.post('calendar/fetch', data);
+  if (apiResponse.status === 'success') {
+    if(apiResponse.data==""){
+      this.setState({
+        showsMood:false,
+      })
+    }else{
+      for(let i=0;i<apiResponse.data.length;i++){
+        this.setState({
+          logDate: [...this.state.logDate,apiResponse.data[i].log_date],
+        });
+      }
+      console.log(this.state.logDate)
+  }
+  } else {
+  }
   }
   setTaskti = (task) => {
     this.setState({
@@ -380,33 +415,117 @@ class My_Calender extends Component {
     });
   }
   renderlog({index, item}) {
-    console.log(item.log[index].title);
+    console.log(JSON.parse(item.log));
+    const logs = JSON.parse(item.log);
     return (
       <View>
+      {/* {item.log_date==selectDate ? ( */}
         <View style={{alignSelf: 'center'}}>
           <Text style={styles.stepsLog}>LOG {item.log_type}</Text>
         </View>
-        {/* {this.state.titlefetch == '' ? null : ( */}
-        <Text
-          style={{
-            marginLeft: 10,
-            marginRight: 40,
-            alignSelf: 'center',
-            marginTop: 10,
-          }}>
-          created at: {item.log_date}
-        </Text>
-        {/* )} */}
-        {/* {this.state.titlefetch == '' ? null : ( */}
-        <Text
-          style={{
-            marginLeft: 10,
-            marginRight: 10,
-            marginTop: 10,
-          }}>
-          {/* {this.state.titlefetch} */}
-        </Text>
-        {/* )} */}
+        <View>
+        {item.log_date=="" ? (
+        <View style={{
+              flexDirection: 'row',
+              // alignSelf: 'center',
+              justifyContent: 'space-between',
+              // alignSelf: 'flex-start',
+              marginTop: 10,
+            }}>
+          <Text
+            style={{
+              marginLeft: 10,
+              marginRight: 10,
+              color: '#035048',
+                fontWeight: '500',
+                fontSize: 18,
+                alignSelf: 'flex-start',
+            }}>
+            Created at: 
+          </Text>
+          <Text
+            style={{
+              marginLeft: 10,
+              marginRight: 10,
+              // alignItems:"stretch",
+              textAlign:"right",
+              alignSelf: 'flex-end'
+            }}>
+            {item.log_date}
+          </Text>
+        </View>
+        ):null}
+        {logs.title !== '' ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              // alignSelf: 'center',
+              justifyContent: 'space-between',
+              // backgroundColor: '#11ba11',
+              // alignSelf: 'flex-start',
+            }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                // marginTop: 10,
+                color: '#035048',
+                fontWeight: '500',
+                fontSize: 18,
+                alignSelf: 'flex-start',
+              }}>
+              Title:
+            </Text>
+            <Text
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                // marginTop: 10,
+                textAlign:"right",
+              }}>
+              {logs.title}
+            </Text>
+          </View>
+        ) : null}
+        {logs.title_desc !== '' ? (
+          <View
+            style={{
+              flexDirection: 'row',
+              // alignSelf: 'center',
+              justifyContent: 'space-around',
+              // backgroundColor: '#11ba11',
+              alignSelf: 'flex-start',
+            }}>
+            <Text
+              style={{
+                marginLeft: 10,
+                // marginRight: 10,
+                // marginTop: 10,
+                width: 120,
+                color: '#035048',
+                fontWeight: '500',
+                fontSize: 18,
+                alignSelf: 'flex-start',
+              }}>
+              Title Description:
+            </Text>
+            <Text
+              style={{
+                marginLeft: 10,
+                marginRight: 10,
+                // marginTop: 10,
+                width: 180,
+              }}>
+              {logs.title_desc}
+            </Text>
+          </View>
+        ) : null}
+        </View>
+      {/* ):(
+        <View>
+          
+        </View>
+      )} */}
       </View>
     );
   }
@@ -477,7 +596,8 @@ class My_Calender extends Component {
                   {
                     month: day.month,
                     year: day.year,
-                    showsMood: true,
+                    // showsMood: true,
+                    selectDate:day.date+"-"+day.month+"-"+day.year
                   },
                   this.taskfecth,
                 );
@@ -494,10 +614,16 @@ class My_Calender extends Component {
                 //   marked: true,
                 //   selectedColor: '#f53716',
                 // },
+                // {this.state.logDate.map((item,index)=>(
+                  // [this.state.logDate]:{dots: [workout], dotColor: 'red'}
+                  ...this.state.logDate.map((item)=>{
+                    
+                  }),
+                // )}
                 '2021-01-07': {dots: [workout], dotColor: 'red'},
-                '2021-01-18': {dots: [massage], dotColor: 'red'},
-                '2021-01-19': {dots: [massage, workout], dotColor: 'red'},
-                '2021-01-10': {dots: [massage1, workout1], dotColor: 'red'},
+                // '2021-01-18': {dots: [massage], dotColor: 'red'},
+                // '2021-01-19': {dots: [massage, workout], dotColor: 'red'},
+                // '2021-01-10': {dots: [massage1, workout1], dotColor: 'red'},
               }}
               markingType={'multi-dot'}
             />

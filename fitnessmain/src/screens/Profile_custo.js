@@ -162,7 +162,10 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem button={true}
+                  onPress={() => {
+                      this.props.navigation.navigate('MedicalDetails');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -191,7 +194,12 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                  // onPress={() => {
+                      // this.props.navigation.navigate('height_profile');
+                    // }}
+                    >
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -228,7 +236,11 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                  onPress={() => {
+                      this.props.navigation.navigate('Medication');
+                    }}>
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -257,7 +269,12 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                  // onPress={() => {
+                  //     this.props.navigation.navigate('height_profile');
+                  //   }}
+                    >
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -294,7 +311,12 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                  // onPress={() => {
+                  //     this.props.navigation.navigate('height_profile');
+                  //   }}
+                    >
                     <Body
                       style={{
                         justifyContent: 'center',
@@ -323,7 +345,12 @@ class Profile_custo extends Component {
                     height: 140,
                     width: 170,
                   }}>
-                  <CardItem>
+                  <CardItem
+                  button={true}
+                  // onPress={() => {
+                  //     this.props.navigation.navigate('height_profile');
+                  //   }}
+                    >
                     <Body
                       style={{
                         justifyContent: 'center',

@@ -304,9 +304,9 @@ export default class Home extends Component {
                 </Left>
                 <Right>
                   <View style={styles.MainContainer}>
-                    <View style={styles.childView}>
-                      <Text style={styles.More_text}> calender </Text>
-                    </View>
+                    <TouchableOpacity style={styles.childView} onPress={()=>this.event()}>
+                      <Text style={styles.More_text}> Event </Text>
+                    </TouchableOpacity>
                   </View>
                 </Right>
               </CardItem>
@@ -464,7 +464,7 @@ export default class Home extends Component {
                           <Text
                             style={styles.More_text}
                             onPress={() => {
-                              this.props.navigation.navigate('PostsScreen', {
+                              this.props.navigation.navigate('Blog Screen', {
                                 type: 'recipe',
                               });
                             }}>
@@ -516,7 +516,7 @@ export default class Home extends Component {
                           <Text
                             style={styles.More_text}
                             onPress={() => {
-                              this.props.navigation.navigate('PostsScreen', {
+                              this.props.navigation.navigate('Blog Screen', {
                                 type: 'posts',
                               });
                             }}>
@@ -564,9 +564,9 @@ export default class Home extends Component {
                 </Left>
                 <Right>
                   <View style={styles.MainContainer}>
-                    <View style={styles.childView}>
+                    <TouchableOpacity style={styles.childView} onPress={()=>this.props.navigation.navigate("Testemonial")}>
                       <Text style={styles.More_text}> Testimonial </Text>
-                    </View>
+                    </TouchableOpacity>
                   </View>
                 </Right>
               </CardItem>

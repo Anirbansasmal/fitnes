@@ -48,7 +48,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
 import Head from '../components/Header_profile';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-datepicker';
 export default class Profile_details extends Component {
   static navigationOptions = {
     title: 'Profile',
@@ -249,7 +249,6 @@ export default class Profile_details extends Component {
       pin: this.state.pin,
       country: this.state.country,
       occupation: this.state.occupation,
-      email: this.state.email,
     };
     console.log(data);
     var user = await AsyncStorage.getItem('userId');

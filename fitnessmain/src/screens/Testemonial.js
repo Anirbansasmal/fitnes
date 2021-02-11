@@ -46,10 +46,10 @@ import {
 import HTMLView from 'react-native-htmlview';
 var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
-
-export default class Posts extends Component {
+import Head from '../components/Header_profile';
+export default class Testemonial extends Component {
   static navigationOptions = ({navigation}) => ({
-    title: `${Strings.ST4}`,
+    title: `${Strings.ST104}`,
     headerRight: (
       <Icon
         name="md-search"
@@ -68,30 +68,28 @@ export default class Posts extends Component {
     this.state = {
       isLoading: true,
       recentposts: [],
-      type: props.route.params.type,
-      category: [],
-      cateid: '',
+      // type: props.route.params.type,
+      cateid:'',
     };
   }
 
   componentDidMount() {
-    this.getBlog();
-    this.TypeBlog();
+    this.getTestemonial();
   }
-  getBlog = async () => {
+  getTestemonial = async () => {
     let blogs = [];
     // var blog = await Api.getBlog('wp-json/wp/v2/posts?_embed&per_page=10');
     var blog = await Api.getBlog(
-      'wp-json/wp/v2/' + this.state.type + '?_embed&per_page=10',
+      'wp-json/custom-routes/v1/' + 'testimonials',
     );
 
     if (blog) {
       for (let blogList of blog) {
         var blogData = {
           id: blogList.id,
-          title: blogList.title.rendered,
-          except: blogList.excerpt.rendered,
-          images: blogList['_embedded']['wp:featuredmedia'][0]['source_url'],
+          title: blogList.title,
+          except: blogList.content,
+          // images: blogList['_embedded']['wp:featuredmedia'][0]['source_url'],
         };
         // blogs.push({ blogData });
         this.setState({
@@ -103,63 +101,31 @@ export default class Posts extends Component {
     }
   };
 
-  PostDetails(item) {
-    this.props.navigation.navigate('PostDetailsScreen', {
-      id: item.id,
-      title: item.title,
-    });
-  }
+//   PostDetails(item) {
+//     this.props.navigation.navigate('PostDetailsScreen', {
+//       id: item.id,
+//       title: item.title,
+//     });
+//   }
 
-  PostsByTag = (tag_id, tag_title) => {
-    this.props.navigation.navigate('PostsByTagScreen', {
-      IdTag: tag_id,
-      TitleTag: tag_title,
-    });
-  };
+//   PostsByTag = (tag_id, tag_title) => {
+//     this.props.navigation.navigate('PostsByTagScreen', {
+//       IdTag: tag_id,
+//       TitleTag: tag_title,
+//     });
+//   };
+//   getcategori=async()=>{
+//     var user = await AsyncStorage.getItem('userId');
+//     var userDetails = await Api.getBlog('wp-json/wp/v2/posts/' + '?categories='+this.state.cateid);
+//     if (userDetails.status === 'success') {
+//       this.setState({
+//         recentposts:[userDetails]
+//       })
+//     }else{
+      
+//     }
+//   }
 
-  TypeBlog = async () => {
-    let blogs = [];
-    var blog = await Api.getBlog('wp-json/wp/v2/' + 'categories');
-
-    console.log('recentposts', blog.length);
-    // blogs.push({ blogData });
-    for (let blogList of blog) {
-      var blogData = {
-        id: blogList.id,
-        title: blogList.name,
-        // except: blogList.excerpt.rendered,
-        // images: blogList['_embedded']['wp:featuredmedia'][0]['source_url'],
-      };
-      this.setState({
-        category: [...this.state.category, blogData],
-      });
-    }
-
-    // this.setState({isLoading: false, posts: blogs});
-  };
-  getcategori = async () => {
-    // var user = await AsyncStorage.getItem('userId');
-    console.log('cateid', this.state.cateid);
-    var userDetails = await Api.getBlog(
-      'wp-json/wp/v2/posts' + '?categories=' + this.state.cateid,
-    );
-    console.log(userDetails);
-    // if (userDetails.status === 'success') {
-      if (userDetails) {
-      for (let blogList of userDetails) {
-        var blogData = {
-          id: blogList.id,
-          title: blogList.title.rendered,
-          except: blogList.excerpt.rendered,
-          images: blogList['_links']['wp:featuredmedia'][0]['href'],
-        };
-        this.setState({recentposts: [...this.state.recentposts, blogData]});
-        console.log(this.state.recentposts)
-      }
-    }
-    // } else {
-    // }
-  };
   render() {
     if (this.state.isLoading) {
       return (
@@ -219,54 +185,30 @@ export default class Posts extends Component {
 
     return (
       <Container style={styles.background_general}>
+      <Head navigation={this.props.navigation} title="" />
         <ScrollView>
           <View style={{margin: 7, marginTop: 8}}>
-            <ScrollView
-              style={{
-                // alignSelf: 'center',
-                backgroundColor: '#a5d1a7',
-                // justifyContent: 'center',
-                marginStart: 14,
-                marginEnd: 14,
-              }}
-              horizontal={true}>
-              {/* <View
+            {/* <View
               style={{
                 height: 50,
                 alignSelf: 'center',
                 backgroundColor: '#a5d1a7',
                 justifyContent: 'center',
-              }}> */}
-              {this.state.category.map((item, index) => {
-                console.log(item.id);
-                return (
-                  <TouchableOpacity
-                    onPress={() =>
-                      this.setState(
-                        {cateid: item.id, recentposts: []},
-                        this.getcategori
-                      )
-                    }>
-                    <Text
-                      style={{
-                        padding: 7,
-                        fontSize: 18,
-                        fontWeight: 'bold',
-                        color: '#035048',
-                      }}>
-                      {item.title}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              })}
-              {/* </View> */}
-            </ScrollView>
-            {/* <FlatList
+              }}>
+              <Text
+                style={{
+                  padding: 7,
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: '#035048',
+                }}>
+                {Strings.ST54}
+              </Text>
+            </View> */}
+            <FlatList
               data={this.state.recentposts}
               // numColumns={2}
-              renderItem={({item, index}) => ( */}
-            {this.state.recentposts.map((item, index) => {
-              return (
+              renderItem={({item, index}) => (
                 <TouchableWithoutFeedback
                   onPress={() => this.PostDetails(item)}
                   activeOpacity={1}
@@ -279,14 +221,14 @@ export default class Posts extends Component {
                       borderWidth: 1,
                       borderRadius: 10,
                       flexDirection: 'row',
-                      borderColor: '#eb910c',
+                      borderColor: '#d3e3d4',
                       justifyContent: 'space-between',
                     }}>
                     {/* <View style={{margin: 7,backgroundColor:"#ffff"}}> */}
                     {/* <View></View> */}
-                    <Image
+                    {/* <Image
                       source={{uri: item.images}}
-                      style={styles.background_posts_2columns}></Image>
+                      style={styles.background_posts_2columns}></Image> */}
                     {/* </View> */}
 
                     <View
@@ -294,12 +236,13 @@ export default class Posts extends Component {
                         margin: 4,
                         marginEnd: 10,
                         height: 170,
-                        width: width * 0.45,
+                        // width: width * 0.45,
                       }}>
                       <ScrollView
                         // showsHorizontalScrollIndicator={false}
                         // showsVerticalScrollIndicator={false}
-                        nestedScrollEnabled={true}>
+                        nestedScrollEnabled={true}
+                        >
                         <Text style={styles.title_posts_categories}>
                           {item.title}
                         </Text>
@@ -317,8 +260,9 @@ export default class Posts extends Component {
                     </View>
                   </View>
                 </TouchableWithoutFeedback>
-              );
-            })}
+              )}
+              keyExtractor={(item, index) => index.toString()}
+            />
           </View>
         </ScrollView>
       </Container>

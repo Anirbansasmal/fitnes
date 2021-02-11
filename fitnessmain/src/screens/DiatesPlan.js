@@ -86,11 +86,14 @@ class DiatesPlan extends Component {
       nextVisble: false,
       user_days_uniq_id: [],
       activeColor: '#fff999',
-      toggleCheckBox1:false,
-      toggleCheckBox2:false,
-      toggleCheckBox3:false,
-      toggleCheckBox4:false,
-      days:1,
+      toggleCheckBox1: false,
+      toggleCheckBox2: false,
+      toggleCheckBox3: false,
+      toggleCheckBox4: false,
+      days: 1,
+      day_ids: '',
+      skipmeal: '',
+      eatsom: '',
     };
     this.diet();
     // console.log('dite weeks', this.state.dataditeSu.data_sub);
@@ -164,19 +167,24 @@ class DiatesPlan extends Component {
       // });
     }
   };
-  like = () => {
+  like = (student) => {
     console.log(this.state.countlike);
+    console.log(student);
     if (this.state.countlike === 0) {
-      this.setState({countlike: 0, islike: true});
+      this.setState({countlike: 0, islike: true, day_ids: student.day_no});
     } else {
-      this.setState({countlike: 1, islike: false});
+      this.setState({countlike: 1, islike: false, day_ids: ''});
     }
   };
-  dislike = () => {
+  dislike = (student) => {
     if (this.state.countdislike === 0) {
-      this.setState({countdislike: 1, isdislike: true});
+      this.setState({
+        countdislike: 1,
+        isdislike: true,
+        day_ids: student.day_no,
+      });
     } else {
-      this.setState({countdislike: 0, isdislike: false});
+      this.setState({countdislike: 0, isdislike: false, day_ids: ''});
     }
   };
   renderCardMo = ({item}) => {
@@ -549,11 +557,61 @@ class DiatesPlan extends Component {
     console.log('currentTab position', i);
     this.setState({currentTab: i}, this.ditelist);
   };
-  likeSubmit = () => {
-    this.setState({countlike: 0, islike: false});
+  likeSubmit = async () => {
+    this.setState({
+      countlike: 0,
+      islike: false,
+      toggleCheckBox1: false,
+      toggleCheckBox2: false,
+    });
+    var formdata = new FormData();
+    var user = await AsyncStorage.getItem('userId');
+    formdata.append('skip', this.state.skipmeal);
+    formdata.append('noteat', this.state.eatsom);
+    // formdata.append('user_id', user);
+    // formdata.append('type', 0);
+    // formdata.append("log",)
+    var data = {
+      user_id: user,
+      week_id: this.state.day_ids,
+      log: JSON.stringify(formdata),
+      type: 1,
+    };
+    console.log(data)
+    var apiResponse = await Api.post('chartLog/store' , data);
+    // console.log(apiResponse);
+    if (apiResponse.status === 'success') {
+      Alert.alert('Success', apiResponse.status);
+    } else {
+      // Alert.alert('Error', errors);
+    }
   };
-  dislikeSubmit = () => {
-    this.setState({countdislike: 0, isdislike: false});
+  dislikeSubmit = async () => {
+    this.setState({
+      countdislike: 0,
+      isdislike: false,
+      toggleCheckBox3: false,
+      toggleCheckBox4: false,
+    });
+    var formdata = new FormData();
+    var user = await AsyncStorage.getItem('userId');
+    formdata.append('skip', this.state.skipmeal);
+    formdata.append('noteat', this.state.eatsom);
+    // formdata.append('user_id', user);
+    // formdata.append('type', 0);
+    var data = {
+      user_id: user,
+      week_id: this.state.day_ids,
+      log: JSON.stringify(formdata),
+      type: 0,
+    };
+    console.log(data)
+    var apiResponse = await Api.post('chartLog/store', data);
+    // console.log(apiResponse);
+    if (apiResponse.status === 'success') {
+      Alert.alert('Success', apiResponse.status);
+    } else {
+    }
   };
   previous = () => {
     if (this.state.resPerPage <= 1) {
@@ -685,27 +743,63 @@ class DiatesPlan extends Component {
       </View>
     );
   };
-  setToggleCheckBox1=(newValue)=>{
+  setToggleCheckBox1 = (newValue) => {
     this.setState({
-      toggleCheckBox1:newValue,
-    })
-    console.log(newValue)
-  }
-  setToggleCheckBox2=(newValue)=>{
+      toggleCheckBox1: newValue,
+    });
+    console.log(newValue);
+    if (newValue) {
+      this.setState({
+        skipmeal: 'Everything as planed',
+      });
+    } else {
+      this.setState({
+        skipmeal: '',
+      });
+    }
+  };
+  setToggleCheckBox2 = (newValue) => {
     this.setState({
-      toggleCheckBox2:newValue,
-    })
-  }
-  setToggleCheckBox3=(newValue)=>{
+      toggleCheckBox2: newValue,
+    });
+    if (newValue) {
+      this.setState({
+        noteat: 'Deviated a bit',
+      });
+    } else {
+      this.setState({
+        noteat: '',
+      });
+    }
+  };
+  setToggleCheckBox3 = (newValue) => {
     this.setState({
-      toggleCheckBox3:newValue,
-    })
-  }
-  setToggleCheckBox4=(newValue)=>{
+      toggleCheckBox3: newValue,
+    });
+    if (newValue) {
+      this.setState({
+        skipmeal: 'Skipped the Meal',
+      });
+    } else {
+      this.setState({
+        skipmeal: '',
+      });
+    }
+  };
+  setToggleCheckBox4 = (newValue) => {
     this.setState({
-      toggleCheckBox4:newValue,
-    })
-  }
+      toggleCheckBox4: newValue,
+    });
+    if (newValue) {
+      this.setState({
+        noteat: 'Ate Something Else',
+      });
+    } else {
+      this.setState({
+        noteat: '',
+      });
+    }
+  };
   render() {
     return (
       <Container>
@@ -738,7 +832,9 @@ class DiatesPlan extends Component {
                   // marginTop: 10,
                   marginStart: 12,
                 }}>
-                <Text style={{color: '#ffff', alignSelf: 'center'}}>{this.state.days}</Text>
+                <Text style={{color: '#ffff', alignSelf: 'center'}}>
+                  {this.state.days}
+                </Text>
               </View>
               <Text style={styles.dietTitle}>week</Text>
               <View
@@ -750,7 +846,9 @@ class DiatesPlan extends Component {
                   // marginTop: 10,
                   marginStart: 12,
                 }}>
-                <Text style={{color: '#ffff', alignSelf: 'center'}}>{this.state.dataditeSu.week}</Text>
+                <Text style={{color: '#ffff', alignSelf: 'center'}}>
+                  {this.state.dataditeSu.week}
+                </Text>
               </View>
             </View>
             <View
@@ -846,9 +944,11 @@ class DiatesPlan extends Component {
                     height: 40,
                     borderRadius: 10,
                   }}
-                  onChangeTab={({ i })=>this.setState({
-                    days:i+1
-                  })}>
+                  onChangeTab={({i}) =>
+                    this.setState({
+                      days: i + 1,
+                    })
+                  }>
                   {this.state.user_days_uniq_id.map((student, index) => (
                     <Tab
                       heading={student.day}
@@ -889,7 +989,7 @@ class DiatesPlan extends Component {
                                       }}>
                                       <TouchableOpacity
                                         style={styles.cardTitle_like}
-                                        onPress={() => this.like()}>
+                                        onPress={() => this.like(student)}>
                                         <Image
                                           style={styles.card_likeimg}
                                           source={require('../../src/assets/images/like.png')}
@@ -897,7 +997,7 @@ class DiatesPlan extends Component {
                                       </TouchableOpacity>
                                       <TouchableOpacity
                                         style={styles.cardTitle_dislike}
-                                        onPress={() => this.dislike()}>
+                                        onPress={() => this.dislike(student)}>
                                         <Image
                                           style={styles.card_dislikeimg}
                                           source={require('../../src/assets/images/dislike.png')}
@@ -936,7 +1036,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -944,7 +1044,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -982,7 +1082,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -990,7 +1090,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1028,7 +1128,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -1036,7 +1136,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1074,7 +1174,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -1082,7 +1182,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1120,7 +1220,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -1128,7 +1228,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1166,7 +1266,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -1174,7 +1274,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1212,7 +1312,7 @@ class DiatesPlan extends Component {
                                     }}>
                                     <TouchableOpacity
                                       style={styles.cardTitle_like}
-                                      onPress={() => this.like()}>
+                                      onPress={() => this.like(student)}>
                                       <Image
                                         style={styles.card_likeimg}
                                         source={require('../../src/assets/images/like.png')}
@@ -1220,7 +1320,7 @@ class DiatesPlan extends Component {
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                       style={styles.cardTitle_dislike}
-                                      onPress={() => this.dislike()}>
+                                      onPress={() => this.dislike(student)}>
                                       <Image
                                         style={styles.card_dislikeimg}
                                         source={require('../../src/assets/images/dislike.png')}
@@ -1321,6 +1421,8 @@ class DiatesPlan extends Component {
                   this.setState({
                     islike: false,
                     countlike: 0,
+                    toggleCheckBox1: false,
+                    toggleCheckBox2: false,
                   })
                 }>
                 <View
@@ -1346,14 +1448,16 @@ class DiatesPlan extends Component {
                   </View>
                   <View
                     style={{
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       flexDirection: 'row',
                       marginTop: 10,
                     }}>
                     <CheckBox
                       disabled={false}
                       value={this.state.toggleCheckBox1}
-                      onValueChange={(newValue) => this.setToggleCheckBox1(newValue)}
+                      onValueChange={(newValue) =>
+                        this.setToggleCheckBox1(newValue)
+                      }
                     />
                     <Text
                       // onChangeText={() => this.setText(text)}
@@ -1361,19 +1465,24 @@ class DiatesPlan extends Component {
                         marginLeft: 10,
                         marginRight: 10,
                         alignSelf: 'center',
+                        color: '#035048',
+                        fontWeight: '500',
+                        fontSize: 18,
                       }}>
-                      Skipped the Meal{' '}
+                      Everything as planed{' '}
                     </Text>
                   </View>
                   <View
                     style={{
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       flexDirection: 'row',
                     }}>
                     <CheckBox
                       disabled={false}
                       value={this.state.toggleCheckBox2}
-                      onValueChange={(newValue) => this.setToggleCheckBox2(newValue)}
+                      onValueChange={(newValue) =>
+                        this.setToggleCheckBox2(newValue)
+                      }
                     />
                     <Text
                       style={{
@@ -1382,8 +1491,11 @@ class DiatesPlan extends Component {
                         // marginTop: 10,
                         // height: 190,
                         alignSelf: 'center',
+                        color: '#035048',
+                        fontWeight: '500',
+                        fontSize: 18,
                       }}>
-                      Ate Something Else{' '}
+                      {'  '}Deviated a bit
                     </Text>
                   </View>
                   <TouchableOpacity
@@ -1421,6 +1533,8 @@ class DiatesPlan extends Component {
                   this.setState({
                     isdislike: false,
                     countdislike: 0,
+                    toggleCheckBox3: false,
+                    toggleCheckBox4: false,
                   })
                 }>
                 <View
@@ -1443,33 +1557,40 @@ class DiatesPlan extends Component {
                   </View>
                   <View
                     style={{
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       flexDirection: 'row',
                       marginTop: 10,
                     }}>
                     <CheckBox
                       disabled={false}
                       value={this.state.toggleCheckBox3}
-                      onValueChange={(newValue) => this.setToggleCheckBox3(newValue)}
+                      onValueChange={(newValue) =>
+                        this.setToggleCheckBox3(newValue)
+                      }
                     />
                     <Text
                       style={{
                         marginLeft: 10,
                         marginRight: 10,
                         alignSelf: 'center',
+                        color: '#035048',
+                        fontWeight: '500',
+                        fontSize: 18,
                       }}>
                       Skipped the Meal
                     </Text>
                   </View>
                   <View
                     style={{
-                      justifyContent: 'center',
+                      justifyContent: 'flex-start',
                       flexDirection: 'row',
                     }}>
                     <CheckBox
                       disabled={false}
                       value={this.state.toggleCheckBox4}
-                      onValueChange={(newValue) => this.setToggleCheckBox4(newValue)}
+                      onValueChange={(newValue) =>
+                        this.setToggleCheckBox4(newValue)
+                      }
                     />
                     <Text
                       style={{
@@ -1478,8 +1599,11 @@ class DiatesPlan extends Component {
                         // marginTop: 10,
                         // height: 190,
                         alignSelf: 'center',
+                        color: '#035048',
+                        fontWeight: '500',
+                        fontSize: 18,
                       }}>
-                      Ate Something Else
+                      {'  '}Ate Something Else
                     </Text>
                   </View>
                   <TouchableOpacity
