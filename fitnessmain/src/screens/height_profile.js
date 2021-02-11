@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
+  TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import {
@@ -46,24 +47,30 @@ var styles = require('../../src/assets/files/Styles');
 var {height, width} = Dimensions.get('window');
 import AsyncStorage from '@react-native-community/async-storage';
 import Api from '../services/api';
+import Head from '../components/Header_profile';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Modal from 'react-native-modal';
+
 class height_profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isloading: true,
-      user: [],
+      weight: '',
+      height: '',
+      bmi: '',
+      visceral_fat: '',
+      body_fat: '',
+      user_age:'',
+      key:'',
+      title:'',
       email: '',
       username: '',
       chosenDate: '',
       first_name: '',
       last_name: '',
       dob: '',
-      weight: '',
-      height: '',
       gender: '',
-      bmi: '',
-      visceral_fat: '',
-      body_fat: '',
       skype_id: '',
       phone: '',
       alt_phone: '',
@@ -72,6 +79,7 @@ class height_profile extends Component {
       pin: '',
       country: '',
       occupation: '',
+      detail: '',
     };
   }
   componentDidMount() {
@@ -90,17 +98,19 @@ class height_profile extends Component {
       this.setState({
         username: userDetails.data.details.first_name,
         isloading: false,
+        weight: userDetails.data.details.weight,
+        height: userDetails.data.details.height,
+        bmi: userDetails.data.details.bmi,
+        visceral_fat: userDetails.data.details.visceral_fat,
+        body_fat: userDetails.data.details.body_fat,
+        user_age: userDetails.data.details.user_age,
+        email: userDetails.data.email,
         user: userDetails.data.details,
         email: userDetails.data.email,
         first_name: userDetails.data.details.first_name,
         last_name: userDetails.data.details.last_name,
         dob: userDetails.data.details.dob,
-        weight: userDetails.data.details.weight,
-        height: userDetails.data.details.height,
         gender: userDetails.data.details.gender,
-        bmi: userDetails.data.details.bmi,
-        visceral_fat: userDetails.data.details.visceral_fat,
-        body_fat: userDetails.data.details.body_fat,
         skype_id: userDetails.data.details.skype_id,
         phone: userDetails.data.details.phone,
         alt_phone: userDetails.data.details.alt_phone,
@@ -109,18 +119,28 @@ class height_profile extends Component {
         pin: userDetails.data.details.pin,
         country: userDetails.data.details.country,
         occupation: userDetails.data.details.occupation,
-        user_age: userDetails.data.details.user_age,
       });
     }
   };
   setDate = (value) => {
-    console.log(value);
+    // console.log(value);
+    this.setState({
+      isVisableMood: true,
+      title: 'User Date of Birth',
+      dob: value,
+    });
   };
+  reminder() {
+    this.setState({
+      isVisableMood: false,
+    });
+    this.onSubmit();
+  }
   setdetails(value, name) {
     switch (name) {
       case 'Weight':
         this.setState({
-          Weight: value,
+          weight: value,
         });
         break;
       case 'Height':
@@ -130,7 +150,7 @@ class height_profile extends Component {
         break;
       case 'Bmi':
         this.setState({
-          Bmi: value,
+          bmi: value,
         });
         break;
       case 'visceral_fat':
@@ -152,18 +172,63 @@ class height_profile extends Component {
         break;
     }
   }
+  Weight = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Weight',
+      key: 'Weight',
+    });
+  };
+  Height = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Height',
+      key: 'Height',
+    });
+  };
+  bmi = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User Bmi',
+      key: 'Bmi',
+    });
+  };
+  Visceral = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User visceral fat',
+      key: 'visceral_fat',
+    });
+  };
+  Body = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User body fat',
+      key: 'body_fat',
+    });
+  };
+  User = () => {
+    this.setState({
+      isVisableMood: true,
+      title: 'User user age',
+      key: 'user_age',
+    });
+  };
+  
   onSubmit = async () => {
     var data = {
+      weight: this.state.weight,
+      height: this.state.height,
+      bmi: this.state.bmi,
+      visceral_fat: this.state.visceral_fat,
+      body_fat: this.state.body_fat,
+      user_age: this.state.user_age,
+      email: this.state.email,
       email: this.state.email,
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       dob: this.state.dob,
-      weight: this.state.weight,
-      height: this.state.height,
       gender: this.state.gender,
-      bmi: this.state.bmi,
-      visceral_fat: this.state.visceral_fat,
-      body_fat: this.state.body_fat,
       skype_id: this.state.skype_id,
       phone: this.state.phone,
       alt_phone: this.state.alt_phone,
@@ -196,133 +261,334 @@ class height_profile extends Component {
     }
     return (
       <Container style={styles.background_general}>
-        <ImageBackground
-          source={require('../../src/assets/images/profilebg.jpg')}
-          style={{
-            width: width,
-            height: height * 0.2,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text style={{color: '#f39c12', fontSize: 22, marginTop: 6}}>
-            {this.state.username}
-          </Text>
-          {/* <Text style={{color: '#FFF', fontSize: 16, marginTop: 6, textTransform: 'uppercase'}}> {Strings.ST65} </Text> */}
-        </ImageBackground>
+        <Head navigation={this.props.navigation} title="" />
         <ScrollView>
-          <Tabs
-            tabBarUnderlineStyle={{backgroundColor: '#f39c12'}}
-            tabContainerStyle={{elevation: 0}}>
-            <Tab
-              heading="View"
-              tabStyle={styles.tabs_diets}
-              activeTabStyle={styles.activetabs_diets}
-              textStyle={styles.tabs_text_diets}
-              activeTextStyle={styles.activetabs_text_diets}>
-              <List>
-                <ListItem>
-                  <Text>Weight : {this.state.user.weight}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Height : {this.state.user.height}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Bmi: {this.state.user.bmi}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Visceral fat: {this.state.user.visceral_fat}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>Body fat: {this.state.user.body_fat}</Text>
-                </ListItem>
-                <ListItem>
-                  <Text>User age: {this.state.user.user_age}</Text>
-                </ListItem>
+          <Text style={styles.profileTitle}>MY Weight,Height,Bmi Food pref</Text>
+          <List>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                    }}>
+                    <Text style={styles.stepsEdit}>Weight</Text>
+                    {this.state.weight == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.Weight()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.weight}
+                      </Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      // justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.Weight()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                    }}>
+                    <Text style={styles.stepsEdit}>Height</Text>
+                    {this.state.height == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.Height()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.height}
+                      </Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      // justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.Height()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Bmi</Text>
+                    {this.state.bmi == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.bmi()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.bmi}</Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.bmi()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Visceral fat</Text>
+                    {this.state.visceral_fat == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.Visceral()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>{this.state.visceral_fat}</Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.Visceral()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>Body fat</Text>
+                    {this.state.body_fat == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.Body()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.body_fat}
+                      </Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.Body()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            <ListItem>
+              <View style={{justifyContent: 'space-between', width: '100%'}}>
+                <View
+                  style={{
+                    justifyContent: 'space-between',
+                    flexDirection: 'row',
+                  }}>
+                  <View>
+                    <Text style={styles.stepsEdit}>User age</Text>
+                    {this.state.user_age == null ? (
+                      <TouchableOpacity
+                        style={{
+                          height: 30,
+                          width: 60,
+                          backgroundColor: '#179937',
+                          borderRadius: 9,
+                          justifyContent: 'center',
+                        }}
+                        onPress={() => this.User()}>
+                        <Text>Add</Text>
+                      </TouchableOpacity>
+                    ) : (
+                      <Text style={styles.stepsView}>
+                        {this.state.user_age}
+                      </Text>
+                    )}
+                  </View>
+                  <TouchableOpacity
+                    style={{
+                      justifyContent: 'center',
+                      alignSelf: 'flex-end',
+                      // backgroundColor: '#11ba11',
+                    }}
+                    onPress={() => this.User()}>
+                    <AntDesign
+                      size={50}
+                      name="right"
+                      // color="#ffff"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </ListItem>
+            
+          </List>
 
-                {/* <ListItem>
-                  <Text>User age: {this.state.user.bmi}</Text>
-                </ListItem> */}
-              </List>
-            </Tab>
+          <Modal
+            isVisible={this.state.isVisableMood}
+            style={{
+              // height: 100,
+              backdropOpacity: 10.7,
+              alignSelf: 'center',
+              width: '90%',
+              paddingLeft: 30,
+              paddingRight: 30,
+              // elevation: 10,
+              // overflow: 'hidden',
+              // borderWidth: 1,
+            }}
+            backdropColor="#ffff"
+            coverScreen={true}
+            hasBackdrop={true}
+            onBackdropPress={() =>
+              this.setState({
+                isVisableMood: false,
+              })
+            }>
+            <View
+              style={{
+                backgroundColor: '#ffff',
+                // height: 400,
+                borderWidth: 1,
+                borderRadius: 20,
+              }}>
+              <View style={{alignSelf: 'center'}}>
+                <Text style={styles.stepsLog}>Edit {this.state.title}</Text>
+              </View>
+              <TextInput
+                placeholder={this.state.title}
+                // value={this.state.weight}
+                onChangeText={(value) =>
+                  this.setdetails(value, this.state.key)
+                }
+                style={{
+                  marginLeft: 10,
+                  marginRight: 10,
+                  backgroundColor: '#dcdedc',
+                }}
+              />
 
-            <Tab
-              heading="Edit"
-              tabStyle={styles.tabs_diets}
-              activeTabStyle={styles.activetabs_diets}
-              textStyle={styles.tabs_text_diets}
-              activeTextStyle={styles.activetabs_text_diets}>
-              <Form>
-                <Item>
-                  <Input
-                    placeholder="Weight"
-                    value={this.state.weight}
-                    onChangeText={(value) => this.setdetails(value, 'Weight')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="Height"
-                    value={this.state.Height}
-                    onChangeText={(value) => this.setdetails(value, 'Height')}
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    placeholder="Bmi"
-                    value={this.state.bmi}
-                    onChangeText={(value) => this.setdetails(value, 'bmi')}
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="Visceral fat"
-                    value={this.state.visceral_fat}
-                    onChangeText={(value) =>
-                      this.setdetails(value, 'visceral_fat')
-                    }
-                  />
-                </Item>
-                <Item last>
-                  <Input
-                    placeholder="body fat"
-                    value={this.state.body_fat}
-                    onChangeText={(value) => this.setdetails(value, 'body_fat')}
-                  />
-                </Item>
-                <Item>
-                  <Input
-                    placeholder="User age"
-                    value={this.state.user_age}
-                    onChangeText={(value) => this.setdetails(value, 'user_age')}
-                  />
-                </Item>
-                {/* <Item>
-                  <DatePicker
-                    defaultDate={new Date(2020, 12, 12)}
-                    minimumDate={new Date(1970, 1, 1)}
-                    maximumDate={new Date(2040, 12, 31)}
-                    locale={'en'}
-                    timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={'fade'}
-                    androidMode={'default'}
-                    placeHolderText="Date of birth"
-                    textStyle={{color: 'green'}}
-                    placeHolderTextStyle={{color: '#d3d3d3'}}
-                    onDateChange={this.setDate}
-                    disabled={false}
-                  />
-                </Item> */}
-                <Button
-                  block
-                  onPress={this.onSubmit}
-                  style={styles.button_auth}>
-                  <Text>Update</Text>
-                </Button>
-              </Form>
-            </Tab>
-          </Tabs>
-        </ScrollView>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#069906',
+                  width: 120,
+                  alignSelf: 'center',
+                  borderRadius: 10,
+                  marginTop: 10,
+                  marginBottom: 20,
+                }}
+                onPress={() => this.reminder()}>
+                <Text style={{margin: 10, alignSelf: 'center', color: '#ffff'}}>
+                  Submit
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+          </ScrollView>
       </Container>
     );
   }

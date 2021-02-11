@@ -63,6 +63,8 @@ import Disclaimer from '../screens/Disclaimer';
 import Faq from '../screens/Faq';
 import Polices from '../screens/Polices';
 import Refer from '../screens/Refer';
+import MedicalDetails from '../screens/MedicalDetails';
+import Medication from '../screens/Medication';
 // import WorkoutSearchScreen from "../screens/WorkoutSearch";
 // import WorkoutResultsScreen from "../screens/WorkoutResults";
 // import CalculatorScreen from "../screens/Calculator";
@@ -75,7 +77,8 @@ import AboutUsScreen from "../screens/AboutUs";
 import ContactUsScreen from "../screens/ContactUs";
 import OfflineBar from '../components/OfflineBar';
 import PostDetails from '../screens/PostDetails';
-
+import ChatDiet from '../screens/ChatDiet';
+import Testemonial from '../screens/Testemonial';
 // const leftIcon = (navigation, icon) => <Icon
 // 	name={icon}
 // 	style={{marginLeft: 20}}
@@ -269,7 +272,7 @@ const TabsScreen = () => (
           case 'ProfileScreen':
             iconName = focused ? 'account-circle' : 'account-circle';
             break;
-          case 'Chat':
+          case 'ChatDiet':
             iconName = focused ? 'message-reply-text' : 'message-reply-text';
             break;
           case 'Moreoption':
@@ -313,8 +316,8 @@ const TabsScreen = () => (
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
-      name="Chat"
-      component={Chat}
+      name="ChatDiet"
+      component={ChatDiet}
       options={{tabBarLabel: ''}}
     />
     <Tabs.Screen
@@ -395,7 +398,7 @@ const HomeStackScreenNav = ({navigation}) => (
       }}
     />
     <HomeStack_nav.Screen
-      name="PostsScreen"
+      name="Blog Screen"
       component={PostsScreen}
       options={{
         headerShown: true,
@@ -501,6 +504,36 @@ const HomeStackScreenNav = ({navigation}) => (
         headerShown: false,
       }}
     />
+    
+    <HomeStack_nav.Screen
+      name="ChatDiet"
+      component={ChatDiet}
+      options={{
+        headerShown: false,
+      }}
+    />
+    
+    <HomeStack_nav.Screen
+      name="Testemonial"
+      component={Testemonial}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="MedicalDetails"
+      component={MedicalDetails}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Medication"
+      component={Medication}
+      options={{
+        headerShown: false,
+      }}
+    />
   </HomeStack_nav.Navigator>
 );
 const HomeStackScreen = ({navigation}) => (
@@ -556,7 +589,7 @@ const HomeStackScreen = ({navigation}) => (
       }}
     />
     <HomeStack.Screen
-      name="PostsScreen"
+      name="Blog Screen"
       component={PostsScreen}
       options={{
         headerShown: true,
@@ -705,6 +738,34 @@ const HomeStackScreen = ({navigation}) => (
     <HomeStack_nav.Screen
       name="Chat"
       component={Chat}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="ChatDiet"
+      component={ChatDiet}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Testemonial"
+      component={Testemonial}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="MedicalDetails"
+      component={MedicalDetails}
+      options={{
+        headerShown: false,
+      }}
+    />
+    <HomeStack_nav.Screen
+      name="Medication"
+      component={Medication}
       options={{
         headerShown: false,
       }}

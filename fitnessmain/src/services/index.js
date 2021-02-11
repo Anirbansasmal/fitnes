@@ -115,7 +115,7 @@ export default class API {
         method: method,
         body: JSON.stringify(params),
       };
-      // console.log(url);
+      console.log(url);
       // console.log(options);
       fetch(url, options)
         .then((response) => response.json())

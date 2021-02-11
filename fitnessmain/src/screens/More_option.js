@@ -46,125 +46,133 @@ import Head from '../components/Header_profile';
 import Modal from 'react-native-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-export default class More_option extends Component {
+import {useNavigation} from '@react-navigation/native';
+export default function More_option() {
   // static navigationOptions = {
   //   title: 'Profile',
   // };
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      isloading: true,
-      isVisableMore:false,
-    };
-    console.log("jkgdsfjhfghdfh",this.props)
-  }
-  // componentDidMount() {
-    // this.LoginCheck();
+  //   this.state = {
+  //     isloading: true,
+  //     isVisableMore:false,
+  //   };
+  //   console.log("jkgdsfjhfghdfh",this.props)
   // }
-  about(){
-    this.props.navigation.navigate('AboutUsScreen');
-  }
-  contact=()=>{
-    this.props.navigation.navigate('ContactUsScreen');
-  }
-  faq=()=>{
-    this.props.navigation.navigate('Faq');
-  }
-  disclaimer=()=>{
-    this.props.navigation.navigate('Disclaimer');
-  }
-  policies=()=>{
-    this.props.navigation.navigate('Polices');
-  }
-  refer=()=>{
-    this.props.navigation.navigate('Refer');
-  }
-  render() {
+  // componentDidMount() {
+  // this.LoginCheck();
+  // }
+  const navigation = useNavigation();
+  const about = () => {
+    navigation.navigate('AboutUsScreen');
+  };
+  const contact = () => {
+    navigation.navigate('ContactUsScreen');
+  };
+  const faq = () => {
+    navigation.navigate('Faq');
+  };
+  const disclaimer = () => {
+    navigation.navigate('Disclaimer');
+  };
+  const policies = () => {
+    navigation.navigate('Polices');
+  };
+  const refer = () => {
+    navigation.navigate('Refer');
+  };
+  const [data, setData] = React.useState({
+    isVisableMore: false,
+  });
+  // render() {
 
-    return (
-      // <Container>
-      <>
-      <TouchableOpacity onPress={() => {this.setState({isVisableMore:true})}}>
-          <MaterialCommunityIcons name="dots-horizontal-circle-outline" style={{color: '#ffff', alignSelf: 'center', marginTop: 7,marginEnd:20}}
-            size={36} />
-        
-      {/* /> */}
+  return (
+    // <Container>
+    <>
+      <TouchableOpacity
+        onPress={() => {
+          setData({isVisableMore: true});
+        }}>
+        <MaterialCommunityIcons
+          name="dots-horizontal-circle-outline"
+          style={{
+            color: '#ffff',
+            alignSelf: 'center',
+            marginTop: 7,
+            marginEnd: 20,
+          }}
+          size={36}
+        />
+
+        {/* /> */}
       </TouchableOpacity>
-      <View style={{backgroundColor: 'transparent',}}>
+      <View style={{backgroundColor: 'transparent'}}>
         <Modal
-            isVisible={this.state.isVisableMore}
+          isVisible={data.isVisableMore}
+          style={{
+            // height: 100,
+            // backdropOpacity: 10.7,
+            alignSelf: 'flex-end',
+            width: '50%',
+            paddingLeft: 30,
+            // paddingRight: 30,
+            // alignItems:"flex-end"
+            // position:"relative",
+          }}
+          // marginTop={width}
+          marginTop={height - 390}
+          backdropColor="transparent"
+          coverScreen={true}
+          hasBackdrop={true}
+          onBackdropPress={() =>
+            setData({
+              isVisableMore: false,
+            })
+          }>
+          <View
             style={{
-              // height: 100,
-              // backdropOpacity: 10.7,
-              alignSelf: 'flex-end',
-              width: '50%',
-              paddingLeft: 30,
-              // paddingRight: 30,
-              // alignItems:"flex-end"
-              // position:"relative",
-            }}
-            // marginTop={width}
-            marginTop={height-390}
-            backdropColor="transparent"
-            coverScreen={true}
-            hasBackdrop={true}
-            onBackdropPress={() =>
-              this.setState({
-                isVisableMore: false,
-              })
-            }>
+              backgroundColor: '#ffff',
+              // height: 300,
+              // borderWidth: 1,
+              borderRadius: 20,
+            }}>
+            <View style={{alignSelf: 'center'}}>
+              <Text style={styles.stepsLog}>More Options</Text>
+            </View>
             <View
               style={{
-                backgroundColor: '#ffff',
-                // height: 300,
-                // borderWidth: 1,
-                borderRadius: 20,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginTop: 18,
               }}>
-              <View style={{alignSelf: 'center'}}>
-                <Text style={styles.stepsLog}>More Options</Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                  marginTop: 18,
-                }}>
-                <View>
-                  <TouchableOpacity onPress={()=>this.about()}>
-                    
+              <View>
+                <TouchableOpacity onPress={() => about()}>
                   <Text style={styles.stepsSetting}>About F&W</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.contact()}>
-                    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => contact()}>
                   <Text style={styles.stepsSetting}>Contact</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.faq()}>
-                    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => faq()}>
                   <Text style={styles.stepsSetting}>FAQ</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.disclaimer()}>
-
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => disclaimer()}>
                   <Text style={styles.stepsSetting}>Disclaimer</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.policies()}>
-
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => policies()}>
                   <Text style={styles.stepsSetting}>Policies</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=>this.refer()}>
-                    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => refer()}>
                   <Text style={styles.stepsSetting_bottom}>Refer</Text>
-                  </TouchableOpacity>
-                </View>
-                
+                </TouchableOpacity>
               </View>
-              
             </View>
-          </Modal>
+          </View>
+        </Modal>
       </View>
-      </>
-      // </Container>
-    );
-  }
+    </>
+    // </Container>
+  );
 }
+// }
